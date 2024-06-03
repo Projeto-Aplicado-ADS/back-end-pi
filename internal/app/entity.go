@@ -4,13 +4,15 @@ import (
 	"time"
 
 	"projeto-api/internal/app/store"
+	"projeto-api/pkg/crypt"
 
 	"github.com/ServiceWeaver/weaver"
+	"github.com/google/uuid"
 )
 
 type UsersOut struct {
 	weaver.AutoMarshal
-	ID        int       `json:"id"`
+	ID        string    `json:"id"`
 	FullName  string    `json:"full_name"`
 	Email     string    `json:"email"`
 	Phone     string    `json:"phone,omitempty"`
@@ -21,7 +23,7 @@ type UsersOut struct {
 type AllUsersOut []UsersOut
 
 func (e UsersOut) FromStore(in store.User) UsersOut {
-	e.ID = int(in.ID)
+	e.ID = in.ID
 	e.FullName = in.FullName
 	e.Email = in.Email
 	e.Phone = in.Phone
@@ -50,12 +52,12 @@ type UserIn struct {
 
 func (e UserIn) ToStore() (params store.CreateUserParams) {
 	t := time.Now()
-	params.ID = int32(t.UTC().UnixNano()) // fake id
+	params.ID = uuid.New().String()
 	params.FullName = e.FullName
 	params.Email = e.Email
 	params.Phone = e.Phone
-	params.Password = e.Password // TODO emcript senha
-	params.Birthday = e.Birthday.UnixMilli()
+	params.Password = crypt.New().CryptPassword(e.Password)
+	params.Birthday = e.Birthday.Unix()
 	params.CreatedAt = t.UnixMilli()
 	return params
 }

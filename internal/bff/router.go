@@ -19,11 +19,11 @@ func (e implBFF) GetAllUsers(c *fiber.Ctx) (err error) {
 }
 
 func (e implBFF) GetUserById(c *fiber.Ctx) (err error) {
-	id, err := strconv.Atoi(c.Params("id"))
+	id, err := strconv.Unquote(c.Params("id"))
 	if err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, "invalid parameter:"+c.Params("id"))
 	}
-	out, err := e.user.Get().GetOneUserById(c.Context(), int32(id))
+	out, err := e.user.Get().GetOneUserById(c.Context(), string(id))
 	if err != nil {
 		return fiber.ErrInternalServerError
 	}

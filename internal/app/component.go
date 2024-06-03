@@ -14,7 +14,7 @@ import (
 
 type Component interface {
 	AllUsers(ctx context.Context) (out AllUsersOut, err error)
-	GetOneUserById(ctx context.Context, id int32) (out UsersOut, err error)
+	GetOneUserById(ctx context.Context, id string) (out UsersOut, err error)
 	CreateUser(ctx context.Context, in UserIn) (ok bool, err error)
 }
 
@@ -45,19 +45,19 @@ func (e *implapp) Init(ctx context.Context) error {
 }
 
 func (e implapp) AllUsers(ctx context.Context) (out AllUsersOut, err error) {
-	examples, err := e.db.ListUsers(ctx)
+	users, err := e.db.ListUsers(ctx)
 	if err != nil {
 		return out, err
 	}
-	return out.FromStore(examples), nil
+	return out.FromStore(users), nil
 }
 
-func (e implapp) GetOneUserById(ctx context.Context, id int32) (out UsersOut, err error) {
-	example, err := e.db.GetUserById(ctx, id)
+func (e implapp) GetOneUserById(ctx context.Context, id string) (out UsersOut, err error) {
+	user, err := e.db.GetUserById(ctx, id)
 	if err != nil {
 		return out, err
 	}
-	return out.FromStore(example), nil
+	return out.FromStore(user), nil
 }
 
 func (e implapp) CreateUser(ctx context.Context, in UserIn) (ok bool, err error) {

@@ -95,7 +95,7 @@ func (s component_local_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 boo
 	return s.impl.CreateUser(ctx, a0)
 }
 
-func (s component_local_stub) GetOneUserById(ctx context.Context, a0 int32) (r0 UsersOut, err error) {
+func (s component_local_stub) GetOneUserById(ctx context.Context, a0 string) (r0 UsersOut, err error) {
 	// Update metrics.
 	begin := s.getOneUserByIdMetrics.Begin()
 	defer func() { s.getOneUserByIdMetrics.End(begin, err != nil, 0, 0) }()
@@ -225,7 +225,7 @@ func (s component_client_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bo
 	return
 }
 
-func (s component_client_stub) GetOneUserById(ctx context.Context, a0 int32) (r0 UsersOut, err error) {
+func (s component_client_stub) GetOneUserById(ctx context.Context, a0 string) (r0 UsersOut, err error) {
 	// Update metrics.
 	var requestBytes, replyBytes int
 	begin := s.getOneUserByIdMetrics.Begin()
@@ -256,12 +256,12 @@ func (s component_client_stub) GetOneUserById(ctx context.Context, a0 int32) (r0
 
 	// Preallocate a buffer of the right size.
 	size := 0
-	size += 4
+	size += (4 + len(a0))
 	enc := codegen.NewEncoder()
 	enc.Reset(size)
 
 	// Encode arguments.
-	enc.Int32(a0)
+	enc.String(a0)
 	var shardKey uint64
 
 	// Call the remote method.
@@ -383,8 +383,8 @@ func (s component_server_stub) getOneUserById(ctx context.Context, args []byte) 
 
 	// Decode arguments.
 	dec := codegen.NewDecoder(args)
-	var a0 int32
-	a0 = dec.Int32()
+	var a0 string
+	a0 = dec.String()
 
 	// TODO(rgrandl): The deferred function above will recover from panics in the
 	// user code: fix this.
@@ -417,7 +417,7 @@ func (s component_reflect_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 b
 	return
 }
 
-func (s component_reflect_stub) GetOneUserById(ctx context.Context, a0 int32) (r0 UsersOut, err error) {
+func (s component_reflect_stub) GetOneUserById(ctx context.Context, a0 string) (r0 UsersOut, err error) {
 	err = s.caller("GetOneUserById", ctx, []any{a0}, []any{&r0})
 	return
 }
@@ -463,7 +463,7 @@ var _ codegen.AutoMarshal = (*UsersOut)(nil)
 
 type __is_UsersOut[T ~struct {
 	weaver.AutoMarshal
-	ID        int       "json:\"id\""
+	ID        string    "json:\"id\""
 	FullName  string    "json:\"full_name\""
 	Email     string    "json:\"email\""
 	Phone     string    "json:\"phone,omitempty\""
@@ -477,7 +477,7 @@ func (x *UsersOut) WeaverMarshal(enc *codegen.Encoder) {
 	if x == nil {
 		panic(fmt.Errorf("UsersOut.WeaverMarshal: nil receiver"))
 	}
-	enc.Int(x.ID)
+	enc.String(x.ID)
 	enc.String(x.FullName)
 	enc.String(x.Email)
 	enc.String(x.Phone)
@@ -489,7 +489,7 @@ func (x *UsersOut) WeaverUnmarshal(dec *codegen.Decoder) {
 	if x == nil {
 		panic(fmt.Errorf("UsersOut.WeaverUnmarshal: nil receiver"))
 	}
-	x.ID = dec.Int()
+	x.ID = dec.String()
 	x.FullName = dec.String()
 	x.Email = dec.String()
 	x.Phone = dec.String()

@@ -19,7 +19,7 @@ INSERT INTO users (
 `
 
 type CreateUserParams struct {
-	ID        int32
+	ID        string
 	FullName  string
 	Email     string
 	Phone     string
@@ -45,7 +45,7 @@ SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, up
 WHERE id = ?
 `
 
-func (q *Queries) GetUserById(ctx context.Context, id int32) (User, error) {
+func (q *Queries) GetUserById(ctx context.Context, id string) (User, error) {
 	row := q.db.QueryRowContext(ctx, getUserById, id)
 	var i User
 	err := row.Scan(
