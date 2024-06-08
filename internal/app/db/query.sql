@@ -17,7 +17,8 @@ INSERT INTO users (
 );
 
 
--- name: Login :execresult
+-- name: GetUserByEmail :one
 SELECT email, password FROM users 
-WHERE email = ? and password = ?;
+WHERE email = ?;
+
 

@@ -46,3 +46,20 @@ func (e implBFF) CreateUser(c *fiber.Ctx) (err error) {
 
 	return c.SendStatus(fiber.StatusCreated)
 }
+
+func (e implBFF) Login(c *fiber.Ctx) (err error) {
+	var body app.UserGetByEmailAndPassword
+
+	err = c.BodyParser(&body)
+	if err != nil {
+		fmt.Println(err)
+		return fiber.ErrBadRequest
+	}
+
+	err = e.user.Get().GetUserByEmailAndPassword(c.Context(), body.Email, body.Password)
+	if err != nil {
+		return err
+	}
+
+	return c.SendStatus(fiber.StatusCreated)
+}

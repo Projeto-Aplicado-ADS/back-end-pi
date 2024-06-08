@@ -40,6 +40,23 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (sql.Res
 	)
 }
 
+const getUserByEmail = `-- name: GetUserByEmail :one
+SELECT email, password FROM users 
+WHERE email = ?
+`
+
+type GetUserByEmailRow struct {
+	Email    string
+	Password string
+}
+
+func (q *Queries) GetUserByEmail(ctx context.Context, email string) (GetUserByEmailRow, error) {
+	row := q.db.QueryRowContext(ctx, getUserByEmail, email)
+	var i GetUserByEmailRow
+	err := row.Scan(&i.Email, &i.Password)
+	return i, err
+}
+
 const getUserById = `-- name: GetUserById :one
 SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
 WHERE id = ?
@@ -135,18 +152,4 @@ func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
 		return nil, err
 	}
 	return items, nil
-}
-
-const login = `-- name: Login :execresult
-SELECT email, password FROM users 
-WHERE email = ? and password = ?
-`
-
-type LoginParams struct {
-	Email    string
-	Password string
-}
-
-func (q *Queries) Login(ctx context.Context, arg LoginParams) (sql.Result, error) {
-	return q.db.ExecContext(ctx, login, arg.Email, arg.Password)
 }

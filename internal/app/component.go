@@ -3,19 +3,23 @@ package app
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
 
 	"github.com/ServiceWeaver/weaver"
 
 	"projeto-api/internal/app/store"
+	"projeto-api/pkg/crypt"
+	"projeto-api/pkg/token"
 
-    _ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Component interface {
 	AllUsers(ctx context.Context) (out AllUsersOut, err error)
 	GetOneUserById(ctx context.Context, id string) (out UsersOut, err error)
 	CreateUser(ctx context.Context, in UserIn) (ok bool, err error)
+	GetUserByEmailAndPassword(ctx context.Context, email string, password string) (err error)
 }
 
 type Config struct {
@@ -66,4 +70,26 @@ func (e implapp) CreateUser(ctx context.Context, in UserIn) (ok bool, err error)
 		return false, err
 	}
 	return true, nil
+}
+
+func (e implapp) GetUserByEmailAndPassword(ctx context.Context, email string, password string) (err error) {
+
+	result, err := e.db.GetUserByEmail(ctx, email)
+	if err != nil {
+		return err
+	}
+
+	ok := crypt.New().ValidateUserByPassword(password, result.Password)
+	if !ok {
+		return errors.New("usuario ou senha invalido!")
+	}
+
+	tokenString, err := token.New().CreateNewToken(result.Email)
+	if err != nil {
+		return err
+	}
+	fmt.Println(tokenString)
+
+
+	return nil
 }
