@@ -5,7 +5,7 @@
 package store
 
 type User struct {
-	ID        int32
+	ID        string
 	FullName  string
 	Email     string
 	Phone     string

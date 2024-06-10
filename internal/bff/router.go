@@ -19,11 +19,11 @@ func (e implBFF) GetAllUsers(c *fiber.Ctx) (err error) {
 }
 
 func (e implBFF) GetUserById(c *fiber.Ctx) (err error) {
-	id, err := strconv.Atoi(c.Params("id"))
+	id, err := strconv.Unquote(c.Params("id"))
 	if err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, "invalid parameter:"+c.Params("id"))
 	}
-	out, err := e.user.Get().GetOneUserById(c.Context(), int32(id))
+	out, err := e.user.Get().GetOneUserById(c.Context(), string(id))
 	if err != nil {
 		return fiber.ErrInternalServerError
 	}
@@ -42,6 +42,23 @@ func (e implBFF) CreateUser(c *fiber.Ctx) (err error) {
 	_, err = e.user.Get().CreateUser(c.Context(), body)
 	if err != nil {
 		return fiber.ErrInternalServerError
+	}
+
+	return c.SendStatus(fiber.StatusCreated)
+}
+
+func (e implBFF) Login(c *fiber.Ctx) (err error) {
+	var body app.UserGetByEmailAndPassword
+
+	err = c.BodyParser(&body)
+	if err != nil {
+		fmt.Println(err)
+		return fiber.ErrBadRequest
+	}
+
+	err = e.user.Get().GetUserByEmailAndPassword(c.Context(), body.Email, body.Password)
+	if err != nil {
+		return err
 	}
 
 	return c.SendStatus(fiber.StatusCreated)

@@ -29,7 +29,9 @@ func (e *implBFF) createRouter(ctx context.Context, f *fiber.App) {
 	g := router.Group("/users")
 	g.Get("/", e.GetAllUsers)
 	g.Get("/:id", e.GetUserById)
+	g.Post("/login", e.Login)
 	g.Post("/", e.CreateUser)
+
 }
 
 func Serve(ctx context.Context, e *implBFF) error {
