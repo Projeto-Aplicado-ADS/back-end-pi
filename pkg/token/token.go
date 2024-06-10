@@ -15,6 +15,7 @@ type implToken struct{}
 
 type Token interface {
 	CreateNewToken(username string) (string, error)
+	ValidateToken(tokenString string) (jwt.Token, error)
 }
 
 func New() Token {
@@ -41,19 +42,19 @@ func (e implToken) CreateNewToken(email string) (string, error) {
 	return tokeToString, err
 }
 
-func (e implToken) ValidateToken(tokenString string) error {
+func (e implToken) ValidateToken(tokenString string) (jwt.Token, error) {
 
 	token, err := jwt.Parse(tokenString, func(t *jwt.Token) (interface{}, error) {
 		return tokenString, nil
 	})
 
 	if err != nil {
-		return err
+		return *token, err
 	}
 
 	if !token.Valid {
-		return fmt.Errorf("invalid token")
+		return *token, fmt.Errorf("invalid token")
 	}
 
-	return nil
+	return *token, nil
 }
