@@ -25,12 +25,13 @@ func (e *implBFF) createRouter(ctx context.Context, f *fiber.App) {
 	})
 
 	router := middleware.BaseRouter()
+/* 	auth := middleware.Authorization()  TODO -- add Authorization method*/
 
 	g := router.Group("/users")
 	g.Get("/", e.GetAllUsers)
 	g.Get("/:id", e.GetUserById)
 	g.Post("/login", e.Login)
-	g.Post("/", e.CreateUser)
+	g.Post("/singup", e.CreateUser)
 
 }
 
