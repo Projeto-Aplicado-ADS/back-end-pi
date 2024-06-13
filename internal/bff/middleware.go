@@ -56,21 +56,11 @@ func (e implMiddleware) Authorization() func(*fiber.Ctx) error {
 			return fiber.ErrUnauthorized
 		}
 
-		tokenValidete, err := token.New().ValidateToken(tokenString)
-		if err != nil {
+		if _, err := token.New().ValidateToken(tokenString); err != nil {
 			return err
 		}
 
-		if !tokenValidete.Valid {
-			return fiber.ErrUnauthorized
-		}
-
-		// TODO
-
-		// verificar se o token e valido
-		// se for valido, retornar o token
-		
-
+		// Ver como retornar token correto FIX: token signature is invalid: key is of invalid type: ECDSA verify expects *ecdsa.PublicKey
 		return nil
 	}
 }

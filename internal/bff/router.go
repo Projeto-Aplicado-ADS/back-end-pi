@@ -2,7 +2,6 @@ package bff
 
 import (
 	"fmt"
-	"strconv"
 
 	"projeto-api/internal/app"
 
@@ -19,14 +18,17 @@ func (e implBFF) GetAllUsers(c *fiber.Ctx) (err error) {
 }
 
 func (e implBFF) GetUserById(c *fiber.Ctx) (err error) {
-	id, err := strconv.Unquote(c.Params("id"))
-	if err != nil {
+	userId := c.Params("id")
+
+	if userId == "" {
 		return fiber.NewError(fiber.StatusBadRequest, "invalid parameter:"+c.Params("id"))
 	}
-	out, err := e.user.Get().GetOneUserById(c.Context(), string(id))
+
+	out, err := e.user.Get().GetOneUserById(c.Context(), string(userId))
 	if err != nil {
 		return fiber.ErrInternalServerError
 	}
+
 	return c.Status(fiber.StatusOK).JSON(out)
 }
 
