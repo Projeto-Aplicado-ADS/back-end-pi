@@ -56,7 +56,7 @@ func (e implMiddleware) Authorization() func(*fiber.Ctx) error {
 			return fiber.ErrUnauthorized
 		}
 
-		if _, err := token.New().ValidateToken(tokenString)
+		if err := token.New().ValidateToken(tokenString)
 		err != nil {
 			return err
 		}

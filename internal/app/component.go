@@ -10,7 +10,6 @@ import (
 
 	"projeto-api/internal/app/store"
 	"projeto-api/pkg/crypt"
-	"projeto-api/pkg/token"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -84,13 +83,6 @@ func (e implapp) GetUserByEmailAndPassword(ctx context.Context, email string, pa
 	if !ok {
 		return errors.New("Email ou senha invalido!")
 	}
-
-	tokenString, err := token.New().CreateNewToken(result.Email, result.IsAdmin)
-	if err != nil {
-		return err
-	}
-	fmt.Println(tokenString)
-
 
 	return nil
 }

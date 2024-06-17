@@ -1,11 +1,7 @@
 package token
 
 import (
-	"crypto/ecdsa"
-	"crypto/elliptic"
-	"crypto/rand"
-	"fmt"
-	"log"
+	"errors"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -15,47 +11,62 @@ type implToken struct{}
 
 type Token interface {
 	CreateNewToken(email string, isAdming bool) (string, error)
-	ValidateToken(tokenString string) (*jwt.Token, error)
+	ValidateToken(token string) (error)
+}
+
+type Claims struct {
+	Email string `json:"email"`
+	IsAdmin bool `json:"is_admin"`
+	jwt.RegisteredClaims
 }
 
 func New() Token {
 	return new(implToken)
 }
 
+var jwtKey = []byte("secret_key") 
+
 func (e implToken) CreateNewToken(email string, isAdming bool) (string, error) {
 
-	key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
-	if err != nil {
-		log.Fatal(err)
+	var claims = &Claims{
+		Email: email,
+		IsAdmin: isAdming,
+		RegisteredClaims: jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 24)),
+		},
 	}
 
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, jwt.MapClaims{
-		"email": email,
-		"isAdmin": isAdming,
-		"exp":   time.Now().Add(time.Hour * 24).Unix(),
-	})
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	tokeToString, err := token.SignedString(key)
+	tokenToString, err := token.SignedString(jwtKey)
 	if err != nil {
 		return "", err
 	}
 
-	return tokeToString, err
+	return tokenToString, err
 }
 
-func (e implToken) ValidateToken(tokenString string) (*jwt.Token, error) {
+func (e implToken) ValidateToken(token string) (error) {
+	claims := &Claims{}
 
-	token, err := jwt.Parse(tokenString, func(t *jwt.Token) (interface{}, error) {
-		return tokenString, nil
+	tkn, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
 	})
-
 	if err != nil {
-		return token, err
+		if err == jwt.ErrSignatureInvalid {
+			return err
+		}
+
+		if !tkn.Valid {
+			return errors.New("invalid token")
+		}
+
+		if time.Until(claims.ExpiresAt.Time) > 30*time.Second {
+			return errors.New("token expired")
+		}
+
+		return err
 	}
 
-	if !token.Valid {
-		return token, fmt.Errorf("invalid token")
-	}
-
-	return token, nil
+	return nil
 }
