@@ -14,7 +14,7 @@ import (
 type implToken struct{}
 
 type Token interface {
-	CreateNewToken(username string) (string, error)
+	CreateNewToken(email string, isAdming bool) (string, error)
 	ValidateToken(tokenString string) (*jwt.Token, error)
 }
 
@@ -22,7 +22,7 @@ func New() Token {
 	return new(implToken)
 }
 
-func (e implToken) CreateNewToken(email string) (string, error) {
+func (e implToken) CreateNewToken(email string, isAdming bool) (string, error) {
 
 	key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	if err != nil {
@@ -31,6 +31,7 @@ func (e implToken) CreateNewToken(email string) (string, error) {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodES256, jwt.MapClaims{
 		"email": email,
+		"isAdmin": isAdming,
 		"exp":   time.Now().Add(time.Hour * 24).Unix(),
 	})
 

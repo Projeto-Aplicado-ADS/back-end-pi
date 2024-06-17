@@ -20,6 +20,7 @@ type Component interface {
 	GetOneUserById(ctx context.Context, id string) (out UsersOut, err error)
 	CreateUser(ctx context.Context, in UserIn) (ok bool, err error)
 	GetUserByEmailAndPassword(ctx context.Context, email string, password string) (err error)
+	ListUserByEmail(ctx context.Context, email string) (out UsersOut, err error)
 }
 
 type Config struct {
@@ -76,15 +77,15 @@ func (e implapp) GetUserByEmailAndPassword(ctx context.Context, email string, pa
 
 	result, err := e.db.GetUserByEmail(ctx, email)
 	if err != nil {
-		return err
+		return errors.New("Email ou senha invalido!")
 	}
 
 	ok := crypt.New().ValidateUserByPassword(password, result.Password)
 	if !ok {
-		return errors.New("usuario ou senha invalido!")
+		return errors.New("Email ou senha invalido!")
 	}
 
-	tokenString, err := token.New().CreateNewToken(result.Email)
+	tokenString, err := token.New().CreateNewToken(result.Email, result.IsAdmin)
 	if err != nil {
 		return err
 	}
@@ -92,4 +93,13 @@ func (e implapp) GetUserByEmailAndPassword(ctx context.Context, email string, pa
 
 
 	return nil
+}
+
+func (e implapp) ListUserByEmail(ctx context.Context, email string) (out UsersOut, err error) {
+	users, err := e.db.ListUserByEmail(ctx, email)
+	if err != nil {
+		return out, err
+	}
+
+	return out.FromStore(users), nil
 }

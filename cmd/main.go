@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	if err := weaver.Run(context.Background(), bff.Serve); err != nil {
+	if err := weaver.Run(context.Background(), bff.Server); err != nil {
 		log.Fatal(err)
 	}
 }

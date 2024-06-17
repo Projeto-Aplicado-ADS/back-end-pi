@@ -65,3 +65,18 @@ func (e implBFF) Login(c *fiber.Ctx) (err error) {
 
 	return c.SendStatus(fiber.StatusCreated)
 }
+
+func (e implBFF) ListUserByEmail(c *fiber.Ctx) (err error) {
+	email := c.Params("email")
+
+	if email == "" {
+		return fiber.NewError(fiber.StatusBadRequest, "invalid parameter:"+c.Params("email"))
+	}
+
+	out, err := e.user.Get().ListUserByEmail(c.Context(), string(email))
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+
+	return c.Status(fiber.StatusOK).JSON(out)
+}

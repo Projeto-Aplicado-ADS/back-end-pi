@@ -16,6 +16,7 @@ type UsersOut struct {
 	FullName  string    `json:"full_name"`
 	Email     string    `json:"email"`
 	Phone     string    `json:"phone,omitempty"`
+	IsAdmin  	bool      `json:"is_admin,omitempty"`
 	Birthday  time.Time `json:"birthday,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
 }
@@ -23,6 +24,7 @@ type UsersOut struct {
 type UserGetByEmailAndPassword struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
+	IsAdmin  bool   `json:"is_admin,omitempty"`
 }
 
 type AllUsersOut []UsersOut
@@ -32,6 +34,7 @@ func (e UsersOut) FromStore(in store.User) UsersOut {
 	e.FullName = in.FullName
 	e.Email = in.Email
 	e.Phone = in.Phone
+	e.IsAdmin = in.IsAdmin
 	e.Birthday = time.UnixMilli(in.Birthday)
 	e.CreatedAt = time.UnixMilli(in.CreatedAt)
 	return e
@@ -70,6 +73,7 @@ func (e UserIn) ToStore() (params store.CreateUserParams) {
 func (e UserGetByEmailAndPassword) FromStoreByEmailAndPassword(in store.GetUserByEmailRow) UserGetByEmailAndPassword {
 	e.Email = in.Email
 	e.Password = in.Password
+	e.IsAdmin = in.IsAdmin
 
 	return e
 }
