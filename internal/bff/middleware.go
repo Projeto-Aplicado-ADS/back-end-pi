@@ -2,6 +2,7 @@ package bff
 
 import (
 	"projeto-api/pkg/token"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -49,17 +50,26 @@ func (e implMiddleware) Cors() func(*fiber.Ctx) error {
 
 func (e implMiddleware) Authorization() func(*fiber.Ctx) error {
 	return func(ctx *fiber.Ctx) error {
-		tokenString := ctx.Get("Authorization")
+		tokenString := ctx.Get("Authorization")  
+
 		if tokenString == "" {
 			return fiber.ErrUnauthorized
 		}
 
-		if err := token.New().ValidateToken(tokenString)
-		err != nil {
-			return err
+		tokenString = strings.TrimPrefix(tokenString, "Bearer ")
+
+		tokenParsed, err := token.New().ParseToken(tokenString)
+		if err != nil {
+			return fiber.ErrUnauthorized
 		}
 
-		// Ver como retornar token correto FIX: token signature is invalid: key is of invalid type: ECDSA verify expects *ecdsa.PublicKey
-		return nil
+		email := tokenParsed.Email
+		if email == "" {
+				return fiber.NewError(fiber.StatusBadRequest, "email claim not found")
+		}
+
+		ctx.Locals("email", email)
+
+		return ctx.Next()
 	}
 }

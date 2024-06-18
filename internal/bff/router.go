@@ -74,7 +74,7 @@ func (e implBFF) Login(c *fiber.Ctx) (err error) {
 		Name:     "token",
 		Value:    tokenString,
 		Expires:  time.Now().Add(time.Hour * 24),
-		HTTPOnly: true,
+		HTTPOnly: false,
 	})
 	
 
@@ -82,27 +82,18 @@ func (e implBFF) Login(c *fiber.Ctx) (err error) {
 }
 
 func (e implBFF) ListUserByEmail(c *fiber.Ctx) (err error) {
+	email := c.Locals("email").(string)
 
-	var tokenFromCookie = c.Cookies("token")
-	if tokenFromCookie == "" {
-		return fiber.ErrUnauthorized
+	if email == "" {
+		return fiber.NewError(fiber.StatusBadRequest, "Email not found")
 	}
 
-	err = token.New().ValidateToken(tokenFromCookie)
+	out, err := e.user.Get().ListUserByEmail(c.Context(), email)
 	if err != nil {
 		return err
 	}
 
-	email := c.Params("email")
-
-	if email == "" {
-		return fiber.NewError(fiber.StatusBadRequest, "invalid parameter:"+c.Params("email"))
-	}
-
-	out, err := e.user.Get().ListUserByEmail(c.Context(), string(email))
-	if err != nil {
-		return fiber.ErrInternalServerError
-	}
+	//TODO
 
 	return c.Status(fiber.StatusOK).JSON(out)
 }

@@ -12,6 +12,7 @@ type implToken struct{}
 type Token interface {
 	CreateNewToken(email string, isAdming bool) (string, error)
 	ValidateToken(token string) (error)
+	ParseToken(token string) (*Claims, error)
 }
 
 type Claims struct {
@@ -72,3 +73,24 @@ func (e implToken) ValidateToken(token string) (error) {
 
 	return nil
 }
+
+
+func (e implToken) ParseToken(token string) (*Claims, error) {
+	claims := &Claims{}
+
+	tkn, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
+	if err != nil {
+		if err == jwt.ErrSignatureInvalid {
+			return nil, err
+		}	
+		if !tkn.Valid {
+			return nil, errors.New("invalid token")
+		}	
+
+		return nil, err
+	}
+
+	return claims, nil
+}	
