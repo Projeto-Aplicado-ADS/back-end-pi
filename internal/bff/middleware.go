@@ -40,12 +40,10 @@ func (e implMiddleware) Logger(log ...logger.Config) func(*fiber.Ctx) error {
 
 func (e implMiddleware) Cors() func(*fiber.Ctx) error {
 	return cors.New(cors.Config{
-		AllowOrigins:     "*",
-		AllowHeaders:     "Accept, Authorization, Content-Type, X-CSRF-Token, X-API-Key",
-		AllowMethods:     "GET, POST, PUT, PATCH, DELETE, OPTIONS",
-		ExposeHeaders:    "ETag",
-		AllowCredentials: false,
-		MaxAge:           300,
+		AllowHeaders:     "Origin,Content-Type,Accept,Content-Length,Accept-Language,Accept-Encoding,Connection,Access-Control-Allow-Origin",
+		AllowOrigins:     "http://localhost:3000", 
+		AllowCredentials: true,
+		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
 	})
 }
 

@@ -26,13 +26,13 @@ func New() Token {
 
 var jwtKey = []byte("secret_key") 
 
-func (e implToken) CreateNewToken(email string, isAdming bool) (string, error) {
+func (e implToken) CreateNewToken(email string, isAdmin bool) (string, error) {
 
 	var claims = &Claims{
 		Email: email,
-		IsAdmin: isAdming,
+		IsAdmin: isAdmin,
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 24)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Minute * 60)),
 		},
 	}
 
@@ -64,6 +64,8 @@ func (e implToken) ValidateToken(token string) (error) {
 		if time.Until(claims.ExpiresAt.Time) > 30*time.Second {
 			return errors.New("token expired")
 		}
+
+		// TODO: REFRESH TOKEN
 
 		return err
 	}
