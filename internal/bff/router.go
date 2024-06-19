@@ -81,10 +81,10 @@ func (e implBFF) Login(c *fiber.Ctx) (err error) {
 	return c.SendStatus(fiber.StatusCreated)
 }
 
-func (e implBFF) ListUserByEmail(c *fiber.Ctx) (err error) {
-	email := c.Locals("email").(string)
+func (e implBFF) getMe(c *fiber.Ctx) (err error) {
+	email, ok := c.Locals("email").(string)
 
-	if email == "" {
+	if !ok || email == "" {
 		return fiber.NewError(fiber.StatusBadRequest, "Email not found")
 	}
 
@@ -92,8 +92,6 @@ func (e implBFF) ListUserByEmail(c *fiber.Ctx) (err error) {
 	if err != nil {
 		return err
 	}
-
-	//TODO
 
 	return c.Status(fiber.StatusOK).JSON(out)
 }
