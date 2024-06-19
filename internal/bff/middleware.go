@@ -2,6 +2,7 @@ package bff
 
 import (
 	"projeto-api/pkg/token"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -40,27 +41,35 @@ func (e implMiddleware) Logger(log ...logger.Config) func(*fiber.Ctx) error {
 
 func (e implMiddleware) Cors() func(*fiber.Ctx) error {
 	return cors.New(cors.Config{
-		AllowOrigins:     "*",
-		AllowHeaders:     "Accept, Authorization, Content-Type, X-CSRF-Token, X-API-Key",
-		AllowMethods:     "GET, POST, PUT, PATCH, DELETE, OPTIONS",
-		ExposeHeaders:    "ETag",
-		AllowCredentials: false,
-		MaxAge:           300,
+		AllowHeaders:     "Origin,Content-Type,Accept,Content-Length,Accept-Language,Accept-Encoding,Connection,Access-Control-Allow-Origin,Authorization, Access-Control-Allow-Headers",
+		AllowOrigins:     "http://localhost:3000", 
+		AllowCredentials: true,
+		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
 	})
 }
 
 func (e implMiddleware) Authorization() func(*fiber.Ctx) error {
 	return func(ctx *fiber.Ctx) error {
-		tokenString := ctx.Get("Authorization")
+		tokenString := ctx.Get("Authorization")  
+
 		if tokenString == "" {
 			return fiber.ErrUnauthorized
 		}
 
-		if _, err := token.New().ValidateToken(tokenString); err != nil {
-			return err
+		tokenString = strings.TrimPrefix(tokenString, "Bearer ")
+
+		tokenParsed, err := token.New().ParseToken(tokenString)
+		if err != nil {
+			return fiber.ErrUnauthorized
 		}
 
-		// Ver como retornar token correto FIX: token signature is invalid: key is of invalid type: ECDSA verify expects *ecdsa.PublicKey
-		return nil
+		email := tokenParsed.Email
+		if email == "" {
+				return fiber.NewError(fiber.StatusBadRequest, "email claim not found")
+		}
+
+		ctx.Locals("email", email)
+
+		return ctx.Next()
 	}
 }

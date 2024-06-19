@@ -25,17 +25,18 @@ func (e *implBFF) createRouter(ctx context.Context, f *fiber.App) {
 	})
 
 	router := middleware.BaseRouter()
-/* 	auth := middleware.Authorization()  TODO -- add Authorization method*/
+  auth := middleware.Authorization()
 
 	g := router.Group("/users")
 	g.Get("/", e.GetAllUsers)
+	g.Get("/me", auth, e.getMe)
 	g.Get("/:id", e.GetUserById)
 	g.Post("/login", e.Login)
-	g.Post("/singup", e.CreateUser)
+	g.Post("/", e.CreateUser)
 
 }
 
-func Serve(ctx context.Context, e *implBFF) error {
+func Server(ctx context.Context, e *implBFF) error {
 	fmt.Printf("BFF listener available on %v\n", e.bff.String())
 
 	f := fiber.New()

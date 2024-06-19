@@ -18,7 +18,11 @@ INSERT INTO users (
 
 
 -- name: GetUserByEmail :one
-SELECT email, password FROM users 
+SELECT email, password, is_admin FROM users 
+WHERE email = ?;
+
+-- name: ListUserByEmail :one
+SELECT * FROM users
 WHERE email = ?;
 
 

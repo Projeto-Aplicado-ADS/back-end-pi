@@ -2,8 +2,10 @@ package bff
 
 import (
 	"fmt"
+	"time"
 
 	"projeto-api/internal/app"
+	"projeto-api/pkg/token"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -63,5 +65,33 @@ func (e implBFF) Login(c *fiber.Ctx) (err error) {
 		return err
 	}
 
+	tokenString, err := token.New().CreateNewToken(body.Email, body.IsAdmin)
+	if err != nil {
+		return err
+	}
+
+	c.Cookie(&fiber.Cookie{
+		Name:     "token",
+		Value:    tokenString,
+		Expires:  time.Now().Add(time.Hour * 24),
+		HTTPOnly: false,
+	})
+	
+
 	return c.SendStatus(fiber.StatusCreated)
+}
+
+func (e implBFF) getMe(c *fiber.Ctx) (err error) {
+	email, ok := c.Locals("email").(string)
+
+	if !ok || email == "" {
+		return fiber.NewError(fiber.StatusBadRequest, "Email not found")
+	}
+
+	out, err := e.user.Get().ListUserByEmail(c.Context(), email)
+	if err != nil {
+		return err
+	}
+
+	return c.Status(fiber.StatusOK).JSON(out)
 }

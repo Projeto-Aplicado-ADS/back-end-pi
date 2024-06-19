@@ -41,19 +41,20 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (sql.Res
 }
 
 const getUserByEmail = `-- name: GetUserByEmail :one
-SELECT email, password FROM users 
+SELECT email, password, is_admin FROM users 
 WHERE email = ?
 `
 
 type GetUserByEmailRow struct {
 	Email    string
 	Password string
+	IsAdmin  bool
 }
 
 func (q *Queries) GetUserByEmail(ctx context.Context, email string) (GetUserByEmailRow, error) {
 	row := q.db.QueryRowContext(ctx, getUserByEmail, email)
 	var i GetUserByEmailRow
-	err := row.Scan(&i.Email, &i.Password)
+	err := row.Scan(&i.Email, &i.Password, &i.IsAdmin)
 	return i, err
 }
 
@@ -115,6 +116,28 @@ func (q *Queries) ListAdmins(ctx context.Context) ([]User, error) {
 		return nil, err
 	}
 	return items, nil
+}
+
+const listUserByEmail = `-- name: ListUserByEmail :one
+SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
+WHERE email = ?
+`
+
+func (q *Queries) ListUserByEmail(ctx context.Context, email string) (User, error) {
+	row := q.db.QueryRowContext(ctx, listUserByEmail, email)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.FullName,
+		&i.Email,
+		&i.Phone,
+		&i.Password,
+		&i.IsAdmin,
+		&i.Birthday,
+		&i.CreatedAt,
+		&i.UpdateAt,
+	)
+	return i, err
 }
 
 const listUsers = `-- name: ListUsers :many

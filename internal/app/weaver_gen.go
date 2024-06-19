@@ -21,10 +21,10 @@ func init() {
 		Iface: reflect.TypeOf((*Component)(nil)).Elem(),
 		Impl:  reflect.TypeOf(implapp{}),
 		LocalStubFn: func(impl any, caller string, tracer trace.Tracer) any {
-			return component_local_stub{impl: impl.(Component), tracer: tracer, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: false, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: false, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: false, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: false, Generated: true})}
+			return component_local_stub{impl: impl.(Component), tracer: tracer, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: false, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: false, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: false, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: false, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: false, Generated: true})}
 		},
 		ClientStubFn: func(stub codegen.Stub, caller string) any {
-			return component_client_stub{stub: stub, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: true, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: true, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: true, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: true, Generated: true})}
+			return component_client_stub{stub: stub, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: true, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: true, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: true, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: true, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: true, Generated: true})}
 		},
 		ServerStubFn: func(impl any, addLoad func(uint64, float64)) codegen.Server {
 			return component_server_stub{impl: impl.(Component), addLoad: addLoad}
@@ -51,6 +51,7 @@ type component_local_stub struct {
 	createUserMetrics                *codegen.MethodMetrics
 	getOneUserByIdMetrics            *codegen.MethodMetrics
 	getUserByEmailAndPasswordMetrics *codegen.MethodMetrics
+	listUserByEmailMetrics           *codegen.MethodMetrics
 }
 
 // Check that component_local_stub implements the Component interface.
@@ -136,6 +137,26 @@ func (s component_local_stub) GetUserByEmailAndPassword(ctx context.Context, a0 
 	return s.impl.GetUserByEmailAndPassword(ctx, a0, a1)
 }
 
+func (s component_local_stub) ListUserByEmail(ctx context.Context, a0 string) (r0 UsersOut, err error) {
+	// Update metrics.
+	begin := s.listUserByEmailMetrics.Begin()
+	defer func() { s.listUserByEmailMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.ListUserByEmail", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.ListUserByEmail(ctx, a0)
+}
+
 // Client stub implementations.
 
 type component_client_stub struct {
@@ -144,6 +165,7 @@ type component_client_stub struct {
 	createUserMetrics                *codegen.MethodMetrics
 	getOneUserByIdMetrics            *codegen.MethodMetrics
 	getUserByEmailAndPasswordMetrics *codegen.MethodMetrics
+	listUserByEmailMetrics           *codegen.MethodMetrics
 }
 
 // Check that component_client_stub implements the Component interface.
@@ -360,6 +382,62 @@ func (s component_client_stub) GetUserByEmailAndPassword(ctx context.Context, a0
 	return
 }
 
+func (s component_client_stub) ListUserByEmail(ctx context.Context, a0 string) (r0 UsersOut, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.listUserByEmailMetrics.Begin()
+	defer func() { s.listUserByEmailMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.ListUserByEmail", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Preallocate a buffer of the right size.
+	size := 0
+	size += (4 + len(a0))
+	enc := codegen.NewEncoder()
+	enc.Reset(size)
+
+	// Encode arguments.
+	enc.String(a0)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 4, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	(&r0).WeaverUnmarshal(dec)
+	err = dec.Error()
+	return
+}
+
 // Note that "weaver generate" will always generate the error message below.
 // Everything is okay. The error message is only relevant if you see it when
 // you run "go build" or "go run".
@@ -404,6 +482,8 @@ func (s component_server_stub) GetStubFn(method string) func(ctx context.Context
 		return s.getOneUserById
 	case "GetUserByEmailAndPassword":
 		return s.getUserByEmailAndPassword
+	case "ListUserByEmail":
+		return s.listUserByEmail
 	default:
 		return nil
 	}
@@ -505,6 +585,31 @@ func (s component_server_stub) getUserByEmailAndPassword(ctx context.Context, ar
 	return enc.Data(), nil
 }
 
+func (s component_server_stub) listUserByEmail(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 string
+	a0 = dec.String()
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.ListUserByEmail(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	(r0).WeaverMarshal(enc)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
 // Reflect stub implementations.
 
 type component_reflect_stub struct {
@@ -531,6 +636,11 @@ func (s component_reflect_stub) GetOneUserById(ctx context.Context, a0 string) (
 
 func (s component_reflect_stub) GetUserByEmailAndPassword(ctx context.Context, a0 string, a1 string) (err error) {
 	err = s.caller("GetUserByEmailAndPassword", ctx, []any{a0, a1}, []any{})
+	return
+}
+
+func (s component_reflect_stub) ListUserByEmail(ctx context.Context, a0 string) (r0 UsersOut, err error) {
+	err = s.caller("ListUserByEmail", ctx, []any{a0}, []any{&r0})
 	return
 }
 
@@ -579,6 +689,7 @@ type __is_UsersOut[T ~struct {
 	FullName  string    "json:\"full_name\""
 	Email     string    "json:\"email\""
 	Phone     string    "json:\"phone,omitempty\""
+	IsAdmin   bool      "json:\"is_admin,omitempty\""
 	Birthday  time.Time "json:\"birthday,omitempty\""
 	CreatedAt time.Time "json:\"created_at,omitempty\""
 }] struct{}
@@ -593,6 +704,7 @@ func (x *UsersOut) WeaverMarshal(enc *codegen.Encoder) {
 	enc.String(x.FullName)
 	enc.String(x.Email)
 	enc.String(x.Phone)
+	enc.Bool(x.IsAdmin)
 	enc.EncodeBinaryMarshaler(&x.Birthday)
 	enc.EncodeBinaryMarshaler(&x.CreatedAt)
 }
@@ -605,6 +717,7 @@ func (x *UsersOut) WeaverUnmarshal(dec *codegen.Decoder) {
 	x.FullName = dec.String()
 	x.Email = dec.String()
 	x.Phone = dec.String()
+	x.IsAdmin = dec.Bool()
 	dec.DecodeBinaryUnmarshaler(&x.Birthday)
 	dec.DecodeBinaryUnmarshaler(&x.CreatedAt)
 }
