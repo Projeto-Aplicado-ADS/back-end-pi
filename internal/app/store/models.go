@@ -4,6 +4,263 @@
 
 package store
 
+import (
+	"database/sql/driver"
+	"fmt"
+)
+
+type HospedesSexo string
+
+const (
+	HospedesSexoMasculino HospedesSexo = "masculino"
+	HospedesSexoFeminino  HospedesSexo = "feminino"
+)
+
+func (e *HospedesSexo) Scan(src interface{}) error {
+	switch s := src.(type) {
+	case []byte:
+		*e = HospedesSexo(s)
+	case string:
+		*e = HospedesSexo(s)
+	default:
+		return fmt.Errorf("unsupported scan type for HospedesSexo: %T", src)
+	}
+	return nil
+}
+
+type NullHospedesSexo struct {
+	HospedesSexo HospedesSexo
+	Valid        bool // Valid is true if HospedesSexo is not NULL
+}
+
+// Scan implements the Scanner interface.
+func (ns *NullHospedesSexo) Scan(value interface{}) error {
+	if value == nil {
+		ns.HospedesSexo, ns.Valid = "", false
+		return nil
+	}
+	ns.Valid = true
+	return ns.HospedesSexo.Scan(value)
+}
+
+// Value implements the driver Valuer interface.
+func (ns NullHospedesSexo) Value() (driver.Value, error) {
+	if !ns.Valid {
+		return nil, nil
+	}
+	return string(ns.HospedesSexo), nil
+}
+
+type QuartosStatusQuarto string
+
+const (
+	QuartosStatusQuartoLivre     QuartosStatusQuarto = "livre"
+	QuartosStatusQuartoOcupado   QuartosStatusQuarto = "ocupado"
+	QuartosStatusQuartoReservado QuartosStatusQuarto = "reservado"
+)
+
+func (e *QuartosStatusQuarto) Scan(src interface{}) error {
+	switch s := src.(type) {
+	case []byte:
+		*e = QuartosStatusQuarto(s)
+	case string:
+		*e = QuartosStatusQuarto(s)
+	default:
+		return fmt.Errorf("unsupported scan type for QuartosStatusQuarto: %T", src)
+	}
+	return nil
+}
+
+type NullQuartosStatusQuarto struct {
+	QuartosStatusQuarto QuartosStatusQuarto
+	Valid               bool // Valid is true if QuartosStatusQuarto is not NULL
+}
+
+// Scan implements the Scanner interface.
+func (ns *NullQuartosStatusQuarto) Scan(value interface{}) error {
+	if value == nil {
+		ns.QuartosStatusQuarto, ns.Valid = "", false
+		return nil
+	}
+	ns.Valid = true
+	return ns.QuartosStatusQuarto.Scan(value)
+}
+
+// Value implements the driver Valuer interface.
+func (ns NullQuartosStatusQuarto) Value() (driver.Value, error) {
+	if !ns.Valid {
+		return nil, nil
+	}
+	return string(ns.QuartosStatusQuarto), nil
+}
+
+type QuartosTipoQuarto string
+
+const (
+	QuartosTipoQuartoSimples QuartosTipoQuarto = "simples"
+	QuartosTipoQuartoCasal   QuartosTipoQuarto = "casal"
+	QuartosTipoQuartoFamilia QuartosTipoQuarto = "familia"
+	QuartosTipoQuartoLuxo    QuartosTipoQuarto = "luxo"
+)
+
+func (e *QuartosTipoQuarto) Scan(src interface{}) error {
+	switch s := src.(type) {
+	case []byte:
+		*e = QuartosTipoQuarto(s)
+	case string:
+		*e = QuartosTipoQuarto(s)
+	default:
+		return fmt.Errorf("unsupported scan type for QuartosTipoQuarto: %T", src)
+	}
+	return nil
+}
+
+type NullQuartosTipoQuarto struct {
+	QuartosTipoQuarto QuartosTipoQuarto
+	Valid             bool // Valid is true if QuartosTipoQuarto is not NULL
+}
+
+// Scan implements the Scanner interface.
+func (ns *NullQuartosTipoQuarto) Scan(value interface{}) error {
+	if value == nil {
+		ns.QuartosTipoQuarto, ns.Valid = "", false
+		return nil
+	}
+	ns.Valid = true
+	return ns.QuartosTipoQuarto.Scan(value)
+}
+
+// Value implements the driver Valuer interface.
+func (ns NullQuartosTipoQuarto) Value() (driver.Value, error) {
+	if !ns.Valid {
+		return nil, nil
+	}
+	return string(ns.QuartosTipoQuarto), nil
+}
+
+type ReservasStatusReserva string
+
+const (
+	ReservasStatusReservaPendente   ReservasStatusReserva = "pendente"
+	ReservasStatusReservaConfirmada ReservasStatusReserva = "confirmada"
+	ReservasStatusReservaCancelada  ReservasStatusReserva = "cancelada"
+)
+
+func (e *ReservasStatusReserva) Scan(src interface{}) error {
+	switch s := src.(type) {
+	case []byte:
+		*e = ReservasStatusReserva(s)
+	case string:
+		*e = ReservasStatusReserva(s)
+	default:
+		return fmt.Errorf("unsupported scan type for ReservasStatusReserva: %T", src)
+	}
+	return nil
+}
+
+type NullReservasStatusReserva struct {
+	ReservasStatusReserva ReservasStatusReserva
+	Valid                 bool // Valid is true if ReservasStatusReserva is not NULL
+}
+
+// Scan implements the Scanner interface.
+func (ns *NullReservasStatusReserva) Scan(value interface{}) error {
+	if value == nil {
+		ns.ReservasStatusReserva, ns.Valid = "", false
+		return nil
+	}
+	ns.Valid = true
+	return ns.ReservasStatusReserva.Scan(value)
+}
+
+// Value implements the driver Valuer interface.
+func (ns NullReservasStatusReserva) Value() (driver.Value, error) {
+	if !ns.Valid {
+		return nil, nil
+	}
+	return string(ns.ReservasStatusReserva), nil
+}
+
+type ReservasTipoReserva string
+
+const (
+	ReservasTipoReservaDiaria  ReservasTipoReserva = "diaria"
+	ReservasTipoReservaSemanal ReservasTipoReserva = "semanal"
+	ReservasTipoReservaMensal  ReservasTipoReserva = "mensal"
+)
+
+func (e *ReservasTipoReserva) Scan(src interface{}) error {
+	switch s := src.(type) {
+	case []byte:
+		*e = ReservasTipoReserva(s)
+	case string:
+		*e = ReservasTipoReserva(s)
+	default:
+		return fmt.Errorf("unsupported scan type for ReservasTipoReserva: %T", src)
+	}
+	return nil
+}
+
+type NullReservasTipoReserva struct {
+	ReservasTipoReserva ReservasTipoReserva
+	Valid               bool // Valid is true if ReservasTipoReserva is not NULL
+}
+
+// Scan implements the Scanner interface.
+func (ns *NullReservasTipoReserva) Scan(value interface{}) error {
+	if value == nil {
+		ns.ReservasTipoReserva, ns.Valid = "", false
+		return nil
+	}
+	ns.Valid = true
+	return ns.ReservasTipoReserva.Scan(value)
+}
+
+// Value implements the driver Valuer interface.
+func (ns NullReservasTipoReserva) Value() (driver.Value, error) {
+	if !ns.Valid {
+		return nil, nil
+	}
+	return string(ns.ReservasTipoReserva), nil
+}
+
+type Hospede struct {
+	ID             string
+	Nome           string
+	Email          string
+	Telefone       string
+	Cpf            string
+	DataNascimento string
+	Sexo           HospedesSexo
+	CreatedAt      int64
+	UpdateAt       int64
+}
+
+type Quarto struct {
+	ID           string
+	NumeroQuarto int32
+	NumeroAndar  int32
+	Descricao    string
+	TipoQuarto   QuartosTipoQuarto
+	StatusQuarto QuartosStatusQuarto
+	CreatedAt    int64
+	UpdateAt     int64
+}
+
+type Reserva struct {
+	ID            string
+	TipoReserva   ReservasTipoReserva
+	DataReserva   string
+	DataCheckin   string
+	DataCheckout  string
+	StatusReserva ReservasStatusReserva
+	ValorReserva  string
+	CreatedAt     int64
+	UpdateAt      int64
+	IDQuarto      string
+	IDHospede     string
+}
+
 type User struct {
 	ID        string
 	FullName  string

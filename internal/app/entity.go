@@ -21,6 +21,47 @@ type UsersOut struct {
 	CreatedAt time.Time `json:"created_at,omitempty"`
 }
 
+
+
+type (
+	HospedesOut struct {
+		weaver.AutoMarshal
+		ID             string `json:"id"`
+		Nome           string `json:"nome"`
+		Email          string `json:"email"`
+		Telefone       string `json:"telefone,omitempty"`
+		Cpf            string `json:"cpf"`
+		DataNascimento string `json:"data_nascimento"`
+		Sexo           string `json:"sexo"`
+		CreatedAt      time.Time  `json:"created_at,omitempty"`
+	}
+	HospedesIn struct {
+		weaver.AutoMarshal
+		ID             string `json:"id"`
+		Nome           string `json:"nome"`
+		Email          string `json:"email"`
+		Telefone       string `json:"telefone,omitempty"`
+		Cpf            string `json:"cpf"`
+		DataNascimento string `json:"data_nascimento"`
+		Sexo           string `json:"sexo"`
+		CreateAt			 time.Time  `json:"created_at,omitempty"`
+	}
+	QuartosOut struct {
+		weaver.AutoMarshal
+		ID             string `json:"id"`
+		Descricao      string `json:"descricao,omitempty"`
+		TipoQuarto     string `json:"tipo_quarto"`
+		StatusQuarto   string `json:"status_quarto"`
+		NumeroQuarto 	 int    `json:"numero_quarto"`
+		NumeroAndar    int    `json:"numero_andar"`
+		CreatedAt      time.Time  `json:"created_at,omitempty"`
+	}
+
+)
+
+type AllHospodesOut []HospedesOut
+
+
 type UserGetByEmailAndPassword struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
@@ -77,3 +118,38 @@ func (e UserGetByEmailAndPassword) FromStoreByEmailAndPassword(in store.GetUserB
 
 	return e
 }
+
+func (e HospedesOut) FromStore(in store.Hospede) HospedesOut {
+	e.ID = in.ID
+	e.Nome = in.Nome
+	e.Email = in.Email
+	e.Telefone = in.Telefone
+	e.Cpf = in.Cpf
+	e.DataNascimento = in.DataNascimento
+	e.Sexo = string(in.Sexo)
+	e.CreatedAt = time.UnixMilli(in.CreatedAt)
+	return e
+}
+
+func (e AllHospodesOut) FromStore(in []store.Hospede) AllHospodesOut {
+	e = make(AllHospodesOut, 0, len(in))
+	for _, v := range in {
+		e = append(e, HospedesOut{}.FromStore(v))
+	}
+	return e
+}
+
+func (e HospedesIn) ToStore() (params store.CreateHospedeParams) {
+	t := time.Now()
+	params.ID = uuid.New().String()
+	params.ID = e.ID
+	params.Cpf = e.Cpf
+	params.DataNascimento = e.DataNascimento
+	params.Email = e.Email
+	params.Nome = e.Nome
+	params.Sexo = store.HospedesSexo(e.Sexo)
+	params.Telefone = e.Telefone
+	params.CreatedAt = t.UnixMilli()
+	return params
+}
+

@@ -10,6 +10,169 @@ import (
 	"database/sql"
 )
 
+const alterarHospede = `-- name: AlterarHospede :execresult
+UPDATE hospedes
+SET nome = ?, email = ?, telefone = ?, cpf = ?, data_nascimento = ?, sexo = ?
+WHERE id = ?
+`
+
+type AlterarHospedeParams struct {
+	Nome           string
+	Email          string
+	Telefone       string
+	Cpf            string
+	DataNascimento string
+	Sexo           HospedesSexo
+	ID             string
+}
+
+func (q *Queries) AlterarHospede(ctx context.Context, arg AlterarHospedeParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, alterarHospede,
+		arg.Nome,
+		arg.Email,
+		arg.Telefone,
+		arg.Cpf,
+		arg.DataNascimento,
+		arg.Sexo,
+		arg.ID,
+	)
+}
+
+const alterarQuarto = `-- name: AlterarQuarto :execresult
+UPDATE quartos
+SET numero_quarto = ?, numero_andar = ?, descricao = ?, tipo_quarto = ?, status_quarto = ?
+WHERE id = ?
+`
+
+type AlterarQuartoParams struct {
+	NumeroQuarto int32
+	NumeroAndar  int32
+	Descricao    string
+	TipoQuarto   QuartosTipoQuarto
+	StatusQuarto QuartosStatusQuarto
+	ID           string
+}
+
+func (q *Queries) AlterarQuarto(ctx context.Context, arg AlterarQuartoParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, alterarQuarto,
+		arg.NumeroQuarto,
+		arg.NumeroAndar,
+		arg.Descricao,
+		arg.TipoQuarto,
+		arg.StatusQuarto,
+		arg.ID,
+	)
+}
+
+const alterarReserva = `-- name: AlterarReserva :execresult
+UPDATE reservas
+SET status_reserva = ?
+WHERE id = ?
+`
+
+type AlterarReservaParams struct {
+	StatusReserva ReservasStatusReserva
+	ID            string
+}
+
+func (q *Queries) AlterarReserva(ctx context.Context, arg AlterarReservaParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, alterarReserva, arg.StatusReserva, arg.ID)
+}
+
+const createHospede = `-- name: CreateHospede :execresult
+INSERT INTO hospedes (
+  id, nome, email, telefone, cpf, data_nascimento, sexo, created_at
+) VALUES (
+  ?, ?, ?, ?, ?, ?, ?, ?
+)
+`
+
+type CreateHospedeParams struct {
+	ID             string
+	Nome           string
+	Email          string
+	Telefone       string
+	Cpf            string
+	DataNascimento string
+	Sexo           HospedesSexo
+	CreatedAt      int64
+}
+
+func (q *Queries) CreateHospede(ctx context.Context, arg CreateHospedeParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, createHospede,
+		arg.ID,
+		arg.Nome,
+		arg.Email,
+		arg.Telefone,
+		arg.Cpf,
+		arg.DataNascimento,
+		arg.Sexo,
+		arg.CreatedAt,
+	)
+}
+
+const createQuarto = `-- name: CreateQuarto :execresult
+INSERT INTO quartos (
+  id, numero_quarto, numero_andar, descricao, tipo_quarto, status_quarto, created_at
+) VALUES (
+  ?, ?, ?, ?, ?, ?, ?
+)
+`
+
+type CreateQuartoParams struct {
+	ID           string
+	NumeroQuarto int32
+	NumeroAndar  int32
+	Descricao    string
+	TipoQuarto   QuartosTipoQuarto
+	StatusQuarto QuartosStatusQuarto
+	CreatedAt    int64
+}
+
+func (q *Queries) CreateQuarto(ctx context.Context, arg CreateQuartoParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, createQuarto,
+		arg.ID,
+		arg.NumeroQuarto,
+		arg.NumeroAndar,
+		arg.Descricao,
+		arg.TipoQuarto,
+		arg.StatusQuarto,
+		arg.CreatedAt,
+	)
+}
+
+const createReserva = `-- name: CreateReserva :execresult
+INSERT INTO reservas (
+  id, tipo_reserva, data_reserva, data_checkin, data_checkout, status_reserva, valor_reserva, created_at
+) VALUES (
+  ?, ?, ?, ?, ?, ?, ?, ?
+)
+`
+
+type CreateReservaParams struct {
+	ID            string
+	TipoReserva   ReservasTipoReserva
+	DataReserva   string
+	DataCheckin   string
+	DataCheckout  string
+	StatusReserva ReservasStatusReserva
+	ValorReserva  string
+	CreatedAt     int64
+}
+
+func (q *Queries) CreateReserva(ctx context.Context, arg CreateReservaParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, createReserva,
+		arg.ID,
+		arg.TipoReserva,
+		arg.DataReserva,
+		arg.DataCheckin,
+		arg.DataCheckout,
+		arg.StatusReserva,
+		arg.ValorReserva,
+		arg.CreatedAt,
+	)
+}
+
 const createUser = `-- name: CreateUser :execresult
 INSERT INTO users (
   id, full_name, email, phone, password, birthday, created_at
@@ -118,6 +281,161 @@ func (q *Queries) ListAdmins(ctx context.Context) ([]User, error) {
 	return items, nil
 }
 
+const listHospedeById = `-- name: ListHospedeById :one
+SELECT id, nome, email, telefone, cpf, data_nascimento, sexo, created_at, update_at FROM hospedes
+WHERE id = ?
+`
+
+func (q *Queries) ListHospedeById(ctx context.Context, id string) (Hospede, error) {
+	row := q.db.QueryRowContext(ctx, listHospedeById, id)
+	var i Hospede
+	err := row.Scan(
+		&i.ID,
+		&i.Nome,
+		&i.Email,
+		&i.Telefone,
+		&i.Cpf,
+		&i.DataNascimento,
+		&i.Sexo,
+		&i.CreatedAt,
+		&i.UpdateAt,
+	)
+	return i, err
+}
+
+const listHospedes = `-- name: ListHospedes :many
+SELECT id, nome, email, telefone, cpf, data_nascimento, sexo, created_at, update_at FROM hospedes
+`
+
+func (q *Queries) ListHospedes(ctx context.Context) ([]Hospede, error) {
+	rows, err := q.db.QueryContext(ctx, listHospedes)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Hospede
+	for rows.Next() {
+		var i Hospede
+		if err := rows.Scan(
+			&i.ID,
+			&i.Nome,
+			&i.Email,
+			&i.Telefone,
+			&i.Cpf,
+			&i.DataNascimento,
+			&i.Sexo,
+			&i.CreatedAt,
+			&i.UpdateAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const listQuartoById = `-- name: ListQuartoById :one
+SELECT id, numero_quarto, numero_andar, descricao, tipo_quarto, status_quarto, created_at, update_at FROM quartos
+WHERE id = ?
+`
+
+func (q *Queries) ListQuartoById(ctx context.Context, id string) (Quarto, error) {
+	row := q.db.QueryRowContext(ctx, listQuartoById, id)
+	var i Quarto
+	err := row.Scan(
+		&i.ID,
+		&i.NumeroQuarto,
+		&i.NumeroAndar,
+		&i.Descricao,
+		&i.TipoQuarto,
+		&i.StatusQuarto,
+		&i.CreatedAt,
+		&i.UpdateAt,
+	)
+	return i, err
+}
+
+const listQuartos = `-- name: ListQuartos :many
+SELECT id, numero_quarto, numero_andar, descricao, tipo_quarto, status_quarto, created_at, update_at FROM quartos
+`
+
+func (q *Queries) ListQuartos(ctx context.Context) ([]Quarto, error) {
+	rows, err := q.db.QueryContext(ctx, listQuartos)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Quarto
+	for rows.Next() {
+		var i Quarto
+		if err := rows.Scan(
+			&i.ID,
+			&i.NumeroQuarto,
+			&i.NumeroAndar,
+			&i.Descricao,
+			&i.TipoQuarto,
+			&i.StatusQuarto,
+			&i.CreatedAt,
+			&i.UpdateAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const listReservas = `-- name: ListReservas :many
+SELECT id, tipo_reserva, data_reserva, data_checkin, data_checkout, status_reserva, valor_reserva, created_at, update_at, id_quarto, id_hospede FROM reservas
+`
+
+func (q *Queries) ListReservas(ctx context.Context) ([]Reserva, error) {
+	rows, err := q.db.QueryContext(ctx, listReservas)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Reserva
+	for rows.Next() {
+		var i Reserva
+		if err := rows.Scan(
+			&i.ID,
+			&i.TipoReserva,
+			&i.DataReserva,
+			&i.DataCheckin,
+			&i.DataCheckout,
+			&i.StatusReserva,
+			&i.ValorReserva,
+			&i.CreatedAt,
+			&i.UpdateAt,
+			&i.IDQuarto,
+			&i.IDHospede,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listUserByEmail = `-- name: ListUserByEmail :one
 SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
 WHERE email = ?
@@ -175,4 +493,31 @@ func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
 		return nil, err
 	}
 	return items, nil
+}
+
+const removerHospede = `-- name: RemoverHospede :execresult
+DELETE FROM hospedes
+WHERE id = ?
+`
+
+func (q *Queries) RemoverHospede(ctx context.Context, id string) (sql.Result, error) {
+	return q.db.ExecContext(ctx, removerHospede, id)
+}
+
+const removerQuarto = `-- name: RemoverQuarto :execresult
+DELETE FROM quartos
+WHERE id = ?
+`
+
+func (q *Queries) RemoverQuarto(ctx context.Context, id string) (sql.Result, error) {
+	return q.db.ExecContext(ctx, removerQuarto, id)
+}
+
+const removerReserva = `-- name: RemoverReserva :execresult
+DELETE FROM reservas
+WHERE id = ?
+`
+
+func (q *Queries) RemoverReserva(ctx context.Context, id string) (sql.Result, error) {
+	return q.db.ExecContext(ctx, removerReserva, id)
 }
