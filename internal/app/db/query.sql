@@ -34,7 +34,9 @@ INSERT INTO reservas (
 );
 
 -- name: ListReservas :many
-SELECT * FROM reservas;
+select s.id ,s.data_reserva, s.data_checkin, s.data_checkout, s.valor_reserva, s.tipo_reserva , s.status_reserva ,h.nome , h.cpf , q.numero_quarto , q.numero_andar , q.tipo_quarto , q.status_quarto, s.created_at  from reservas s 
+inner join hospedes h on s.id_hospede = h.id 
+inner join quartos q on s.id_quarto = q.id;
 
 -- name: AlterarReserva :execresult
 UPDATE reservas

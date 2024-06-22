@@ -76,7 +76,6 @@ func (e implBFF) Login(c *fiber.Ctx) (err error) {
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: false,
 	})
-	
 
 	return c.SendStatus(fiber.StatusCreated)
 }
@@ -95,3 +94,9 @@ func (e implBFF) getMe(c *fiber.Ctx) (err error) {
 
 	return c.Status(fiber.StatusOK).JSON(out)
 }
+
+func (e implBFF) Logout(c *fiber.Ctx) (err error) {
+	c.ClearCookie("token")
+	return c.SendStatus(fiber.StatusOK)
+}
+

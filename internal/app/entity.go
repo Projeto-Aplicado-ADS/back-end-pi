@@ -16,51 +16,89 @@ type UsersOut struct {
 	FullName  string    `json:"full_name"`
 	Email     string    `json:"email"`
 	Phone     string    `json:"phone,omitempty"`
-	IsAdmin  	bool      `json:"is_admin,omitempty"`
+	IsAdmin   bool      `json:"is_admin,omitempty"`
 	Birthday  time.Time `json:"birthday,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
 }
 
-
-
 type (
 	HospedesOut struct {
 		weaver.AutoMarshal
-		ID             string `json:"id"`
-		Nome           string `json:"nome"`
-		Email          string `json:"email"`
-		Telefone       string `json:"telefone,omitempty"`
-		Cpf            string `json:"cpf"`
-		DataNascimento string `json:"data_nascimento"`
-		Sexo           string `json:"sexo"`
-		CreatedAt      time.Time  `json:"created_at,omitempty"`
+		ID             string    `json:"id"`
+		Nome           string    `json:"nome"`
+		Email          string    `json:"email"`
+		Telefone       string    `json:"telefone,omitempty"`
+		Cpf            string    `json:"cpf"`
+		DataNascimento string    `json:"data_nascimento"`
+		Sexo           string    `json:"sexo"`
+		CreatedAt      time.Time `json:"created_at,omitempty"`
 	}
 	HospedesIn struct {
 		weaver.AutoMarshal
-		ID             string `json:"id"`
-		Nome           string `json:"nome"`
-		Email          string `json:"email"`
-		Telefone       string `json:"telefone,omitempty"`
-		Cpf            string `json:"cpf"`
-		DataNascimento string `json:"data_nascimento"`
-		Sexo           string `json:"sexo"`
-		CreateAt			 time.Time  `json:"created_at,omitempty"`
+		ID             string    `json:"id"`
+		Nome           string    `json:"nome"`
+		Email          string    `json:"email"`
+		Telefone       string    `json:"telefone,omitempty"`
+		Cpf            string    `json:"cpf"`
+		DataNascimento string    `json:"data_nascimento"`
+		Sexo           string    `json:"sexo"`
+		CreateAt       time.Time `json:"created_at,omitempty"`
 	}
 	QuartosOut struct {
 		weaver.AutoMarshal
-		ID             string `json:"id"`
-		Descricao      string `json:"descricao,omitempty"`
-		TipoQuarto     string `json:"tipo_quarto"`
-		StatusQuarto   string `json:"status_quarto"`
-		NumeroQuarto 	 int    `json:"numero_quarto"`
-		NumeroAndar    int    `json:"numero_andar"`
-		CreatedAt      time.Time  `json:"created_at,omitempty"`
+		ID           string    `json:"id"`
+		Descricao    string    `json:"descricao,omitempty"`
+		TipoQuarto   string    `json:"tipo_quarto"`
+		StatusQuarto string    `json:"status_quarto"`
+		NumeroQuarto int32     `json:"numero_quarto"`
+		NumeroAndar  int32     `json:"numero_andar"`
+		CreatedAt    time.Time `json:"created_at,omitempty"`
 	}
-
+	QuartosIn struct {
+		weaver.AutoMarshal
+		ID           string    `json:"id"`
+		Descricao    string    `json:"descricao,omitempty"`
+		TipoQuarto   string    `json:"tipo_quarto"`
+		StatusQuarto string    `json:"status_quarto"`
+		NumeroQuarto int32     `json:"numero_quarto"`
+		NumeroAndar  int32     `json:"numero_andar"`
+		CreateAt     time.Time `json:"created_at,omitempty"`
+	}
+	ReservasOut struct {
+		weaver.AutoMarshal
+		ID            string    `json:"id"`
+		Nome          string    `json:"nome"`
+		Cpf           string    `json:"cpf"`
+		TipoReserva   string    `json:"tipo_reserva"`
+		DataReserva   string    `json:"data_reserva"`
+		DataCheckIn   string    `json:"data_check_in"`
+		DataCheckOut  string    `json:"data_check_out"`
+		StatusReserva string    `json:"status_reserva"`
+		ValorReserva  string    `json:"valor_reserva"`
+		NumeroQuarto  int32     `json:"numero_quarto"`
+		NumeroAndar   int32     `json:"numero_andar"`
+		TipoQuarto    string    `json:"tipo_quarto"`
+		StatusQuarto  string    `json:"status_quarto"`
+		CreatedAt     time.Time `json:"created_at,omitempty"`
+	}
+	ReservasIn struct {
+		weaver.AutoMarshal
+		ID            string    `json:"id"`
+		TipoReserva   string    `json:"tipo_reserva"`
+		DataReserva   string    `json:"data_reserva"`
+		DataCheckIn   string    `json:"data_check_in"`
+		DataCheckOut  string    `json:"data_check_out"`
+		StatusReserva string    `json:"status_reserva"`
+		ValorReserva  string    `json:"valor_reserva"`
+		CreateAt      time.Time `json:"created_at,omitempty"`
+	}
 )
 
 type AllHospodesOut []HospedesOut
 
+type AllQuartosOut []QuartosOut
+
+type AllReservasOut []ReservasOut
 
 type UserGetByEmailAndPassword struct {
 	Email    string `json:"email"`
@@ -142,7 +180,6 @@ func (e AllHospodesOut) FromStore(in []store.Hospede) AllHospodesOut {
 func (e HospedesIn) ToStore() (params store.CreateHospedeParams) {
 	t := time.Now()
 	params.ID = uuid.New().String()
-	params.ID = e.ID
 	params.Cpf = e.Cpf
 	params.DataNascimento = e.DataNascimento
 	params.Email = e.Email
@@ -153,3 +190,71 @@ func (e HospedesIn) ToStore() (params store.CreateHospedeParams) {
 	return params
 }
 
+func (e QuartosOut) FromStore(in store.Quarto) QuartosOut {
+	e.ID = in.ID
+	e.Descricao = in.Descricao
+	e.NumeroAndar = in.NumeroAndar
+	e.NumeroQuarto = in.NumeroQuarto
+	e.StatusQuarto = string(in.StatusQuarto)
+	e.TipoQuarto = string(in.TipoQuarto)
+	e.CreatedAt = time.UnixMilli(in.CreatedAt)
+	return e
+}
+
+func (e AllQuartosOut) FromStore(in []store.Quarto) AllQuartosOut {
+	e = make(AllQuartosOut, 0, len(in))
+	for _, v := range in {
+		e = append(e, QuartosOut{}.FromStore(v))
+	}
+	return e
+}
+
+func (e QuartosIn) ToStore() (params store.CreateQuartoParams) {
+	t := time.Now()
+	params.ID = uuid.New().String()
+	params.Descricao = e.Descricao
+	params.NumeroAndar = e.NumeroAndar
+	params.NumeroQuarto = e.NumeroQuarto
+	params.StatusQuarto = store.QuartosStatusQuarto(e.StatusQuarto)
+	params.TipoQuarto = store.QuartosTipoQuarto(e.TipoQuarto)
+	params.CreatedAt = t.UnixMilli()
+	return params
+}
+
+func (e ReservasOut) FromStore(in store.ListReservasRow) ReservasOut {
+	e.ID = in.ID
+	e.Cpf = in.Cpf
+	e.Nome = in.Nome
+	e.DataReserva = in.DataReserva
+	e.DataCheckIn = in.DataCheckin
+	e.DataCheckOut = in.DataCheckout
+	e.ValorReserva = in.ValorReserva
+	e.NumeroAndar = in.NumeroAndar
+	e.NumeroQuarto = in.NumeroQuarto
+	e.StatusQuarto = string(in.StatusQuarto)
+	e.StatusReserva = string(in.StatusReserva)
+	e.TipoQuarto = string(in.TipoQuarto)
+	e.TipoReserva = string(in.TipoReserva)
+	e.CreatedAt = time.UnixMilli(in.CreatedAt)
+	return e
+}
+
+func (e AllReservasOut) FromStore(in []store.ListReservasRow) AllReservasOut {
+	e = make(AllReservasOut, 0, len(in))
+	for _, v := range in {
+		e = append(e, ReservasOut{}.FromStore(v))
+	}
+	return e
+}
+
+func (e ReservasIn) ToStore() (params store.CreateReservaParams) {
+	t := time.Now()
+	params.ID = uuid.New().String()
+	params.DataCheckin = e.DataCheckIn
+	params.DataCheckout = e.DataCheckOut
+	params.ValorReserva = e.ValorReserva
+	params.StatusReserva = store.ReservasStatusReserva(e.StatusReserva)
+	params.TipoReserva = store.ReservasTipoReserva(e.TipoReserva)
+	params.CreatedAt = t.UnixMilli()
+	return params
+}

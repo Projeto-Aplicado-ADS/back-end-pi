@@ -47,7 +47,9 @@ CREATE TABLE IF NOT EXISTS reservas (
     status_reserva ENUM('pendente', 'confirmada', 'cancelada') NOT NULL DEFAULT 'pendente',
     valor_reserva DECIMAL(10,2) NOT NULL,
     created_at BIGINT NOT NULL,
-    update_at BIGINT NOT NULL DEFAULT 0,
-    id_quarto VARCHAR(36) NOT NULL REFERENCES quartos(id),
-    id_hospede VARCHAR(36) NOT NULL REFERENCES hospedes(id)
+    updated_at BIGINT DEFAULT NULL,
+    id_quarto VARCHAR(36) NOT NULL,
+    id_hospede VARCHAR(36) NOT NULL,
+    FOREIGN KEY (id_quarto) REFERENCES quartos(id),
+    FOREIGN KEY (id_hospede) REFERENCES hospedes(id)
 ); 

@@ -646,6 +646,282 @@ func (s component_reflect_stub) ListUserByEmail(ctx context.Context, a0 string) 
 
 // AutoMarshal implementations.
 
+var _ codegen.AutoMarshal = (*HospedesIn)(nil)
+
+type __is_HospedesIn[T ~struct {
+	weaver.AutoMarshal
+	ID             string    "json:\"id\""
+	Nome           string    "json:\"nome\""
+	Email          string    "json:\"email\""
+	Telefone       string    "json:\"telefone,omitempty\""
+	Cpf            string    "json:\"cpf\""
+	DataNascimento string    "json:\"data_nascimento\""
+	Sexo           string    "json:\"sexo\""
+	CreateAt       time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_HospedesIn[HospedesIn]
+
+func (x *HospedesIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("HospedesIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Nome)
+	enc.String(x.Email)
+	enc.String(x.Telefone)
+	enc.String(x.Cpf)
+	enc.String(x.DataNascimento)
+	enc.String(x.Sexo)
+	enc.EncodeBinaryMarshaler(&x.CreateAt)
+}
+
+func (x *HospedesIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("HospedesIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Nome = dec.String()
+	x.Email = dec.String()
+	x.Telefone = dec.String()
+	x.Cpf = dec.String()
+	x.DataNascimento = dec.String()
+	x.Sexo = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.CreateAt)
+}
+
+var _ codegen.AutoMarshal = (*HospedesOut)(nil)
+
+type __is_HospedesOut[T ~struct {
+	weaver.AutoMarshal
+	ID             string    "json:\"id\""
+	Nome           string    "json:\"nome\""
+	Email          string    "json:\"email\""
+	Telefone       string    "json:\"telefone,omitempty\""
+	Cpf            string    "json:\"cpf\""
+	DataNascimento string    "json:\"data_nascimento\""
+	Sexo           string    "json:\"sexo\""
+	CreatedAt      time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_HospedesOut[HospedesOut]
+
+func (x *HospedesOut) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("HospedesOut.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Nome)
+	enc.String(x.Email)
+	enc.String(x.Telefone)
+	enc.String(x.Cpf)
+	enc.String(x.DataNascimento)
+	enc.String(x.Sexo)
+	enc.EncodeBinaryMarshaler(&x.CreatedAt)
+}
+
+func (x *HospedesOut) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("HospedesOut.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Nome = dec.String()
+	x.Email = dec.String()
+	x.Telefone = dec.String()
+	x.Cpf = dec.String()
+	x.DataNascimento = dec.String()
+	x.Sexo = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.CreatedAt)
+}
+
+var _ codegen.AutoMarshal = (*QuartosIn)(nil)
+
+type __is_QuartosIn[T ~struct {
+	weaver.AutoMarshal
+	ID           string    "json:\"id\""
+	Descricao    string    "json:\"descricao,omitempty\""
+	TipoQuarto   string    "json:\"tipo_quarto\""
+	StatusQuarto string    "json:\"status_quarto\""
+	NumeroQuarto int32     "json:\"numero_quarto\""
+	NumeroAndar  int32     "json:\"numero_andar\""
+	CreateAt     time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_QuartosIn[QuartosIn]
+
+func (x *QuartosIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("QuartosIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Descricao)
+	enc.String(x.TipoQuarto)
+	enc.String(x.StatusQuarto)
+	enc.Int32(x.NumeroQuarto)
+	enc.Int32(x.NumeroAndar)
+	enc.EncodeBinaryMarshaler(&x.CreateAt)
+}
+
+func (x *QuartosIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("QuartosIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Descricao = dec.String()
+	x.TipoQuarto = dec.String()
+	x.StatusQuarto = dec.String()
+	x.NumeroQuarto = dec.Int32()
+	x.NumeroAndar = dec.Int32()
+	dec.DecodeBinaryUnmarshaler(&x.CreateAt)
+}
+
+var _ codegen.AutoMarshal = (*QuartosOut)(nil)
+
+type __is_QuartosOut[T ~struct {
+	weaver.AutoMarshal
+	ID           string    "json:\"id\""
+	Descricao    string    "json:\"descricao,omitempty\""
+	TipoQuarto   string    "json:\"tipo_quarto\""
+	StatusQuarto string    "json:\"status_quarto\""
+	NumeroQuarto int32     "json:\"numero_quarto\""
+	NumeroAndar  int32     "json:\"numero_andar\""
+	CreatedAt    time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_QuartosOut[QuartosOut]
+
+func (x *QuartosOut) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("QuartosOut.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Descricao)
+	enc.String(x.TipoQuarto)
+	enc.String(x.StatusQuarto)
+	enc.Int32(x.NumeroQuarto)
+	enc.Int32(x.NumeroAndar)
+	enc.EncodeBinaryMarshaler(&x.CreatedAt)
+}
+
+func (x *QuartosOut) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("QuartosOut.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Descricao = dec.String()
+	x.TipoQuarto = dec.String()
+	x.StatusQuarto = dec.String()
+	x.NumeroQuarto = dec.Int32()
+	x.NumeroAndar = dec.Int32()
+	dec.DecodeBinaryUnmarshaler(&x.CreatedAt)
+}
+
+var _ codegen.AutoMarshal = (*ReservasIn)(nil)
+
+type __is_ReservasIn[T ~struct {
+	weaver.AutoMarshal
+	ID            string    "json:\"id\""
+	TipoReserva   string    "json:\"tipo_reserva\""
+	DataReserva   string    "json:\"data_reserva\""
+	DataCheckIn   string    "json:\"data_check_in\""
+	DataCheckOut  string    "json:\"data_check_out\""
+	StatusReserva string    "json:\"status_reserva\""
+	ValorReserva  string    "json:\"valor_reserva\""
+	CreateAt      time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_ReservasIn[ReservasIn]
+
+func (x *ReservasIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("ReservasIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.TipoReserva)
+	enc.String(x.DataReserva)
+	enc.String(x.DataCheckIn)
+	enc.String(x.DataCheckOut)
+	enc.String(x.StatusReserva)
+	enc.String(x.ValorReserva)
+	enc.EncodeBinaryMarshaler(&x.CreateAt)
+}
+
+func (x *ReservasIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("ReservasIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.TipoReserva = dec.String()
+	x.DataReserva = dec.String()
+	x.DataCheckIn = dec.String()
+	x.DataCheckOut = dec.String()
+	x.StatusReserva = dec.String()
+	x.ValorReserva = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.CreateAt)
+}
+
+var _ codegen.AutoMarshal = (*ReservasOut)(nil)
+
+type __is_ReservasOut[T ~struct {
+	weaver.AutoMarshal
+	ID            string    "json:\"id\""
+	Nome          string    "json:\"nome\""
+	Cpf           string    "json:\"cpf\""
+	TipoReserva   string    "json:\"tipo_reserva\""
+	DataReserva   string    "json:\"data_reserva\""
+	DataCheckIn   string    "json:\"data_check_in\""
+	DataCheckOut  string    "json:\"data_check_out\""
+	StatusReserva string    "json:\"status_reserva\""
+	ValorReserva  string    "json:\"valor_reserva\""
+	NumeroQuarto  int32     "json:\"numero_quarto\""
+	NumeroAndar   int32     "json:\"numero_andar\""
+	TipoQuarto    string    "json:\"tipo_quarto\""
+	StatusQuarto  string    "json:\"status_quarto\""
+	CreatedAt     time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_ReservasOut[ReservasOut]
+
+func (x *ReservasOut) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("ReservasOut.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Nome)
+	enc.String(x.Cpf)
+	enc.String(x.TipoReserva)
+	enc.String(x.DataReserva)
+	enc.String(x.DataCheckIn)
+	enc.String(x.DataCheckOut)
+	enc.String(x.StatusReserva)
+	enc.String(x.ValorReserva)
+	enc.Int32(x.NumeroQuarto)
+	enc.Int32(x.NumeroAndar)
+	enc.String(x.TipoQuarto)
+	enc.String(x.StatusQuarto)
+	enc.EncodeBinaryMarshaler(&x.CreatedAt)
+}
+
+func (x *ReservasOut) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("ReservasOut.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Nome = dec.String()
+	x.Cpf = dec.String()
+	x.TipoReserva = dec.String()
+	x.DataReserva = dec.String()
+	x.DataCheckIn = dec.String()
+	x.DataCheckOut = dec.String()
+	x.StatusReserva = dec.String()
+	x.ValorReserva = dec.String()
+	x.NumeroQuarto = dec.Int32()
+	x.NumeroAndar = dec.Int32()
+	x.TipoQuarto = dec.String()
+	x.StatusQuarto = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.CreatedAt)
+}
+
 var _ codegen.AutoMarshal = (*UserIn)(nil)
 
 type __is_UserIn[T ~struct {

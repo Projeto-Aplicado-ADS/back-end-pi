@@ -398,30 +398,52 @@ func (q *Queries) ListQuartos(ctx context.Context) ([]Quarto, error) {
 }
 
 const listReservas = `-- name: ListReservas :many
-SELECT id, tipo_reserva, data_reserva, data_checkin, data_checkout, status_reserva, valor_reserva, created_at, update_at, id_quarto, id_hospede FROM reservas
+select s.id ,s.data_reserva, s.data_checkin, s.data_checkout, s.valor_reserva, s.tipo_reserva , s.status_reserva ,h.nome , h.cpf , q.numero_quarto , q.numero_andar , q.tipo_quarto , q.status_quarto, s.created_at  from reservas s 
+inner join hospedes h on s.id_hospede = h.id 
+inner join quartos q on s.id_quarto = q.id
 `
 
-func (q *Queries) ListReservas(ctx context.Context) ([]Reserva, error) {
+type ListReservasRow struct {
+	ID            string
+	DataReserva   string
+	DataCheckin   string
+	DataCheckout  string
+	ValorReserva  string
+	TipoReserva   ReservasTipoReserva
+	StatusReserva ReservasStatusReserva
+	Nome          string
+	Cpf           string
+	NumeroQuarto  int32
+	NumeroAndar   int32
+	TipoQuarto    QuartosTipoQuarto
+	StatusQuarto  QuartosStatusQuarto
+	CreatedAt     int64
+}
+
+func (q *Queries) ListReservas(ctx context.Context) ([]ListReservasRow, error) {
 	rows, err := q.db.QueryContext(ctx, listReservas)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Reserva
+	var items []ListReservasRow
 	for rows.Next() {
-		var i Reserva
+		var i ListReservasRow
 		if err := rows.Scan(
 			&i.ID,
-			&i.TipoReserva,
 			&i.DataReserva,
 			&i.DataCheckin,
 			&i.DataCheckout,
-			&i.StatusReserva,
 			&i.ValorReserva,
+			&i.TipoReserva,
+			&i.StatusReserva,
+			&i.Nome,
+			&i.Cpf,
+			&i.NumeroQuarto,
+			&i.NumeroAndar,
+			&i.TipoQuarto,
+			&i.StatusQuarto,
 			&i.CreatedAt,
-			&i.UpdateAt,
-			&i.IDQuarto,
-			&i.IDHospede,
 		); err != nil {
 			return nil, err
 		}

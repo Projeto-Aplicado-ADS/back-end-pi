@@ -5,6 +5,7 @@
 package store
 
 import (
+	"database/sql"
 	"database/sql/driver"
 	"fmt"
 )
@@ -256,7 +257,7 @@ type Reserva struct {
 	StatusReserva ReservasStatusReserva
 	ValorReserva  string
 	CreatedAt     int64
-	UpdateAt      int64
+	UpdatedAt     sql.NullInt64
 	IDQuarto      string
 	IDHospede     string
 }

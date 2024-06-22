@@ -20,6 +20,14 @@ type Component interface {
 	CreateUser(ctx context.Context, in UserIn) (ok bool, err error)
 	GetUserByEmailAndPassword(ctx context.Context, email string, password string) (err error)
 	ListUserByEmail(ctx context.Context, email string) (out UsersOut, err error)
+
+	GetHospedes(ctx context.Context) (out HospedesOut, err error)
+	CreateHospode(ctx context.Context, in HospedesIn) (ok bool, err error)
+
+	GetQuartos(ctx context.Context) (out QuartosOut, err error)
+	CreateQuarto(ctx context.Context, in QuartosIn) (ok bool, err error)
+
+	GetReservas(ctx context.Context) (out AllReservasOut, err error)
 }
 
 type Config struct {
@@ -94,4 +102,44 @@ func (e implapp) ListUserByEmail(ctx context.Context, email string) (out UsersOu
 	}
 
 	return out.FromStore(users), nil
+}
+
+func (e implapp) GetHospedes(ctx context.Context) (out AllHospodesOut, err error) {
+	hospedes, err := e.db.ListHospedes(ctx)
+	if err != nil {
+		return out, err
+	}
+	return out.FromStore(hospedes), nil
+}
+
+func (e implapp) CreateHospode(ctx context.Context, in HospedesIn) (ok bool, err error) {
+	_, err = e.db.CreateHospede(ctx, in.ToStore())
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+func (e implapp) GetQuartos(ctx context.Context) (out AllQuartosOut, err error) {
+	quartos, err := e.db.ListQuartos(ctx)
+	if err != nil {
+		return out, err
+	}
+	return out.FromStore(quartos), nil
+}
+
+func (e implapp) CreateQuarto(ctx context.Context, in QuartosIn) (ok bool, err error) {
+	_, err = e.db.CreateQuarto(ctx, in.ToStore())
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+func (e implapp) GetReservas(ctx context.Context) (out AllReservasOut, err error) {
+	reservas, err := e.db.ListReservas(ctx)
+	if err != nil {
+		return out, err
+	}
+	return out.FromStore(reservas), nil
 }
