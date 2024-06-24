@@ -21,13 +21,18 @@ type Component interface {
 	GetUserByEmailAndPassword(ctx context.Context, email string, password string) (err error)
 	ListUserByEmail(ctx context.Context, email string) (out UsersOut, err error)
 
-	GetHospedes(ctx context.Context) (out HospedesOut, err error)
-	CreateHospode(ctx context.Context, in HospedesIn) (ok bool, err error)
+	/* Hospedes */
+	GetHospedes(ctx context.Context) (out AllHospodesOut, err error)
+	CreateHospede(ctx context.Context, in HospedesIn) (ok bool, err error)
+	RemoveHospede(ctx context.Context, out RemoveHospedesIn) (ok bool, err error)
 
-	GetQuartos(ctx context.Context) (out QuartosOut, err error)
-	CreateQuarto(ctx context.Context, in QuartosIn) (ok bool, err error)
+	/* Quartos 
+		GetQuartos(ctx context.Context) (out QuartosOut, err error)
+		CreateQuarto(ctx context.Context, in QuartosIn) (ok bool, err error)
 
-	GetReservas(ctx context.Context) (out AllReservasOut, err error)
+	/* Reservas */
+
+	/* GetReservas(ctx context.Context) (out AllReservasOut, err error) */
 }
 
 type Config struct {
@@ -112,7 +117,7 @@ func (e implapp) GetHospedes(ctx context.Context) (out AllHospodesOut, err error
 	return out.FromStore(hospedes), nil
 }
 
-func (e implapp) CreateHospode(ctx context.Context, in HospedesIn) (ok bool, err error) {
+func (e implapp) CreateHospede(ctx context.Context, in HospedesIn) (ok bool, err error) {
 	_, err = e.db.CreateHospede(ctx, in.ToStore())
 	if err != nil {
 		return false, err
@@ -120,13 +125,21 @@ func (e implapp) CreateHospode(ctx context.Context, in HospedesIn) (ok bool, err
 	return true, nil
 }
 
-func (e implapp) GetQuartos(ctx context.Context) (out AllQuartosOut, err error) {
+func (e implapp) RemoveHospede(ctx context.Context, out RemoveHospedesIn) (ok bool, err error) {
+	err = e.db.RemoverHospede(ctx, out.ToStore())
+	if err != nil {
+		return false, errors.New("Erro ao remover hospede")
+	}
+	return true, nil
+}
+
+/* func (e implapp) GetQuartos(ctx context.Context) (out AllQuartosOut, err error) {
 	quartos, err := e.db.ListQuartos(ctx)
 	if err != nil {
 		return out, err
 	}
 	return out.FromStore(quartos), nil
-}
+} 
 
 func (e implapp) CreateQuarto(ctx context.Context, in QuartosIn) (ok bool, err error) {
 	_, err = e.db.CreateQuarto(ctx, in.ToStore())
@@ -143,3 +156,4 @@ func (e implapp) GetReservas(ctx context.Context) (out AllReservasOut, err error
 	}
 	return out.FromStore(reservas), nil
 }
+ */

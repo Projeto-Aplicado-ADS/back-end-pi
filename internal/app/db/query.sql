@@ -55,7 +55,7 @@ INSERT INTO hospedes (
 );
 
 -- name: ListHospedes :many
-SELECT * FROM hospedes;
+SELECT * FROM hospedes where deleted_at = 0;
 
 -- name: ListHospedeById :one
 SELECT * FROM hospedes
@@ -66,9 +66,8 @@ UPDATE hospedes
 SET nome = ?, email = ?, telefone = ?, cpf = ?, data_nascimento = ?, sexo = ?
 WHERE id = ?;
 
--- name: RemoverHospede :execresult
-DELETE FROM hospedes
-WHERE id = ?; 
+-- name: RemoverHospede :exec
+UPDATE hospedes SET deleted_at = ? WHERE id = ?;
 
 -- name: CreateQuarto :execresult
 INSERT INTO quartos (

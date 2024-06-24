@@ -21,10 +21,10 @@ func init() {
 		Iface: reflect.TypeOf((*Component)(nil)).Elem(),
 		Impl:  reflect.TypeOf(implapp{}),
 		LocalStubFn: func(impl any, caller string, tracer trace.Tracer) any {
-			return component_local_stub{impl: impl.(Component), tracer: tracer, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: false, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: false, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: false, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: false, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: false, Generated: true})}
+			return component_local_stub{impl: impl.(Component), tracer: tracer, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: false, Generated: true}), createHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateHospede", Remote: false, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: false, Generated: true}), getHospedesMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetHospedes", Remote: false, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: false, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: false, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: false, Generated: true}), removeHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "RemoveHospede", Remote: false, Generated: true})}
 		},
 		ClientStubFn: func(stub codegen.Stub, caller string) any {
-			return component_client_stub{stub: stub, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: true, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: true, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: true, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: true, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: true, Generated: true})}
+			return component_client_stub{stub: stub, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: true, Generated: true}), createHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateHospede", Remote: true, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: true, Generated: true}), getHospedesMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetHospedes", Remote: true, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: true, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: true, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: true, Generated: true}), removeHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "RemoveHospede", Remote: true, Generated: true})}
 		},
 		ServerStubFn: func(impl any, addLoad func(uint64, float64)) codegen.Server {
 			return component_server_stub{impl: impl.(Component), addLoad: addLoad}
@@ -48,10 +48,13 @@ type component_local_stub struct {
 	impl                             Component
 	tracer                           trace.Tracer
 	allUsersMetrics                  *codegen.MethodMetrics
+	createHospedeMetrics             *codegen.MethodMetrics
 	createUserMetrics                *codegen.MethodMetrics
+	getHospedesMetrics               *codegen.MethodMetrics
 	getOneUserByIdMetrics            *codegen.MethodMetrics
 	getUserByEmailAndPasswordMetrics *codegen.MethodMetrics
 	listUserByEmailMetrics           *codegen.MethodMetrics
+	removeHospedeMetrics             *codegen.MethodMetrics
 }
 
 // Check that component_local_stub implements the Component interface.
@@ -77,6 +80,26 @@ func (s component_local_stub) AllUsers(ctx context.Context) (r0 AllUsersOut, err
 	return s.impl.AllUsers(ctx)
 }
 
+func (s component_local_stub) CreateHospede(ctx context.Context, a0 HospedesIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.createHospedeMetrics.Begin()
+	defer func() { s.createHospedeMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.CreateHospede", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.CreateHospede(ctx, a0)
+}
+
 func (s component_local_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bool, err error) {
 	// Update metrics.
 	begin := s.createUserMetrics.Begin()
@@ -95,6 +118,26 @@ func (s component_local_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 boo
 	}
 
 	return s.impl.CreateUser(ctx, a0)
+}
+
+func (s component_local_stub) GetHospedes(ctx context.Context) (r0 AllHospodesOut, err error) {
+	// Update metrics.
+	begin := s.getHospedesMetrics.Begin()
+	defer func() { s.getHospedesMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.GetHospedes", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.GetHospedes(ctx)
 }
 
 func (s component_local_stub) GetOneUserById(ctx context.Context, a0 string) (r0 UsersOut, err error) {
@@ -157,15 +200,38 @@ func (s component_local_stub) ListUserByEmail(ctx context.Context, a0 string) (r
 	return s.impl.ListUserByEmail(ctx, a0)
 }
 
+func (s component_local_stub) RemoveHospede(ctx context.Context, a0 RemoveHospedesIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.removeHospedeMetrics.Begin()
+	defer func() { s.removeHospedeMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.RemoveHospede", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.RemoveHospede(ctx, a0)
+}
+
 // Client stub implementations.
 
 type component_client_stub struct {
 	stub                             codegen.Stub
 	allUsersMetrics                  *codegen.MethodMetrics
+	createHospedeMetrics             *codegen.MethodMetrics
 	createUserMetrics                *codegen.MethodMetrics
+	getHospedesMetrics               *codegen.MethodMetrics
 	getOneUserByIdMetrics            *codegen.MethodMetrics
 	getUserByEmailAndPasswordMetrics *codegen.MethodMetrics
 	listUserByEmailMetrics           *codegen.MethodMetrics
+	removeHospedeMetrics             *codegen.MethodMetrics
 }
 
 // Check that component_client_stub implements the Component interface.
@@ -218,16 +284,16 @@ func (s component_client_stub) AllUsers(ctx context.Context) (r0 AllUsersOut, er
 	return
 }
 
-func (s component_client_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bool, err error) {
+func (s component_client_stub) CreateHospede(ctx context.Context, a0 HospedesIn) (r0 bool, err error) {
 	// Update metrics.
 	var requestBytes, replyBytes int
-	begin := s.createUserMetrics.Begin()
-	defer func() { s.createUserMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+	begin := s.createHospedeMetrics.Begin()
+	defer func() { s.createHospedeMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
 
 	span := trace.SpanFromContext(ctx)
 	if span.SpanContext().IsValid() {
 		// Create a child span for this method.
-		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.CreateUser", trace.WithSpanKind(trace.SpanKindClient))
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.CreateHospede", trace.WithSpanKind(trace.SpanKindClient))
 	}
 
 	defer func() {
@@ -265,6 +331,104 @@ func (s component_client_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bo
 	// Decode the results.
 	dec := codegen.NewDecoder(results)
 	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.createUserMetrics.Begin()
+	defer func() { s.createUserMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.CreateUser", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Encode arguments.
+	enc := codegen.NewEncoder()
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 2, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) GetHospedes(ctx context.Context) (r0 AllHospodesOut, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.getHospedesMetrics.Begin()
+	defer func() { s.getHospedesMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.GetHospedes", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	var shardKey uint64
+
+	// Call the remote method.
+	var results []byte
+	results, err = s.stub.Run(ctx, 3, nil, shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	*(*[]HospedesOut)(&r0) = serviceweaver_dec_slice_HospedesOut_3d55506f(dec)
 	err = dec.Error()
 	return
 }
@@ -311,7 +475,7 @@ func (s component_client_stub) GetOneUserById(ctx context.Context, a0 string) (r
 	// Call the remote method.
 	requestBytes = len(enc.Data())
 	var results []byte
-	results, err = s.stub.Run(ctx, 2, enc.Data(), shardKey)
+	results, err = s.stub.Run(ctx, 4, enc.Data(), shardKey)
 	replyBytes = len(results)
 	if err != nil {
 		err = errors.Join(weaver.RemoteCallError, err)
@@ -369,7 +533,7 @@ func (s component_client_stub) GetUserByEmailAndPassword(ctx context.Context, a0
 	// Call the remote method.
 	requestBytes = len(enc.Data())
 	var results []byte
-	results, err = s.stub.Run(ctx, 3, enc.Data(), shardKey)
+	results, err = s.stub.Run(ctx, 5, enc.Data(), shardKey)
 	replyBytes = len(results)
 	if err != nil {
 		err = errors.Join(weaver.RemoteCallError, err)
@@ -424,7 +588,7 @@ func (s component_client_stub) ListUserByEmail(ctx context.Context, a0 string) (
 	// Call the remote method.
 	requestBytes = len(enc.Data())
 	var results []byte
-	results, err = s.stub.Run(ctx, 4, enc.Data(), shardKey)
+	results, err = s.stub.Run(ctx, 6, enc.Data(), shardKey)
 	replyBytes = len(results)
 	if err != nil {
 		err = errors.Join(weaver.RemoteCallError, err)
@@ -434,6 +598,57 @@ func (s component_client_stub) ListUserByEmail(ctx context.Context, a0 string) (
 	// Decode the results.
 	dec := codegen.NewDecoder(results)
 	(&r0).WeaverUnmarshal(dec)
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) RemoveHospede(ctx context.Context, a0 RemoveHospedesIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.removeHospedeMetrics.Begin()
+	defer func() { s.removeHospedeMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.RemoveHospede", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Encode arguments.
+	enc := codegen.NewEncoder()
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 7, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
 	err = dec.Error()
 	return
 }
@@ -476,14 +691,20 @@ func (s component_server_stub) GetStubFn(method string) func(ctx context.Context
 	switch method {
 	case "AllUsers":
 		return s.allUsers
+	case "CreateHospede":
+		return s.createHospede
 	case "CreateUser":
 		return s.createUser
+	case "GetHospedes":
+		return s.getHospedes
 	case "GetOneUserById":
 		return s.getOneUserById
 	case "GetUserByEmailAndPassword":
 		return s.getUserByEmailAndPassword
 	case "ListUserByEmail":
 		return s.listUserByEmail
+	case "RemoveHospede":
+		return s.removeHospede
 	default:
 		return nil
 	}
@@ -509,6 +730,31 @@ func (s component_server_stub) allUsers(ctx context.Context, args []byte) (res [
 	return enc.Data(), nil
 }
 
+func (s component_server_stub) createHospede(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 HospedesIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.CreateHospede(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
 func (s component_server_stub) createUser(ctx context.Context, args []byte) (res []byte, err error) {
 	// Catch and return any panics detected during encoding/decoding/rpc.
 	defer func() {
@@ -530,6 +776,26 @@ func (s component_server_stub) createUser(ctx context.Context, args []byte) (res
 	// Encode the results.
 	enc := codegen.NewEncoder()
 	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) getHospedes(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.GetHospedes(ctx)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	serviceweaver_enc_slice_HospedesOut_3d55506f(enc, ([]HospedesOut)(r0))
 	enc.Error(appErr)
 	return enc.Data(), nil
 }
@@ -610,6 +876,31 @@ func (s component_server_stub) listUserByEmail(ctx context.Context, args []byte)
 	return enc.Data(), nil
 }
 
+func (s component_server_stub) removeHospede(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 RemoveHospedesIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.RemoveHospede(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
 // Reflect stub implementations.
 
 type component_reflect_stub struct {
@@ -624,8 +915,18 @@ func (s component_reflect_stub) AllUsers(ctx context.Context) (r0 AllUsersOut, e
 	return
 }
 
+func (s component_reflect_stub) CreateHospede(ctx context.Context, a0 HospedesIn) (r0 bool, err error) {
+	err = s.caller("CreateHospede", ctx, []any{a0}, []any{&r0})
+	return
+}
+
 func (s component_reflect_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bool, err error) {
 	err = s.caller("CreateUser", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) GetHospedes(ctx context.Context) (r0 AllHospodesOut, err error) {
+	err = s.caller("GetHospedes", ctx, []any{}, []any{&r0})
 	return
 }
 
@@ -641,6 +942,11 @@ func (s component_reflect_stub) GetUserByEmailAndPassword(ctx context.Context, a
 
 func (s component_reflect_stub) ListUserByEmail(ctx context.Context, a0 string) (r0 UsersOut, err error) {
 	err = s.caller("ListUserByEmail", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) RemoveHospede(ctx context.Context, a0 RemoveHospedesIn) (r0 bool, err error) {
+	err = s.caller("RemoveHospede", ctx, []any{a0}, []any{&r0})
 	return
 }
 
@@ -814,6 +1120,32 @@ func (x *QuartosOut) WeaverUnmarshal(dec *codegen.Decoder) {
 	x.NumeroQuarto = dec.Int32()
 	x.NumeroAndar = dec.Int32()
 	dec.DecodeBinaryUnmarshaler(&x.CreatedAt)
+}
+
+var _ codegen.AutoMarshal = (*RemoveHospedesIn)(nil)
+
+type __is_RemoveHospedesIn[T ~struct {
+	weaver.AutoMarshal
+	ID        string    "json:\"id\" validate:\"required, uuid\""
+	DeletedAt time.Time "json:\"deleted_at,omitempty\""
+}] struct{}
+
+var _ __is_RemoveHospedesIn[RemoveHospedesIn]
+
+func (x *RemoveHospedesIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("RemoveHospedesIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.EncodeBinaryMarshaler(&x.DeletedAt)
+}
+
+func (x *RemoveHospedesIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("RemoveHospedesIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.DeletedAt)
 }
 
 var _ codegen.AutoMarshal = (*ReservasIn)(nil)
@@ -1017,6 +1349,29 @@ func serviceweaver_dec_slice_UsersOut_50a126a0(dec *codegen.Decoder) []UsersOut 
 		return nil
 	}
 	res := make([]UsersOut, n)
+	for i := 0; i < n; i++ {
+		(&res[i]).WeaverUnmarshal(dec)
+	}
+	return res
+}
+
+func serviceweaver_enc_slice_HospedesOut_3d55506f(enc *codegen.Encoder, arg []HospedesOut) {
+	if arg == nil {
+		enc.Len(-1)
+		return
+	}
+	enc.Len(len(arg))
+	for i := 0; i < len(arg); i++ {
+		(arg[i]).WeaverMarshal(enc)
+	}
+}
+
+func serviceweaver_dec_slice_HospedesOut_3d55506f(dec *codegen.Decoder) []HospedesOut {
+	n := dec.Len()
+	if n == -1 {
+		return nil
+	}
+	res := make([]HospedesOut, n)
 	for i := 0; i < n; i++ {
 		(&res[i]).WeaverUnmarshal(dec)
 	}

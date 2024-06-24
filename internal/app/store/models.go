@@ -235,6 +235,7 @@ type Hospede struct {
 	Sexo           HospedesSexo
 	CreatedAt      int64
 	UpdateAt       int64
+	DeletedAt      int64
 }
 
 type Quarto struct {

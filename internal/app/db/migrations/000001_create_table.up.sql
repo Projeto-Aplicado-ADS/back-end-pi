@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS hospedes (
     data_nascimento VARCHAR(14) NOT NULL,
     sexo ENUM('masculino', 'feminino') NOT NULL,
     created_at BIGINT NOT NULL,
-    update_at BIGINT NOT NULL DEFAULT 0
+    update_at BIGINT NOT NULL DEFAULT 0,
+    deleted_at BIGINT NOT NULL DEFAULT 0
 ); 
 
 

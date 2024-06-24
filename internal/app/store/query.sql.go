@@ -282,7 +282,7 @@ func (q *Queries) ListAdmins(ctx context.Context) ([]User, error) {
 }
 
 const listHospedeById = `-- name: ListHospedeById :one
-SELECT id, nome, email, telefone, cpf, data_nascimento, sexo, created_at, update_at FROM hospedes
+SELECT id, nome, email, telefone, cpf, data_nascimento, sexo, created_at, update_at, deleted_at FROM hospedes
 WHERE id = ?
 `
 
@@ -299,12 +299,13 @@ func (q *Queries) ListHospedeById(ctx context.Context, id string) (Hospede, erro
 		&i.Sexo,
 		&i.CreatedAt,
 		&i.UpdateAt,
+		&i.DeletedAt,
 	)
 	return i, err
 }
 
 const listHospedes = `-- name: ListHospedes :many
-SELECT id, nome, email, telefone, cpf, data_nascimento, sexo, created_at, update_at FROM hospedes
+SELECT id, nome, email, telefone, cpf, data_nascimento, sexo, created_at, update_at, deleted_at FROM hospedes where deleted_at = 0
 `
 
 func (q *Queries) ListHospedes(ctx context.Context) ([]Hospede, error) {
@@ -326,6 +327,7 @@ func (q *Queries) ListHospedes(ctx context.Context) ([]Hospede, error) {
 			&i.Sexo,
 			&i.CreatedAt,
 			&i.UpdateAt,
+			&i.DeletedAt,
 		); err != nil {
 			return nil, err
 		}
@@ -517,13 +519,18 @@ func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
 	return items, nil
 }
 
-const removerHospede = `-- name: RemoverHospede :execresult
-DELETE FROM hospedes
-WHERE id = ?
+const removerHospede = `-- name: RemoverHospede :exec
+UPDATE hospedes SET deleted_at = ? WHERE id = ?
 `
 
-func (q *Queries) RemoverHospede(ctx context.Context, id string) (sql.Result, error) {
-	return q.db.ExecContext(ctx, removerHospede, id)
+type RemoverHospedeParams struct {
+	DeletedAt int64
+	ID        string
+}
+
+func (q *Queries) RemoverHospede(ctx context.Context, arg RemoverHospedeParams) error {
+	_, err := q.db.ExecContext(ctx, removerHospede, arg.DeletedAt, arg.ID)
+	return err
 }
 
 const removerQuarto = `-- name: RemoverQuarto :execresult

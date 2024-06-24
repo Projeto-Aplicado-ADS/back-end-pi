@@ -190,6 +190,19 @@ func (e HospedesIn) ToStore() (params store.CreateHospedeParams) {
 	return params
 }
 
+type RemoveHospedesIn struct {
+	weaver.AutoMarshal
+	ID string `json:"id" validate:"required, uuid"`
+	DeletedAt time.Time `json:"deleted_at,omitempty"`
+}
+
+func (e RemoveHospedesIn) ToStore() (out store.RemoverHospedeParams) {
+	time := time.Now()
+	out.ID = e.ID
+	out.DeletedAt = time.UnixMilli()
+	return out
+}
+
 func (e QuartosOut) FromStore(in store.Quarto) QuartosOut {
 	e.ID = in.ID
 	e.Descricao = in.Descricao
