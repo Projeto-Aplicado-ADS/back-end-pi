@@ -44,6 +44,11 @@ type (
 		Sexo           string    `json:"sexo"`
 		CreateAt       time.Time `json:"created_at,omitempty"`
 	}
+	RemoveHospedesIn struct {
+		weaver.AutoMarshal
+		ID string `json:"id" validate:"required, uuid"`
+		DeletedAt time.Time `json:"deleted_at,omitempty"`
+	}
 	QuartosOut struct {
 		weaver.AutoMarshal
 		ID           string    `json:"id"`
@@ -64,6 +69,13 @@ type (
 		NumeroAndar  int32     `json:"numero_andar"`
 		CreateAt     time.Time `json:"created_at,omitempty"`
 	}
+
+	UpdateQuartosStatusIn struct {
+		weaver.AutoMarshal
+		ID string `json:"id"`
+		StatusQuarto string `json:"status_quarto"`
+	}
+
 	ReservasOut struct {
 		weaver.AutoMarshal
 		ID            string    `json:"id"`
@@ -190,11 +202,7 @@ func (e HospedesIn) ToStore() (params store.CreateHospedeParams) {
 	return params
 }
 
-type RemoveHospedesIn struct {
-	weaver.AutoMarshal
-	ID string `json:"id" validate:"required, uuid"`
-	DeletedAt time.Time `json:"deleted_at,omitempty"`
-}
+
 
 func (e RemoveHospedesIn) ToStore() (out store.RemoverHospedeParams) {
 	time := time.Now()
@@ -233,6 +241,13 @@ func (e QuartosIn) ToStore() (params store.CreateQuartoParams) {
 	params.CreatedAt = t.UnixMilli()
 	return params
 }
+
+func (e UpdateQuartosStatusIn) ToStore() (out store.AlterarStatusQuartoParams) {
+	out.ID = e.ID
+	out.StatusQuarto = store.QuartosStatusQuarto(e.StatusQuarto)
+	return out
+}
+
 
 func (e ReservasOut) FromStore(in store.ListReservasRow) ReservasOut {
 	e.ID = in.ID

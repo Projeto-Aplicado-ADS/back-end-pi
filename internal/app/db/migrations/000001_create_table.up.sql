@@ -16,9 +16,9 @@ CREATE TABLE IF NOT EXISTS quartos (
     id VARCHAR(36) NOT NULL PRIMARY KEY,
     numero_quarto INT NOT NULL,
     numero_andar INT NOT NULL,
-    descricao VARCHAR(255) NOT NULL,
     tipo_quarto ENUM('simples', 'casal', 'familia', 'luxo') NOT NULL,
     status_quarto ENUM('livre', 'ocupado', 'reservado') NOT NULL DEFAULT 'livre',
+    descricao VARCHAR(255) NOT NULL,
     created_at BIGINT NOT NULL,
     update_at BIGINT NOT NULL DEFAULT 0
 ); 
@@ -51,6 +51,6 @@ CREATE TABLE IF NOT EXISTS reservas (
     updated_at BIGINT DEFAULT NULL,
     id_quarto VARCHAR(36) NOT NULL,
     id_hospede VARCHAR(36) NOT NULL,
-    FOREIGN KEY (id_quarto) REFERENCES quartos(id),
-    FOREIGN KEY (id_hospede) REFERENCES hospedes(id)
+    FOREIGN KEY (id_quarto) REFERENCES quartos(id) ON UPDATE CASCADE,
+    FOREIGN KEY (id_hospede) REFERENCES hospedes(id) ON UPDATE CASCADE
 ); 

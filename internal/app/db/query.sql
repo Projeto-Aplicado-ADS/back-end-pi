@@ -69,6 +69,9 @@ WHERE id = ?;
 -- name: RemoverHospede :exec
 UPDATE hospedes SET deleted_at = ? WHERE id = ?;
 
+/* -- name: RemoverQuarto :exec
+UPDATE quartos SET deleted_at = ? WHERE id = ?;  */
+
 -- name: CreateQuarto :execresult
 INSERT INTO quartos (
   id, numero_quarto, numero_andar, descricao, tipo_quarto, status_quarto, created_at
@@ -88,7 +91,5 @@ UPDATE quartos
 SET numero_quarto = ?, numero_andar = ?, descricao = ?, tipo_quarto = ?, status_quarto = ?
 WHERE id = ?; 
 
--- name: RemoverQuarto :execresult
-DELETE FROM quartos
-WHERE id = ?; 
-
+-- name: AlterarStatusQuarto :exec
+UPDATE quartos SET status_quarto = ? WHERE id = ?;

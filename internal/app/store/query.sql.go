@@ -79,6 +79,20 @@ func (q *Queries) AlterarReserva(ctx context.Context, arg AlterarReservaParams) 
 	return q.db.ExecContext(ctx, alterarReserva, arg.StatusReserva, arg.ID)
 }
 
+const alterarStatusQuarto = `-- name: AlterarStatusQuarto :exec
+UPDATE quartos SET status_quarto = ? WHERE id = ?
+`
+
+type AlterarStatusQuartoParams struct {
+	StatusQuarto QuartosStatusQuarto
+	ID           string
+}
+
+func (q *Queries) AlterarStatusQuarto(ctx context.Context, arg AlterarStatusQuartoParams) error {
+	_, err := q.db.ExecContext(ctx, alterarStatusQuarto, arg.StatusQuarto, arg.ID)
+	return err
+}
+
 const createHospede = `-- name: CreateHospede :execresult
 INSERT INTO hospedes (
   id, nome, email, telefone, cpf, data_nascimento, sexo, created_at
@@ -112,6 +126,9 @@ func (q *Queries) CreateHospede(ctx context.Context, arg CreateHospedeParams) (s
 }
 
 const createQuarto = `-- name: CreateQuarto :execresult
+/* -- name: RemoverQuarto :exec
+UPDATE quartos SET deleted_at = ? WHERE id = ?;  */
+
 INSERT INTO quartos (
   id, numero_quarto, numero_andar, descricao, tipo_quarto, status_quarto, created_at
 ) VALUES (
@@ -531,15 +548,6 @@ type RemoverHospedeParams struct {
 func (q *Queries) RemoverHospede(ctx context.Context, arg RemoverHospedeParams) error {
 	_, err := q.db.ExecContext(ctx, removerHospede, arg.DeletedAt, arg.ID)
 	return err
-}
-
-const removerQuarto = `-- name: RemoverQuarto :execresult
-DELETE FROM quartos
-WHERE id = ?
-`
-
-func (q *Queries) RemoverQuarto(ctx context.Context, id string) (sql.Result, error) {
-	return q.db.ExecContext(ctx, removerQuarto, id)
 }
 
 const removerReserva = `-- name: RemoverReserva :execresult

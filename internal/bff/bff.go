@@ -34,11 +34,20 @@ func (e *implBFF) createRouter(ctx context.Context, f *fiber.App) {
 	g.Post("/login", e.Login)
 	g.Post("/", e.CreateUser)
 
-	/* TODO: criar um novo grupo de rotas "/reservas" essas rotas todas devem utilizar o token */
-  gR := router.Group("/hospedes")
-	gR.Get("/", auth, e.GetHospedes)
-	gR.Post("/", auth, e.CreateHospede)
-	gR.Put("/:id", auth, e.DeleteHospede)
+	/* Hospedes */
+  gH := router.Group("/hospedes")
+	gH.Get("/", auth, e.GetHospedes)
+	gH.Post("/", auth, e.CreateHospede)
+	gH.Put("/:id", auth, e.DeleteHospede)
+
+	/* Quartos */
+
+	gQ := router.Group("/quartos")
+	gQ.Get("/", auth, e.GetQuartos)
+	gQ.Post("/", auth, e.CreateQuarto)
+	gQ.Put("/:id", auth, e.UpdateStatusQuarto)
+	/* TODO: PUT AND UPDATE QUARTO */
+
 }
 
 func Server(ctx context.Context, e *implBFF) error {

@@ -26,9 +26,10 @@ type Component interface {
 	CreateHospede(ctx context.Context, in HospedesIn) (ok bool, err error)
 	RemoveHospede(ctx context.Context, out RemoveHospedesIn) (ok bool, err error)
 
-	/* Quartos 
-		GetQuartos(ctx context.Context) (out QuartosOut, err error)
-		CreateQuarto(ctx context.Context, in QuartosIn) (ok bool, err error)
+	/* Quartos */
+	GetQuartos(ctx context.Context) (out AllQuartosOut, err error)
+	CreateQuarto(ctx context.Context, in QuartosIn) (ok bool, err error)
+	UpdateStatusQuarto(ctx context.Context, in UpdateQuartosStatusIn) (ok bool, err error)
 
 	/* Reservas */
 
@@ -133,7 +134,7 @@ func (e implapp) RemoveHospede(ctx context.Context, out RemoveHospedesIn) (ok bo
 	return true, nil
 }
 
-/* func (e implapp) GetQuartos(ctx context.Context) (out AllQuartosOut, err error) {
+func (e implapp) GetQuartos(ctx context.Context) (out AllQuartosOut, err error) {
 	quartos, err := e.db.ListQuartos(ctx)
 	if err != nil {
 		return out, err
@@ -149,11 +150,20 @@ func (e implapp) CreateQuarto(ctx context.Context, in QuartosIn) (ok bool, err e
 	return true, nil
 }
 
+func (e implapp) UpdateStatusQuarto(ctx context.Context, in UpdateQuartosStatusIn) (ok bool, err error) {
+	err = e.db.AlterarStatusQuarto(ctx, in.ToStore())
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+/* Reservas 
 func (e implapp) GetReservas(ctx context.Context) (out AllReservasOut, err error) {
 	reservas, err := e.db.ListReservas(ctx)
 	if err != nil {
 		return out, err
 	}
 	return out.FromStore(reservas), nil
-}
- */
+}*/
+ 

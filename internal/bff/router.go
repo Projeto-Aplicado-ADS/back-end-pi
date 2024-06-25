@@ -142,3 +142,49 @@ func (e implBFF) DeleteHospede(c *fiber.Ctx) (err error) {
 
 	return c.SendStatus(fiber.StatusNoContent)
 }
+
+
+
+func (e implBFF) CreateQuarto(c *fiber.Ctx) (err error) {
+	var body app.QuartosIn
+
+	err = c.BodyParser(&body)
+	if err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	_, err = e.user.Get().CreateQuarto(c.Context(), body)
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+
+
+	return c.SendStatus(fiber.StatusCreated)
+}
+
+func (e implBFF) GetQuartos(c *fiber.Ctx) (err error) {
+	out, err := e.user.Get().GetQuartos(c.Context())
+	if err != nil {
+		return err
+	}
+	
+	return c.Status(fiber.StatusOK).JSON(out)
+}
+
+
+func (e implBFF) UpdateStatusQuarto(c *fiber.Ctx) (err error) {
+	var body app.UpdateQuartosStatusIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	_, err = e.user.Get().UpdateStatusQuarto(c.Context(), app.UpdateQuartosStatusIn{
+		ID: c.Params("id"),
+		StatusQuarto: body.StatusQuarto,
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+
+	return c.SendStatus(fiber.StatusNoContent)
+}
