@@ -102,6 +102,8 @@ type (
 		DataCheckOut  string    `json:"data_check_out"`
 		StatusReserva string    `json:"status_reserva"`
 		ValorReserva  string    `json:"valor_reserva"`
+		QuartoId      string    `json:"quarto_id"`
+		HospedeId     string    `json:"hospede_id"`
 		CreateAt      time.Time `json:"created_at,omitempty"`
 	}
 )
@@ -283,6 +285,8 @@ func (e ReservasIn) ToStore() (params store.CreateReservaParams) {
 	params.ValorReserva = e.ValorReserva
 	params.StatusReserva = store.ReservasStatusReserva(e.StatusReserva)
 	params.TipoReserva = store.ReservasTipoReserva(e.TipoReserva)
+	params.IDQuarto = e.QuartoId
+	params.IDHospede = e.HospedeId
 	params.CreatedAt = t.UnixMilli()
 	return params
 }

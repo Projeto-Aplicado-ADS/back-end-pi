@@ -1,7 +1,6 @@
 package bff
 
 import (
-	"fmt"
 	"time"
 
 	"projeto-api/internal/app"
@@ -13,7 +12,6 @@ import (
 func (e implBFF) GetAllUsers(c *fiber.Ctx) (err error) {
 	out, err := e.user.Get().AllUsers(c.Context())
 	if err != nil {
-		fmt.Println(err)
 		return fiber.ErrInternalServerError
 	}
 	return c.Status(fiber.StatusOK).JSON(out)
@@ -39,7 +37,6 @@ func (e implBFF) CreateUser(c *fiber.Ctx) (err error) {
 
 	err = c.BodyParser(&body)
 	if err != nil {
-		fmt.Println(err)
 		return fiber.ErrBadRequest
 	}
 
@@ -56,7 +53,6 @@ func (e implBFF) Login(c *fiber.Ctx) (err error) {
 
 	err = c.BodyParser(&body)
 	if err != nil {
-		fmt.Println(err)
 		return fiber.ErrBadRequest
 	}
 
@@ -113,10 +109,8 @@ func (e implBFF) CreateHospede (c *fiber.Ctx) (err error) {
 
 	err = c.BodyParser(&body)
 	if err != nil {
-		fmt.Println(err)
 		return fiber.ErrBadRequest
 	}
-	fmt.Println(body)
 
 	_, err = e.user.Get().CreateHospede(c.Context(), body)
 	if err != nil {
@@ -187,4 +181,33 @@ func (e implBFF) UpdateStatusQuarto(c *fiber.Ctx) (err error) {
 	}
 
 	return c.SendStatus(fiber.StatusNoContent)
+}
+
+
+func (e implBFF) GetReservas (c *fiber.Ctx) (err error) {
+	out, err := e.user.Get().GetReservas(c.Context())
+	if err != nil {
+		return err
+	}
+
+	return c.Status(fiber.StatusOK).JSON(out)
+}
+
+func (e implBFF) CreateReserva (c *fiber.Ctx) (err error) {
+	var body app.ReservasIn
+
+	err = c.BodyParser(&body)
+	if err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	body.QuartoId = c.Params("quartoId")
+	body.HospedeId = c.Params("hospedeId")
+
+	_, err = e.user.Get().CreateReserva(c.Context(), body)
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+
+	return c.SendStatus(fiber.StatusCreated)
 }

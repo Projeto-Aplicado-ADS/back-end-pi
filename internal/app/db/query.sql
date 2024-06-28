@@ -28,9 +28,9 @@ WHERE email = ?;
 
 -- name: CreateReserva :execresult
 INSERT INTO reservas (
-  id, tipo_reserva, data_reserva, data_checkin, data_checkout, status_reserva, valor_reserva, created_at
+  id, tipo_reserva, data_reserva, data_checkin, data_checkout, status_reserva, valor_reserva, id_quarto, id_hospede, created_at
 ) VALUES (
-  ?, ?, ?, ?, ?, ?, ?, ?
+  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 );
 
 -- name: ListReservas :many

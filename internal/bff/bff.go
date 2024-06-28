@@ -48,6 +48,12 @@ func (e *implBFF) createRouter(ctx context.Context, f *fiber.App) {
 	gQ.Put("/:id", auth, e.UpdateStatusQuarto)
 	/* TODO: PUT AND UPDATE QUARTO */
 
+	/* Reservas */
+
+	gR := router.Group("/reservas")
+	gR.Get("/", auth, e.GetReservas)
+	gR.Post("/:quartoId/:hospedeId", auth, e.CreateReserva)
+
 }
 
 func Server(ctx context.Context, e *implBFF) error {

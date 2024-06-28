@@ -242,9 +242,9 @@ type Quarto struct {
 	ID           string
 	NumeroQuarto int32
 	NumeroAndar  int32
-	Descricao    string
 	TipoQuarto   QuartosTipoQuarto
 	StatusQuarto QuartosStatusQuarto
+	Descricao    string
 	CreatedAt    int64
 	UpdateAt     int64
 }

@@ -33,7 +33,8 @@ type Component interface {
 
 	/* Reservas */
 
-	/* GetReservas(ctx context.Context) (out AllReservasOut, err error) */
+	GetReservas(ctx context.Context) (out AllReservasOut, err error) 
+	CreateReserva (ctx context.Context, in ReservasIn) (ok bool, err error)
 }
 
 type Config struct {
@@ -158,12 +159,27 @@ func (e implapp) UpdateStatusQuarto(ctx context.Context, in UpdateQuartosStatusI
 	return true, nil
 }
 
-/* Reservas 
+
+
+/* Reservas */
+
 func (e implapp) GetReservas(ctx context.Context) (out AllReservasOut, err error) {
 	reservas, err := e.db.ListReservas(ctx)
 	if err != nil {
 		return out, err
 	}
 	return out.FromStore(reservas), nil
-}*/
+}
  
+func (e implapp) CreateReserva (ctx context.Context, in ReservasIn) (ok bool, err error) {
+	_, err = e.db.CreateReserva(ctx, in.ToStore())
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+
+// TODO: PUT AND UPDATE RESERVA
+
+

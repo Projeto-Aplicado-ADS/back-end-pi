@@ -160,9 +160,9 @@ func (q *Queries) CreateQuarto(ctx context.Context, arg CreateQuartoParams) (sql
 
 const createReserva = `-- name: CreateReserva :execresult
 INSERT INTO reservas (
-  id, tipo_reserva, data_reserva, data_checkin, data_checkout, status_reserva, valor_reserva, created_at
+  id, tipo_reserva, data_reserva, data_checkin, data_checkout, status_reserva, valor_reserva, id_quarto, id_hospede, created_at
 ) VALUES (
-  ?, ?, ?, ?, ?, ?, ?, ?
+  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 )
 `
 
@@ -174,6 +174,8 @@ type CreateReservaParams struct {
 	DataCheckout  string
 	StatusReserva ReservasStatusReserva
 	ValorReserva  string
+	IDQuarto      string
+	IDHospede     string
 	CreatedAt     int64
 }
 
@@ -186,6 +188,8 @@ func (q *Queries) CreateReserva(ctx context.Context, arg CreateReservaParams) (s
 		arg.DataCheckout,
 		arg.StatusReserva,
 		arg.ValorReserva,
+		arg.IDQuarto,
+		arg.IDHospede,
 		arg.CreatedAt,
 	)
 }
@@ -360,7 +364,7 @@ func (q *Queries) ListHospedes(ctx context.Context) ([]Hospede, error) {
 }
 
 const listQuartoById = `-- name: ListQuartoById :one
-SELECT id, numero_quarto, numero_andar, descricao, tipo_quarto, status_quarto, created_at, update_at FROM quartos
+SELECT id, numero_quarto, numero_andar, tipo_quarto, status_quarto, descricao, created_at, update_at FROM quartos
 WHERE id = ?
 `
 
@@ -371,9 +375,9 @@ func (q *Queries) ListQuartoById(ctx context.Context, id string) (Quarto, error)
 		&i.ID,
 		&i.NumeroQuarto,
 		&i.NumeroAndar,
-		&i.Descricao,
 		&i.TipoQuarto,
 		&i.StatusQuarto,
+		&i.Descricao,
 		&i.CreatedAt,
 		&i.UpdateAt,
 	)
@@ -381,7 +385,7 @@ func (q *Queries) ListQuartoById(ctx context.Context, id string) (Quarto, error)
 }
 
 const listQuartos = `-- name: ListQuartos :many
-SELECT id, numero_quarto, numero_andar, descricao, tipo_quarto, status_quarto, created_at, update_at FROM quartos
+SELECT id, numero_quarto, numero_andar, tipo_quarto, status_quarto, descricao, created_at, update_at FROM quartos
 `
 
 func (q *Queries) ListQuartos(ctx context.Context) ([]Quarto, error) {
@@ -397,9 +401,9 @@ func (q *Queries) ListQuartos(ctx context.Context) ([]Quarto, error) {
 			&i.ID,
 			&i.NumeroQuarto,
 			&i.NumeroAndar,
-			&i.Descricao,
 			&i.TipoQuarto,
 			&i.StatusQuarto,
+			&i.Descricao,
 			&i.CreatedAt,
 			&i.UpdateAt,
 		); err != nil {
