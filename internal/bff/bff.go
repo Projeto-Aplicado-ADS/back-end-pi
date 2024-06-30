@@ -33,6 +33,8 @@ func (e *implBFF) createRouter(ctx context.Context, f *fiber.App) {
 	g.Get("/:id", e.GetUserById)
 	g.Post("/login", e.Login)
 	g.Post("/", e.CreateUser)
+	g.Put("/email/:id", e.UpdateUsersEmail)
+	g.Put("/phone/:id", e.UpdateUsersPhone)
 
 	/* Hospedes */
   gH := router.Group("/hospedes")

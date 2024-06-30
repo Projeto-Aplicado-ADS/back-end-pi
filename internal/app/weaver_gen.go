@@ -21,10 +21,10 @@ func init() {
 		Iface: reflect.TypeOf((*Component)(nil)).Elem(),
 		Impl:  reflect.TypeOf(implapp{}),
 		LocalStubFn: func(impl any, caller string, tracer trace.Tracer) any {
-			return component_local_stub{impl: impl.(Component), tracer: tracer, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: false, Generated: true}), createHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateHospede", Remote: false, Generated: true}), createQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateQuarto", Remote: false, Generated: true}), createReservaMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateReserva", Remote: false, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: false, Generated: true}), getHospedesMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetHospedes", Remote: false, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: false, Generated: true}), getQuartosMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetQuartos", Remote: false, Generated: true}), getReservasMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetReservas", Remote: false, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: false, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: false, Generated: true}), removeHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "RemoveHospede", Remote: false, Generated: true}), updateStatusQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateStatusQuarto", Remote: false, Generated: true})}
+			return component_local_stub{impl: impl.(Component), tracer: tracer, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: false, Generated: true}), createHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateHospede", Remote: false, Generated: true}), createQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateQuarto", Remote: false, Generated: true}), createReservaMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateReserva", Remote: false, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: false, Generated: true}), getHospedesMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetHospedes", Remote: false, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: false, Generated: true}), getQuartosMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetQuartos", Remote: false, Generated: true}), getReservasMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetReservas", Remote: false, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: false, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: false, Generated: true}), removeHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "RemoveHospede", Remote: false, Generated: true}), updateStatusQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateStatusQuarto", Remote: false, Generated: true}), updateUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateUserByEmail", Remote: false, Generated: true}), updateUserPhoneMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateUserPhone", Remote: false, Generated: true})}
 		},
 		ClientStubFn: func(stub codegen.Stub, caller string) any {
-			return component_client_stub{stub: stub, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: true, Generated: true}), createHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateHospede", Remote: true, Generated: true}), createQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateQuarto", Remote: true, Generated: true}), createReservaMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateReserva", Remote: true, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: true, Generated: true}), getHospedesMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetHospedes", Remote: true, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: true, Generated: true}), getQuartosMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetQuartos", Remote: true, Generated: true}), getReservasMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetReservas", Remote: true, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: true, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: true, Generated: true}), removeHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "RemoveHospede", Remote: true, Generated: true}), updateStatusQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateStatusQuarto", Remote: true, Generated: true})}
+			return component_client_stub{stub: stub, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: true, Generated: true}), createHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateHospede", Remote: true, Generated: true}), createQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateQuarto", Remote: true, Generated: true}), createReservaMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateReserva", Remote: true, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: true, Generated: true}), getHospedesMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetHospedes", Remote: true, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: true, Generated: true}), getQuartosMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetQuartos", Remote: true, Generated: true}), getReservasMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetReservas", Remote: true, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: true, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: true, Generated: true}), removeHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "RemoveHospede", Remote: true, Generated: true}), updateStatusQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateStatusQuarto", Remote: true, Generated: true}), updateUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateUserByEmail", Remote: true, Generated: true}), updateUserPhoneMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateUserPhone", Remote: true, Generated: true})}
 		},
 		ServerStubFn: func(impl any, addLoad func(uint64, float64)) codegen.Server {
 			return component_server_stub{impl: impl.(Component), addLoad: addLoad}
@@ -60,6 +60,8 @@ type component_local_stub struct {
 	listUserByEmailMetrics           *codegen.MethodMetrics
 	removeHospedeMetrics             *codegen.MethodMetrics
 	updateStatusQuartoMetrics        *codegen.MethodMetrics
+	updateUserByEmailMetrics         *codegen.MethodMetrics
+	updateUserPhoneMetrics           *codegen.MethodMetrics
 }
 
 // Check that component_local_stub implements the Component interface.
@@ -325,6 +327,46 @@ func (s component_local_stub) UpdateStatusQuarto(ctx context.Context, a0 UpdateQ
 	return s.impl.UpdateStatusQuarto(ctx, a0)
 }
 
+func (s component_local_stub) UpdateUserByEmail(ctx context.Context, a0 UpdateUsersEmailIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.updateUserByEmailMetrics.Begin()
+	defer func() { s.updateUserByEmailMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.UpdateUserByEmail", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.UpdateUserByEmail(ctx, a0)
+}
+
+func (s component_local_stub) UpdateUserPhone(ctx context.Context, a0 UpdateUsersPhoneIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.updateUserPhoneMetrics.Begin()
+	defer func() { s.updateUserPhoneMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.UpdateUserPhone", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.UpdateUserPhone(ctx, a0)
+}
+
 // Client stub implementations.
 
 type component_client_stub struct {
@@ -342,6 +384,8 @@ type component_client_stub struct {
 	listUserByEmailMetrics           *codegen.MethodMetrics
 	removeHospedeMetrics             *codegen.MethodMetrics
 	updateStatusQuartoMetrics        *codegen.MethodMetrics
+	updateUserByEmailMetrics         *codegen.MethodMetrics
+	updateUserPhoneMetrics           *codegen.MethodMetrics
 }
 
 // Check that component_client_stub implements the Component interface.
@@ -1015,6 +1059,118 @@ func (s component_client_stub) UpdateStatusQuarto(ctx context.Context, a0 Update
 	return
 }
 
+func (s component_client_stub) UpdateUserByEmail(ctx context.Context, a0 UpdateUsersEmailIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.updateUserByEmailMetrics.Begin()
+	defer func() { s.updateUserByEmailMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.UpdateUserByEmail", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Preallocate a buffer of the right size.
+	size := 0
+	size += serviceweaver_size_UpdateUsersEmailIn_7ddd1896(&a0)
+	enc := codegen.NewEncoder()
+	enc.Reset(size)
+
+	// Encode arguments.
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 13, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) UpdateUserPhone(ctx context.Context, a0 UpdateUsersPhoneIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.updateUserPhoneMetrics.Begin()
+	defer func() { s.updateUserPhoneMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.UpdateUserPhone", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Preallocate a buffer of the right size.
+	size := 0
+	size += serviceweaver_size_UpdateUsersPhoneIn_1d2732f9(&a0)
+	enc := codegen.NewEncoder()
+	enc.Reset(size)
+
+	// Encode arguments.
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 14, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
 // Note that "weaver generate" will always generate the error message below.
 // Everything is okay. The error message is only relevant if you see it when
 // you run "go build" or "go run".
@@ -1077,6 +1233,10 @@ func (s component_server_stub) GetStubFn(method string) func(ctx context.Context
 		return s.removeHospede
 	case "UpdateStatusQuarto":
 		return s.updateStatusQuarto
+	case "UpdateUserByEmail":
+		return s.updateUserByEmail
+	case "UpdateUserPhone":
+		return s.updateUserPhone
 	default:
 		return nil
 	}
@@ -1388,6 +1548,56 @@ func (s component_server_stub) updateStatusQuarto(ctx context.Context, args []by
 	return enc.Data(), nil
 }
 
+func (s component_server_stub) updateUserByEmail(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 UpdateUsersEmailIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.UpdateUserByEmail(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) updateUserPhone(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 UpdateUsersPhoneIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.UpdateUserPhone(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
 // Reflect stub implementations.
 
 type component_reflect_stub struct {
@@ -1459,6 +1669,16 @@ func (s component_reflect_stub) RemoveHospede(ctx context.Context, a0 RemoveHosp
 
 func (s component_reflect_stub) UpdateStatusQuarto(ctx context.Context, a0 UpdateQuartosStatusIn) (r0 bool, err error) {
 	err = s.caller("UpdateStatusQuarto", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) UpdateUserByEmail(ctx context.Context, a0 UpdateUsersEmailIn) (r0 bool, err error) {
+	err = s.caller("UpdateUserByEmail", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) UpdateUserPhone(ctx context.Context, a0 UpdateUsersPhoneIn) (r0 bool, err error) {
+	err = s.caller("UpdateUserPhone", ctx, []any{a0}, []any{&r0})
 	return
 }
 
@@ -1798,6 +2018,58 @@ func (x *UpdateQuartosStatusIn) WeaverUnmarshal(dec *codegen.Decoder) {
 	x.StatusQuarto = dec.String()
 }
 
+var _ codegen.AutoMarshal = (*UpdateUsersEmailIn)(nil)
+
+type __is_UpdateUsersEmailIn[T ~struct {
+	weaver.AutoMarshal
+	ID    string "json:\"id\""
+	Email string "json:\"email\""
+}] struct{}
+
+var _ __is_UpdateUsersEmailIn[UpdateUsersEmailIn]
+
+func (x *UpdateUsersEmailIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateUsersEmailIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Email)
+}
+
+func (x *UpdateUsersEmailIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateUsersEmailIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Email = dec.String()
+}
+
+var _ codegen.AutoMarshal = (*UpdateUsersPhoneIn)(nil)
+
+type __is_UpdateUsersPhoneIn[T ~struct {
+	weaver.AutoMarshal
+	ID    string "json:\"id\""
+	Phone string "json:\"phone\""
+}] struct{}
+
+var _ __is_UpdateUsersPhoneIn[UpdateUsersPhoneIn]
+
+func (x *UpdateUsersPhoneIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateUsersPhoneIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Phone)
+}
+
+func (x *UpdateUsersPhoneIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateUsersPhoneIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Phone = dec.String()
+}
+
 var _ codegen.AutoMarshal = (*UserIn)(nil)
 
 type __is_UserIn[T ~struct {
@@ -1841,7 +2113,7 @@ type __is_UsersOut[T ~struct {
 	FullName  string    "json:\"full_name\""
 	Email     string    "json:\"email\""
 	Phone     string    "json:\"phone,omitempty\""
-	IsAdmin   bool      "json:\"is_admin,omitempty\""
+	IsAdmin   bool      "json:\"is_admin\""
 	Birthday  time.Time "json:\"birthday,omitempty\""
 	CreatedAt time.Time "json:\"created_at,omitempty\""
 }] struct{}
@@ -1977,5 +2249,25 @@ func serviceweaver_size_UpdateQuartosStatusIn_d798d85e(x *UpdateQuartosStatusIn)
 	size += 0
 	size += (4 + len(x.ID))
 	size += (4 + len(x.StatusQuarto))
+	return size
+}
+
+// serviceweaver_size_UpdateUsersEmailIn_7ddd1896 returns the size (in bytes) of the serialization
+// of the provided type.
+func serviceweaver_size_UpdateUsersEmailIn_7ddd1896(x *UpdateUsersEmailIn) int {
+	size := 0
+	size += 0
+	size += (4 + len(x.ID))
+	size += (4 + len(x.Email))
+	return size
+}
+
+// serviceweaver_size_UpdateUsersPhoneIn_1d2732f9 returns the size (in bytes) of the serialization
+// of the provided type.
+func serviceweaver_size_UpdateUsersPhoneIn_1d2732f9(x *UpdateUsersPhoneIn) int {
+	size := 0
+	size += 0
+	size += (4 + len(x.ID))
+	size += (4 + len(x.Phone))
 	return size
 }

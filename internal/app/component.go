@@ -20,6 +20,8 @@ type Component interface {
 	CreateUser(ctx context.Context, in UserIn) (ok bool, err error)
 	GetUserByEmailAndPassword(ctx context.Context, email string, password string) (err error)
 	ListUserByEmail(ctx context.Context, email string) (out UsersOut, err error)
+	UpdateUserByEmail(ctx context.Context, in UpdateUsersEmailIn) (ok bool, err error)
+	UpdateUserPhone(ctx context.Context, in UpdateUsersPhoneIn) (ok bool, err error)
 
 	/* Hospedes */
 	GetHospedes(ctx context.Context) (out AllHospodesOut, err error)
@@ -110,6 +112,23 @@ func (e implapp) ListUserByEmail(ctx context.Context, email string) (out UsersOu
 
 	return out.FromStore(users), nil
 }
+
+func (e implapp) UpdateUserByEmail (ctx context.Context, in UpdateUsersEmailIn) (ok bool, err error) {
+	_, err = e.db.AlterarEmailUser(ctx, in.ToStore())
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+func (e implapp) UpdateUserPhone(ctx context.Context, in UpdateUsersPhoneIn) (ok bool, err error) {
+	_, err = e.db.AlterarPhoneUser(ctx, in.ToStore())
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
 
 func (e implapp) GetHospedes(ctx context.Context) (out AllHospodesOut, err error) {
 	hospedes, err := e.db.ListHospedes(ctx)

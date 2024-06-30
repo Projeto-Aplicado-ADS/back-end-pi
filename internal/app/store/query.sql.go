@@ -10,6 +10,21 @@ import (
 	"database/sql"
 )
 
+const alterarEmailUser = `-- name: AlterarEmailUser :execresult
+UPDATE users
+SET email = ?
+WHERE id = ?
+`
+
+type AlterarEmailUserParams struct {
+	Email string
+	ID    string
+}
+
+func (q *Queries) AlterarEmailUser(ctx context.Context, arg AlterarEmailUserParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, alterarEmailUser, arg.Email, arg.ID)
+}
+
 const alterarHospede = `-- name: AlterarHospede :execresult
 UPDATE hospedes
 SET nome = ?, email = ?, telefone = ?, cpf = ?, data_nascimento = ?, sexo = ?
@@ -36,6 +51,21 @@ func (q *Queries) AlterarHospede(ctx context.Context, arg AlterarHospedeParams) 
 		arg.Sexo,
 		arg.ID,
 	)
+}
+
+const alterarPhoneUser = `-- name: AlterarPhoneUser :execresult
+UPDATE users
+SET phone = ?
+WHERE id = ?
+`
+
+type AlterarPhoneUserParams struct {
+	Phone string
+	ID    string
+}
+
+func (q *Queries) AlterarPhoneUser(ctx context.Context, arg AlterarPhoneUserParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, alterarPhoneUser, arg.Phone, arg.ID)
 }
 
 const alterarQuarto = `-- name: AlterarQuarto :execresult
@@ -196,7 +226,7 @@ func (q *Queries) CreateReserva(ctx context.Context, arg CreateReservaParams) (s
 
 const createUser = `-- name: CreateUser :execresult
 INSERT INTO users (
-  id, full_name, email, phone, password, birthday, created_at
+  id, full_name, email, phone, password, is_admin, created_at
 ) VALUES (
   ?, ?, ?, ?, ?, ?, ?
 )
@@ -208,7 +238,7 @@ type CreateUserParams struct {
 	Email     string
 	Phone     string
 	Password  string
-	Birthday  int64
+	IsAdmin   bool
 	CreatedAt int64
 }
 
@@ -219,7 +249,7 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (sql.Res
 		arg.Email,
 		arg.Phone,
 		arg.Password,
-		arg.Birthday,
+		arg.IsAdmin,
 		arg.CreatedAt,
 	)
 }
@@ -243,7 +273,7 @@ func (q *Queries) GetUserByEmail(ctx context.Context, email string) (GetUserByEm
 }
 
 const getUserById = `-- name: GetUserById :one
-SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
+SELECT id, full_name, email, phone, password, is_admin, created_at, update_at FROM users
 WHERE id = ?
 `
 
@@ -257,7 +287,6 @@ func (q *Queries) GetUserById(ctx context.Context, id string) (User, error) {
 		&i.Phone,
 		&i.Password,
 		&i.IsAdmin,
-		&i.Birthday,
 		&i.CreatedAt,
 		&i.UpdateAt,
 	)
@@ -265,7 +294,7 @@ func (q *Queries) GetUserById(ctx context.Context, id string) (User, error) {
 }
 
 const listAdmins = `-- name: ListAdmins :many
-SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
+SELECT id, full_name, email, phone, password, is_admin, created_at, update_at FROM users
 WHERE is_admin = 1
 `
 
@@ -285,7 +314,6 @@ func (q *Queries) ListAdmins(ctx context.Context) ([]User, error) {
 			&i.Phone,
 			&i.Password,
 			&i.IsAdmin,
-			&i.Birthday,
 			&i.CreatedAt,
 			&i.UpdateAt,
 		); err != nil {
@@ -385,7 +413,7 @@ func (q *Queries) ListQuartoById(ctx context.Context, id string) (Quarto, error)
 }
 
 const listQuartos = `-- name: ListQuartos :many
-SELECT id, numero_quarto, numero_andar, tipo_quarto, status_quarto, descricao, created_at, update_at FROM quartos
+SELECT id, numero_quarto, numero_andar, tipo_quarto, status_quarto, descricao, created_at, update_at FROM quartos order by numero_quarto asc
 `
 
 func (q *Queries) ListQuartos(ctx context.Context) ([]Quarto, error) {
@@ -482,7 +510,7 @@ func (q *Queries) ListReservas(ctx context.Context) ([]ListReservasRow, error) {
 }
 
 const listUserByEmail = `-- name: ListUserByEmail :one
-SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
+SELECT id, full_name, email, phone, password, is_admin, created_at, update_at FROM users
 WHERE email = ?
 `
 
@@ -496,7 +524,6 @@ func (q *Queries) ListUserByEmail(ctx context.Context, email string) (User, erro
 		&i.Phone,
 		&i.Password,
 		&i.IsAdmin,
-		&i.Birthday,
 		&i.CreatedAt,
 		&i.UpdateAt,
 	)
@@ -504,7 +531,7 @@ func (q *Queries) ListUserByEmail(ctx context.Context, email string) (User, erro
 }
 
 const listUsers = `-- name: ListUsers :many
-SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
+SELECT id, full_name, email, phone, password, is_admin, created_at, update_at FROM users
 `
 
 func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
@@ -523,7 +550,6 @@ func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
 			&i.Phone,
 			&i.Password,
 			&i.IsAdmin,
-			&i.Birthday,
 			&i.CreatedAt,
 			&i.UpdateAt,
 		); err != nil {

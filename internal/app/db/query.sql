@@ -11,15 +11,27 @@ WHERE id = ?;
 
 -- name: CreateUser :execresult
 INSERT INTO users (
-  id, full_name, email, phone, password, birthday, created_at
+  id, full_name, email, phone, password, is_admin, created_at
 ) VALUES (
   ?, ?, ?, ?, ?, ?, ?
 );
 
-
 -- name: GetUserByEmail :one
 SELECT email, password, is_admin FROM users 
 WHERE email = ?;
+
+
+-- name: AlterarEmailUser :execresult
+UPDATE users
+SET email = ?
+WHERE id = ?;
+
+-- name: AlterarPhoneUser :execresult
+UPDATE users
+SET phone = ?
+WHERE id = ?;
+
+
 
 -- name: ListUserByEmail :one
 SELECT * FROM users
@@ -80,7 +92,7 @@ INSERT INTO quartos (
 );
 
 -- name: ListQuartos :many
-SELECT * FROM quartos;  
+SELECT * FROM quartos order by numero_quarto asc;   
 
 -- name: ListQuartoById :one
 SELECT * FROM quartos

@@ -91,6 +91,37 @@ func (e implBFF) getMe(c *fiber.Ctx) (err error) {
 	return c.Status(fiber.StatusOK).JSON(out)
 }
 
+func (e implBFF) UpdateUsersEmail (c *fiber.Ctx) (err error) {
+	var body app.UpdateUsersEmailIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+	_, err = e.user.Get().UpdateUserByEmail(c.Context(), app.UpdateUsersEmailIn{
+		ID: c.Params("id"),
+		Email: body.Email,
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+	return c.SendStatus(fiber.StatusNoContent)
+}
+
+func (e implBFF) UpdateUsersPhone(c *fiber.Ctx) (err error) {
+	var body app.UpdateUsersPhoneIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+	_, err = e.user.Get().UpdateUserPhone(c.Context(), app.UpdateUsersPhoneIn{
+		ID: c.Params("id"),
+		Phone: body.Phone,
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+	return c.SendStatus(fiber.StatusNoContent)
+}
+
+
 func (e implBFF) Logout(c *fiber.Ctx) (err error) {
 	c.ClearCookie("token")
 	return c.SendStatus(fiber.StatusOK)

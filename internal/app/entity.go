@@ -10,16 +10,29 @@ import (
 	"github.com/google/uuid"
 )
 
-type UsersOut struct {
-	weaver.AutoMarshal
-	ID        string    `json:"id"`
-	FullName  string    `json:"full_name"`
-	Email     string    `json:"email"`
-	Phone     string    `json:"phone,omitempty"`
-	IsAdmin   bool      `json:"is_admin,omitempty"`
-	Birthday  time.Time `json:"birthday,omitempty"`
-	CreatedAt time.Time `json:"created_at,omitempty"`
-}
+type (
+	UsersOut struct {
+		weaver.AutoMarshal
+		ID        string    `json:"id"`
+		FullName  string    `json:"full_name"`
+		Email     string    `json:"email"`
+		Phone     string    `json:"phone,omitempty"`
+		IsAdmin   bool      `json:"is_admin"`
+		Birthday  time.Time `json:"birthday,omitempty"`
+		CreatedAt time.Time `json:"created_at,omitempty"`
+	}
+	UpdateUsersEmailIn struct {
+		weaver.AutoMarshal
+		ID    string `json:"id"`
+		Email string `json:"email"`
+	}
+	UpdateUsersPhoneIn struct {
+		weaver.AutoMarshal
+		ID    string `json:"id"`
+		Phone string `json:"phone"`
+	}
+)
+
 
 type (
 	HospedesOut struct {
@@ -128,7 +141,6 @@ func (e UsersOut) FromStore(in store.User) UsersOut {
 	e.Email = in.Email
 	e.Phone = in.Phone
 	e.IsAdmin = in.IsAdmin
-	e.Birthday = time.UnixMilli(in.Birthday)
 	e.CreatedAt = time.UnixMilli(in.CreatedAt)
 	return e
 }
@@ -158,7 +170,7 @@ func (e UserIn) ToStore() (params store.CreateUserParams) {
 	params.Email = e.Email
 	params.Phone = e.Phone
 	params.Password, _ = crypt.New().CryptPassword(e.Password)
-	params.Birthday = e.Birthday.Unix()
+	params.IsAdmin = false
 	params.CreatedAt = t.UnixMilli()
 	return params
 }
@@ -169,6 +181,18 @@ func (e UserGetByEmailAndPassword) FromStoreByEmailAndPassword(in store.GetUserB
 	e.IsAdmin = in.IsAdmin
 
 	return e
+}
+
+func (e UpdateUsersEmailIn) ToStore() (params store.AlterarEmailUserParams) {
+	params.ID = e.ID
+	params.Email = e.Email
+	return params
+} 
+
+func (e UpdateUsersPhoneIn) ToStore() (params store.AlterarPhoneUserParams) {
+	params.ID = e.ID
+	params.Phone = e.Phone
+	return params
 }
 
 func (e HospedesOut) FromStore(in store.Hospede) HospedesOut {

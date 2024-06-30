@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS users (
     phone VARCHAR(14) NOT NULL,
     password VARCHAR(255) NOT NULL, 
     is_admin BOOLEAN NOT NULL DEFAULT 0,
-    birthday BIGINT NOT NULL,
     created_at BIGINT NOT NULL,
     update_at BIGINT NOT NULL DEFAULT 0
 );
@@ -28,10 +27,10 @@ CREATE TABLE IF NOT EXISTS hospedes (
     id VARCHAR(36) NOT NULL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(200) NOT NULL UNIQUE,
-    telefone VARCHAR(14) NOT NULL,
+    telefone VARCHAR(17) NOT NULL,
     cpf VARCHAR(11) NOT NULL UNIQUE,
     data_nascimento VARCHAR(14) NOT NULL,
-    sexo ENUM('masculino', 'feminino') NOT NULL,
+    sexo ENUM('Masculino', 'Feminino') NOT NULL,
     created_at BIGINT NOT NULL,
     update_at BIGINT NOT NULL DEFAULT 0,
     deleted_at BIGINT NOT NULL DEFAULT 0

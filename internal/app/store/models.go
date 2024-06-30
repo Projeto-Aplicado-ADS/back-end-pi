@@ -13,8 +13,8 @@ import (
 type HospedesSexo string
 
 const (
-	HospedesSexoMasculino HospedesSexo = "masculino"
-	HospedesSexoFeminino  HospedesSexo = "feminino"
+	HospedesSexoMasculino HospedesSexo = "Masculino"
+	HospedesSexoFeminino  HospedesSexo = "Feminino"
 )
 
 func (e *HospedesSexo) Scan(src interface{}) error {
@@ -270,7 +270,6 @@ type User struct {
 	Phone     string
 	Password  string
 	IsAdmin   bool
-	Birthday  int64
 	CreatedAt int64
 	UpdateAt  int64
 }
