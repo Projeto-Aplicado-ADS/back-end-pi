@@ -337,3 +337,33 @@ func (e ReservasIn) ToStore() (params store.CreateReservaParams) {
 	params.CreatedAt = t.UnixMilli()
 	return params
 }
+
+
+
+type RemoveReservaIn struct {
+	weaver.AutoMarshal
+	ID string `json:"id"`
+	DeletedAt time.Time `json:"deleted_at"`
+}
+
+func (e RemoveReservaIn) ToStore() (out store.RemoverReservaParams) {
+	time := time.Now()
+	out.ID = e.ID
+	out.DeletedAt = time.UnixMilli()
+
+	return out
+}
+
+
+type UpdateReservaIn struct {
+	weaver.AutoMarshal
+	ID string `json:"id"`
+	StatusReserva string `json:"status_reserva"`
+}
+
+
+func (e UpdateReservaIn) ToStore() (out store.AlterarReservaParams) {
+	out.ID = e.ID
+	out.StatusReserva = store.ReservasStatusReserva(e.StatusReserva)
+	return out
+}

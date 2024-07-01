@@ -96,7 +96,7 @@ func (q *Queries) AlterarQuarto(ctx context.Context, arg AlterarQuartoParams) (s
 	)
 }
 
-const alterarReserva = `-- name: AlterarReserva :execresult
+const alterarReserva = `-- name: AlterarReserva :exec
 UPDATE reservas
 SET status_reserva = ?
 WHERE id = ?
@@ -107,8 +107,9 @@ type AlterarReservaParams struct {
 	ID            string
 }
 
-func (q *Queries) AlterarReserva(ctx context.Context, arg AlterarReservaParams) (sql.Result, error) {
-	return q.db.ExecContext(ctx, alterarReserva, arg.StatusReserva, arg.ID)
+func (q *Queries) AlterarReserva(ctx context.Context, arg AlterarReservaParams) error {
+	_, err := q.db.ExecContext(ctx, alterarReserva, arg.StatusReserva, arg.ID)
+	return err
 }
 
 const alterarStatusQuarto = `-- name: AlterarStatusQuarto :exec
@@ -454,6 +455,7 @@ const listReservas = `-- name: ListReservas :many
 select s.id ,s.data_reserva, s.data_checkin, s.data_checkout, s.valor_reserva, s.tipo_reserva , s.status_reserva ,h.nome , h.cpf , q.numero_quarto , q.numero_andar , q.tipo_quarto , q.status_quarto, s.created_at  from reservas s 
 inner join hospedes h on s.id_hospede = h.id 
 inner join quartos q on s.id_quarto = q.id
+where s.deleted_at = 0
 `
 
 type ListReservasRow struct {
@@ -582,11 +584,16 @@ func (q *Queries) RemoverHospede(ctx context.Context, arg RemoverHospedeParams) 
 	return err
 }
 
-const removerReserva = `-- name: RemoverReserva :execresult
-DELETE FROM reservas
-WHERE id = ?
+const removerReserva = `-- name: RemoverReserva :exec
+UPDATE reservas SET deleted_at = ? WHERE id = ?
 `
 
-func (q *Queries) RemoverReserva(ctx context.Context, id string) (sql.Result, error) {
-	return q.db.ExecContext(ctx, removerReserva, id)
+type RemoverReservaParams struct {
+	DeletedAt int64
+	ID        string
+}
+
+func (q *Queries) RemoverReserva(ctx context.Context, arg RemoverReservaParams) error {
+	_, err := q.db.ExecContext(ctx, removerReserva, arg.DeletedAt, arg.ID)
+	return err
 }

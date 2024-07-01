@@ -39,6 +39,8 @@ type Component interface {
 
 	GetReservas(ctx context.Context) (out AllReservasOut, err error) 
 	CreateReserva (ctx context.Context, in ReservasIn) (ok bool, err error)
+	UpdateReserva (ctx context.Context, in UpdateReservaIn) (ok bool, err error)
+	RemoveReserva (ctx context.Context, in RemoveReservaIn) (ok bool, err error)
 }
 
 type Config struct {
@@ -217,7 +219,22 @@ func (e implapp) CreateReserva (ctx context.Context, in ReservasIn) (ok bool, er
 	return true, nil
 }
 
+func (e implapp) RemoveReserva (ctx context.Context, in RemoveReservaIn) (ok bool, err error) {
+	err = e.db.RemoverReserva(ctx, in.ToStore())
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
 
-// TODO: PUT AND UPDATE RESERVA
+
+func (e implapp) UpdateReserva (ctx context.Context, in UpdateReservaIn) (ok bool, err error){	
+	err = e.db.AlterarReserva(ctx, in.ToStore())
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
+}	
 
 

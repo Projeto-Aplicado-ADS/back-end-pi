@@ -259,6 +259,7 @@ type Reserva struct {
 	ValorReserva  string
 	CreatedAt     int64
 	UpdatedAt     sql.NullInt64
+	DeletedAt     int64
 	IDQuarto      string
 	IDHospede     string
 }

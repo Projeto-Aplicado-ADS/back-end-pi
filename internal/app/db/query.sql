@@ -48,16 +48,16 @@ INSERT INTO reservas (
 -- name: ListReservas :many
 select s.id ,s.data_reserva, s.data_checkin, s.data_checkout, s.valor_reserva, s.tipo_reserva , s.status_reserva ,h.nome , h.cpf , q.numero_quarto , q.numero_andar , q.tipo_quarto , q.status_quarto, s.created_at  from reservas s 
 inner join hospedes h on s.id_hospede = h.id 
-inner join quartos q on s.id_quarto = q.id;
+inner join quartos q on s.id_quarto = q.id
+where s.deleted_at = 0;
 
--- name: AlterarReserva :execresult
+-- name: AlterarReserva :exec
 UPDATE reservas
 SET status_reserva = ?
 WHERE id = ?;
 
--- name: RemoverReserva :execresult
-DELETE FROM reservas
-WHERE id = ?;
+-- name: RemoverReserva :exec
+UPDATE reservas SET deleted_at = ? WHERE id = ?;
 
 -- name: CreateHospede :execresult
 INSERT INTO hospedes (
@@ -105,3 +105,4 @@ WHERE id = ?;
 
 -- name: AlterarStatusQuarto :exec
 UPDATE quartos SET status_quarto = ? WHERE id = ?;
+

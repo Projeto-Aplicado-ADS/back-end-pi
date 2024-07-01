@@ -271,3 +271,36 @@ func (e implBFF) CreateReserva (c *fiber.Ctx) (err error) {
 
 	return c.SendStatus(fiber.StatusCreated)
 }
+
+func (e implBFF) RemoveReserva (c *fiber.Ctx) (err error) {
+	var body app.RemoveReservaIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}	
+
+	_, err = e.user.Get().RemoveReserva(c.Context(), app.RemoveReservaIn{
+		ID: c.Params("id"),
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}		
+
+	return c.SendStatus(fiber.StatusNoContent)
+}
+
+func (e implBFF) UpdateReservas(c *fiber.Ctx) (err error) {
+	var body app.UpdateReservaIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	_, err = e.user.Get().UpdateReserva(c.Context(), app.UpdateReservaIn{
+		ID: c.Params("id"),
+		StatusReserva: body.StatusReserva,
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}		
+
+	return c.SendStatus(fiber.StatusNoContent)
+}

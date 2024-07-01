@@ -56,6 +56,8 @@ func (e *implBFF) createRouter(ctx context.Context, f *fiber.App) {
 	gR := router.Group("/reservas")
 	gR.Get("/", auth, e.GetReservas)
 	gR.Post("/:quartoId/:hospedeId", auth, e.CreateReserva)
+	gR.Put("/remove/:id", auth, e.RemoveReserva)
+	gR.Put("/:id", auth, e.UpdateReservas)
 
 }
 
