@@ -8,7 +8,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.52.4
 )
 
-require github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
+require github.com/golang-jwt/jwt/v5 v5.2.1
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
@@ -21,7 +21,6 @@ require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/google/cel-go v0.17.1 // indirect
 	github.com/google/pprof v0.0.0-20230705174524-200ffdc848b8 // indirect
 	github.com/google/uuid v1.5.0

@@ -10,9 +10,226 @@ import (
 	"database/sql"
 )
 
+const alterarEmailUser = `-- name: AlterarEmailUser :execresult
+UPDATE users
+SET email = ?
+WHERE id = ?
+`
+
+type AlterarEmailUserParams struct {
+	Email string
+	ID    string
+}
+
+func (q *Queries) AlterarEmailUser(ctx context.Context, arg AlterarEmailUserParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, alterarEmailUser, arg.Email, arg.ID)
+}
+
+const alterarHospede = `-- name: AlterarHospede :execresult
+UPDATE hospedes
+SET nome = ?, email = ?, telefone = ?, cpf = ?, data_nascimento = ?, sexo = ?, update_at = ?
+WHERE id = ?
+`
+
+type AlterarHospedeParams struct {
+	Nome           string
+	Email          string
+	Telefone       string
+	Cpf            string
+	DataNascimento string
+	Sexo           HospedesSexo
+	UpdateAt       int64
+	ID             string
+}
+
+func (q *Queries) AlterarHospede(ctx context.Context, arg AlterarHospedeParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, alterarHospede,
+		arg.Nome,
+		arg.Email,
+		arg.Telefone,
+		arg.Cpf,
+		arg.DataNascimento,
+		arg.Sexo,
+		arg.UpdateAt,
+		arg.ID,
+	)
+}
+
+const alterarPhoneUser = `-- name: AlterarPhoneUser :execresult
+UPDATE users
+SET phone = ?
+WHERE id = ?
+`
+
+type AlterarPhoneUserParams struct {
+	Phone string
+	ID    string
+}
+
+func (q *Queries) AlterarPhoneUser(ctx context.Context, arg AlterarPhoneUserParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, alterarPhoneUser, arg.Phone, arg.ID)
+}
+
+const alterarQuarto = `-- name: AlterarQuarto :execresult
+UPDATE quartos
+SET numero_quarto = ?, numero_andar = ?, descricao = ?, tipo_quarto = ?, status_quarto = ?
+WHERE id = ?
+`
+
+type AlterarQuartoParams struct {
+	NumeroQuarto int32
+	NumeroAndar  int32
+	Descricao    string
+	TipoQuarto   QuartosTipoQuarto
+	StatusQuarto QuartosStatusQuarto
+	ID           string
+}
+
+func (q *Queries) AlterarQuarto(ctx context.Context, arg AlterarQuartoParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, alterarQuarto,
+		arg.NumeroQuarto,
+		arg.NumeroAndar,
+		arg.Descricao,
+		arg.TipoQuarto,
+		arg.StatusQuarto,
+		arg.ID,
+	)
+}
+
+const alterarReserva = `-- name: AlterarReserva :exec
+UPDATE reservas
+SET status_reserva = ?
+WHERE id = ?
+`
+
+type AlterarReservaParams struct {
+	StatusReserva ReservasStatusReserva
+	ID            string
+}
+
+func (q *Queries) AlterarReserva(ctx context.Context, arg AlterarReservaParams) error {
+	_, err := q.db.ExecContext(ctx, alterarReserva, arg.StatusReserva, arg.ID)
+	return err
+}
+
+const alterarStatusQuarto = `-- name: AlterarStatusQuarto :exec
+UPDATE quartos SET status_quarto = ? WHERE id = ?
+`
+
+type AlterarStatusQuartoParams struct {
+	StatusQuarto QuartosStatusQuarto
+	ID           string
+}
+
+func (q *Queries) AlterarStatusQuarto(ctx context.Context, arg AlterarStatusQuartoParams) error {
+	_, err := q.db.ExecContext(ctx, alterarStatusQuarto, arg.StatusQuarto, arg.ID)
+	return err
+}
+
+const createHospede = `-- name: CreateHospede :execresult
+INSERT INTO hospedes (
+  id, nome, email, telefone, cpf, data_nascimento, sexo, created_at
+) VALUES (
+  ?, ?, ?, ?, ?, ?, ?, ?
+)
+`
+
+type CreateHospedeParams struct {
+	ID             string
+	Nome           string
+	Email          string
+	Telefone       string
+	Cpf            string
+	DataNascimento string
+	Sexo           HospedesSexo
+	CreatedAt      int64
+}
+
+func (q *Queries) CreateHospede(ctx context.Context, arg CreateHospedeParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, createHospede,
+		arg.ID,
+		arg.Nome,
+		arg.Email,
+		arg.Telefone,
+		arg.Cpf,
+		arg.DataNascimento,
+		arg.Sexo,
+		arg.CreatedAt,
+	)
+}
+
+const createQuarto = `-- name: CreateQuarto :execresult
+/* -- name: RemoverQuarto :exec
+UPDATE quartos SET deleted_at = ? WHERE id = ?;  */
+
+INSERT INTO quartos (
+  id, numero_quarto, numero_andar, descricao, tipo_quarto, status_quarto, created_at
+) VALUES (
+  ?, ?, ?, ?, ?, ?, ?
+)
+`
+
+type CreateQuartoParams struct {
+	ID           string
+	NumeroQuarto int32
+	NumeroAndar  int32
+	Descricao    string
+	TipoQuarto   QuartosTipoQuarto
+	StatusQuarto QuartosStatusQuarto
+	CreatedAt    int64
+}
+
+func (q *Queries) CreateQuarto(ctx context.Context, arg CreateQuartoParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, createQuarto,
+		arg.ID,
+		arg.NumeroQuarto,
+		arg.NumeroAndar,
+		arg.Descricao,
+		arg.TipoQuarto,
+		arg.StatusQuarto,
+		arg.CreatedAt,
+	)
+}
+
+const createReserva = `-- name: CreateReserva :execresult
+INSERT INTO reservas (
+  id, tipo_reserva, data_reserva, data_checkin, data_checkout, status_reserva, valor_reserva, id_quarto, id_hospede, created_at
+) VALUES (
+  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+)
+`
+
+type CreateReservaParams struct {
+	ID            string
+	TipoReserva   ReservasTipoReserva
+	DataReserva   string
+	DataCheckin   string
+	DataCheckout  string
+	StatusReserva ReservasStatusReserva
+	ValorReserva  string
+	IDQuarto      string
+	IDHospede     string
+	CreatedAt     int64
+}
+
+func (q *Queries) CreateReserva(ctx context.Context, arg CreateReservaParams) (sql.Result, error) {
+	return q.db.ExecContext(ctx, createReserva,
+		arg.ID,
+		arg.TipoReserva,
+		arg.DataReserva,
+		arg.DataCheckin,
+		arg.DataCheckout,
+		arg.StatusReserva,
+		arg.ValorReserva,
+		arg.IDQuarto,
+		arg.IDHospede,
+		arg.CreatedAt,
+	)
+}
+
 const createUser = `-- name: CreateUser :execresult
 INSERT INTO users (
-  id, full_name, email, phone, password, birthday, created_at
+  id, full_name, email, phone, password, is_admin, created_at
 ) VALUES (
   ?, ?, ?, ?, ?, ?, ?
 )
@@ -24,7 +241,7 @@ type CreateUserParams struct {
 	Email     string
 	Phone     string
 	Password  string
-	Birthday  int64
+	IsAdmin   bool
 	CreatedAt int64
 }
 
@@ -35,7 +252,7 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (sql.Res
 		arg.Email,
 		arg.Phone,
 		arg.Password,
-		arg.Birthday,
+		arg.IsAdmin,
 		arg.CreatedAt,
 	)
 }
@@ -59,7 +276,7 @@ func (q *Queries) GetUserByEmail(ctx context.Context, email string) (GetUserByEm
 }
 
 const getUserById = `-- name: GetUserById :one
-SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
+SELECT id, full_name, email, phone, password, is_admin, created_at, update_at FROM users
 WHERE id = ?
 `
 
@@ -73,7 +290,6 @@ func (q *Queries) GetUserById(ctx context.Context, id string) (User, error) {
 		&i.Phone,
 		&i.Password,
 		&i.IsAdmin,
-		&i.Birthday,
 		&i.CreatedAt,
 		&i.UpdateAt,
 	)
@@ -81,7 +297,7 @@ func (q *Queries) GetUserById(ctx context.Context, id string) (User, error) {
 }
 
 const listAdmins = `-- name: ListAdmins :many
-SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
+SELECT id, full_name, email, phone, password, is_admin, created_at, update_at FROM users
 WHERE is_admin = 1
 `
 
@@ -101,7 +317,6 @@ func (q *Queries) ListAdmins(ctx context.Context) ([]User, error) {
 			&i.Phone,
 			&i.Password,
 			&i.IsAdmin,
-			&i.Birthday,
 			&i.CreatedAt,
 			&i.UpdateAt,
 		); err != nil {
@@ -118,8 +333,188 @@ func (q *Queries) ListAdmins(ctx context.Context) ([]User, error) {
 	return items, nil
 }
 
+const listHospedeById = `-- name: ListHospedeById :one
+SELECT id, nome, email, telefone, cpf, data_nascimento, sexo, created_at, update_at, deleted_at FROM hospedes
+WHERE id = ? and deleted_at = 0
+`
+
+func (q *Queries) ListHospedeById(ctx context.Context, id string) (Hospede, error) {
+	row := q.db.QueryRowContext(ctx, listHospedeById, id)
+	var i Hospede
+	err := row.Scan(
+		&i.ID,
+		&i.Nome,
+		&i.Email,
+		&i.Telefone,
+		&i.Cpf,
+		&i.DataNascimento,
+		&i.Sexo,
+		&i.CreatedAt,
+		&i.UpdateAt,
+		&i.DeletedAt,
+	)
+	return i, err
+}
+
+const listHospedes = `-- name: ListHospedes :many
+SELECT id, nome, email, telefone, cpf, data_nascimento, sexo, created_at, update_at, deleted_at FROM hospedes where deleted_at = 0
+`
+
+func (q *Queries) ListHospedes(ctx context.Context) ([]Hospede, error) {
+	rows, err := q.db.QueryContext(ctx, listHospedes)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Hospede
+	for rows.Next() {
+		var i Hospede
+		if err := rows.Scan(
+			&i.ID,
+			&i.Nome,
+			&i.Email,
+			&i.Telefone,
+			&i.Cpf,
+			&i.DataNascimento,
+			&i.Sexo,
+			&i.CreatedAt,
+			&i.UpdateAt,
+			&i.DeletedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const listQuartoById = `-- name: ListQuartoById :one
+SELECT id, numero_quarto, numero_andar, tipo_quarto, status_quarto, descricao, created_at, update_at FROM quartos
+WHERE id = ?
+`
+
+func (q *Queries) ListQuartoById(ctx context.Context, id string) (Quarto, error) {
+	row := q.db.QueryRowContext(ctx, listQuartoById, id)
+	var i Quarto
+	err := row.Scan(
+		&i.ID,
+		&i.NumeroQuarto,
+		&i.NumeroAndar,
+		&i.TipoQuarto,
+		&i.StatusQuarto,
+		&i.Descricao,
+		&i.CreatedAt,
+		&i.UpdateAt,
+	)
+	return i, err
+}
+
+const listQuartos = `-- name: ListQuartos :many
+SELECT id, numero_quarto, numero_andar, tipo_quarto, status_quarto, descricao, created_at, update_at FROM quartos order by numero_quarto asc
+`
+
+func (q *Queries) ListQuartos(ctx context.Context) ([]Quarto, error) {
+	rows, err := q.db.QueryContext(ctx, listQuartos)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Quarto
+	for rows.Next() {
+		var i Quarto
+		if err := rows.Scan(
+			&i.ID,
+			&i.NumeroQuarto,
+			&i.NumeroAndar,
+			&i.TipoQuarto,
+			&i.StatusQuarto,
+			&i.Descricao,
+			&i.CreatedAt,
+			&i.UpdateAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const listReservas = `-- name: ListReservas :many
+select s.id ,s.data_reserva, s.data_checkin, s.data_checkout, s.valor_reserva, s.tipo_reserva , s.status_reserva ,h.nome , h.cpf , q.numero_quarto , q.numero_andar , q.tipo_quarto , q.status_quarto, s.created_at  from reservas s 
+inner join hospedes h on s.id_hospede = h.id 
+inner join quartos q on s.id_quarto = q.id
+where s.deleted_at = 0
+`
+
+type ListReservasRow struct {
+	ID            string
+	DataReserva   string
+	DataCheckin   string
+	DataCheckout  string
+	ValorReserva  string
+	TipoReserva   ReservasTipoReserva
+	StatusReserva ReservasStatusReserva
+	Nome          string
+	Cpf           string
+	NumeroQuarto  int32
+	NumeroAndar   int32
+	TipoQuarto    QuartosTipoQuarto
+	StatusQuarto  QuartosStatusQuarto
+	CreatedAt     int64
+}
+
+func (q *Queries) ListReservas(ctx context.Context) ([]ListReservasRow, error) {
+	rows, err := q.db.QueryContext(ctx, listReservas)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ListReservasRow
+	for rows.Next() {
+		var i ListReservasRow
+		if err := rows.Scan(
+			&i.ID,
+			&i.DataReserva,
+			&i.DataCheckin,
+			&i.DataCheckout,
+			&i.ValorReserva,
+			&i.TipoReserva,
+			&i.StatusReserva,
+			&i.Nome,
+			&i.Cpf,
+			&i.NumeroQuarto,
+			&i.NumeroAndar,
+			&i.TipoQuarto,
+			&i.StatusQuarto,
+			&i.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listUserByEmail = `-- name: ListUserByEmail :one
-SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
+SELECT id, full_name, email, phone, password, is_admin, created_at, update_at FROM users
 WHERE email = ?
 `
 
@@ -133,7 +528,6 @@ func (q *Queries) ListUserByEmail(ctx context.Context, email string) (User, erro
 		&i.Phone,
 		&i.Password,
 		&i.IsAdmin,
-		&i.Birthday,
 		&i.CreatedAt,
 		&i.UpdateAt,
 	)
@@ -141,7 +535,7 @@ func (q *Queries) ListUserByEmail(ctx context.Context, email string) (User, erro
 }
 
 const listUsers = `-- name: ListUsers :many
-SELECT id, full_name, email, phone, password, is_admin, birthday, created_at, update_at FROM users
+SELECT id, full_name, email, phone, password, is_admin, created_at, update_at FROM users
 `
 
 func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
@@ -160,7 +554,6 @@ func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
 			&i.Phone,
 			&i.Password,
 			&i.IsAdmin,
-			&i.Birthday,
 			&i.CreatedAt,
 			&i.UpdateAt,
 		); err != nil {
@@ -175,4 +568,32 @@ func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
 		return nil, err
 	}
 	return items, nil
+}
+
+const removerHospede = `-- name: RemoverHospede :exec
+UPDATE hospedes SET deleted_at = ? WHERE id = ?
+`
+
+type RemoverHospedeParams struct {
+	DeletedAt int64
+	ID        string
+}
+
+func (q *Queries) RemoverHospede(ctx context.Context, arg RemoverHospedeParams) error {
+	_, err := q.db.ExecContext(ctx, removerHospede, arg.DeletedAt, arg.ID)
+	return err
+}
+
+const removerReserva = `-- name: RemoverReserva :exec
+UPDATE reservas SET deleted_at = ? WHERE id = ?
+`
+
+type RemoverReservaParams struct {
+	DeletedAt int64
+	ID        string
+}
+
+func (q *Queries) RemoverReserva(ctx context.Context, arg RemoverReservaParams) error {
+	_, err := q.db.ExecContext(ctx, removerReserva, arg.DeletedAt, arg.ID)
+	return err
 }

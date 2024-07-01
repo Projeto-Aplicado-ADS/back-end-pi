@@ -13,7 +13,6 @@ import (
 func (e implBFF) GetAllUsers(c *fiber.Ctx) (err error) {
 	out, err := e.user.Get().AllUsers(c.Context())
 	if err != nil {
-		fmt.Println(err)
 		return fiber.ErrInternalServerError
 	}
 	return c.Status(fiber.StatusOK).JSON(out)
@@ -39,7 +38,6 @@ func (e implBFF) CreateUser(c *fiber.Ctx) (err error) {
 
 	err = c.BodyParser(&body)
 	if err != nil {
-		fmt.Println(err)
 		return fiber.ErrBadRequest
 	}
 
@@ -56,7 +54,6 @@ func (e implBFF) Login(c *fiber.Ctx) (err error) {
 
 	err = c.BodyParser(&body)
 	if err != nil {
-		fmt.Println(err)
 		return fiber.ErrBadRequest
 	}
 
@@ -76,7 +73,6 @@ func (e implBFF) Login(c *fiber.Ctx) (err error) {
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: false,
 	})
-	
 
 	return c.SendStatus(fiber.StatusCreated)
 }
@@ -94,4 +90,217 @@ func (e implBFF) getMe(c *fiber.Ctx) (err error) {
 	}
 
 	return c.Status(fiber.StatusOK).JSON(out)
+}
+
+func (e implBFF) UpdateUsersEmail (c *fiber.Ctx) (err error) {
+	var body app.UpdateUsersEmailIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+	_, err = e.user.Get().UpdateUserByEmail(c.Context(), app.UpdateUsersEmailIn{
+		ID: c.Params("id"),
+		Email: body.Email,
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+	return c.SendStatus(fiber.StatusNoContent)
+}
+
+func (e implBFF) UpdateUsersPhone(c *fiber.Ctx) (err error) {
+	var body app.UpdateUsersPhoneIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+	_, err = e.user.Get().UpdateUserPhone(c.Context(), app.UpdateUsersPhoneIn{
+		ID: c.Params("id"),
+		Phone: body.Phone,
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+	return c.SendStatus(fiber.StatusNoContent)
+}
+
+
+func (e implBFF) Logout(c *fiber.Ctx) (err error) {
+	c.ClearCookie("token")
+	return c.SendStatus(fiber.StatusOK)
+}
+
+func (e implBFF) GetHospedes(c *fiber.Ctx) (err error) {
+	out, err := e.user.Get().GetHospedes(c.Context())
+	if err != nil {
+		return err
+	}
+	return c.Status(fiber.StatusOK).JSON(out)
+}
+
+func (e implBFF) GetHospedeById (c *fiber.Ctx) (err error) {
+	out, err := e.user.Get().GetOneHospedeById(c.Context(), c.Params("id"))
+	if err != nil {
+		return err
+	}
+	return c.Status(fiber.StatusOK).JSON(out)
+}
+
+func (e implBFF) CreateHospede (c *fiber.Ctx) (err error) {
+	var body app.HospedesIn
+
+	err = c.BodyParser(&body)
+	if err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	_, err = e.user.Get().CreateHospede(c.Context(), body)
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+
+	return c.SendStatus(fiber.StatusCreated)
+}
+
+
+func (e implBFF) DeleteHospede(c *fiber.Ctx) (err error) {
+	var body app.RemoveHospedesIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	_, err = e.user.Get().RemoveHospede(c.Context(), app.RemoveHospedesIn{
+		ID: c.Params("id"),
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}	
+
+	return c.SendStatus(fiber.StatusNoContent)
+}
+
+func (e implBFF) UpdateHospede(c *fiber.Ctx) (err error) {
+	var body app.UpdateHospedesIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+	_, err = e.user.Get().UpdateHospedesIn(c.Context(), app.UpdateHospedesIn{
+		ID: c.Params("id"),
+		Nome: body.Nome,
+		Email: body.Email,
+		Telefone: body.Telefone,
+		Cpf: body.Cpf,
+		DataNascimento: body.DataNascimento,
+		Sexo: body.Sexo,
+	})
+	if err != nil {
+		fmt.Println(err)
+		return fiber.ErrInternalServerError
+	}
+	return c.SendStatus(fiber.StatusNoContent)
+}
+
+
+func (e implBFF) CreateQuarto(c *fiber.Ctx) (err error) {
+	var body app.QuartosIn
+
+	err = c.BodyParser(&body)
+	if err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	_, err = e.user.Get().CreateQuarto(c.Context(), body)
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+
+
+	return c.SendStatus(fiber.StatusCreated)
+}
+
+func (e implBFF) GetQuartos(c *fiber.Ctx) (err error) {
+	out, err := e.user.Get().GetQuartos(c.Context())
+	if err != nil {
+		return err
+	}
+	
+	return c.Status(fiber.StatusOK).JSON(out)
+}
+
+
+func (e implBFF) UpdateStatusQuarto(c *fiber.Ctx) (err error) {
+	var body app.UpdateQuartosStatusIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	_, err = e.user.Get().UpdateStatusQuarto(c.Context(), app.UpdateQuartosStatusIn{
+		ID: c.Params("id"),
+		StatusQuarto: body.StatusQuarto,
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+
+	return c.SendStatus(fiber.StatusNoContent)
+}
+
+
+func (e implBFF) GetReservas (c *fiber.Ctx) (err error) {
+	out, err := e.user.Get().GetReservas(c.Context())
+	if err != nil {
+		return err
+	}
+
+	return c.Status(fiber.StatusOK).JSON(out)
+}
+
+func (e implBFF) CreateReserva (c *fiber.Ctx) (err error) {
+	var body app.ReservasIn
+
+	err = c.BodyParser(&body)
+	if err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	body.QuartoId = c.Params("quartoId")
+	body.HospedeId = c.Params("hospedeId")
+
+	_, err = e.user.Get().CreateReserva(c.Context(), body)
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}
+
+	return c.SendStatus(fiber.StatusCreated)
+}
+
+func (e implBFF) RemoveReserva (c *fiber.Ctx) (err error) {
+	var body app.RemoveReservaIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}	
+
+	_, err = e.user.Get().RemoveReserva(c.Context(), app.RemoveReservaIn{
+		ID: c.Params("id"),
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}		
+
+	return c.SendStatus(fiber.StatusNoContent)
+}
+
+func (e implBFF) UpdateReservas(c *fiber.Ctx) (err error) {
+	var body app.UpdateReservaIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+
+	_, err = e.user.Get().UpdateReserva(c.Context(), app.UpdateReservaIn{
+		ID: c.Params("id"),
+		StatusReserva: body.StatusReserva,
+	})
+	if err != nil {
+		return fiber.ErrInternalServerError
+	}		
+
+	return c.SendStatus(fiber.StatusNoContent)
 }

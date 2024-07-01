@@ -21,10 +21,10 @@ func init() {
 		Iface: reflect.TypeOf((*Component)(nil)).Elem(),
 		Impl:  reflect.TypeOf(implapp{}),
 		LocalStubFn: func(impl any, caller string, tracer trace.Tracer) any {
-			return component_local_stub{impl: impl.(Component), tracer: tracer, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: false, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: false, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: false, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: false, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: false, Generated: true})}
+			return component_local_stub{impl: impl.(Component), tracer: tracer, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: false, Generated: true}), createHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateHospede", Remote: false, Generated: true}), createQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateQuarto", Remote: false, Generated: true}), createReservaMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateReserva", Remote: false, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: false, Generated: true}), getHospedesMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetHospedes", Remote: false, Generated: true}), getOneHospedeByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneHospedeById", Remote: false, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: false, Generated: true}), getQuartosMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetQuartos", Remote: false, Generated: true}), getReservasMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetReservas", Remote: false, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: false, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: false, Generated: true}), removeHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "RemoveHospede", Remote: false, Generated: true}), removeReservaMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "RemoveReserva", Remote: false, Generated: true}), updateHospedesInMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateHospedesIn", Remote: false, Generated: true}), updateReservaMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateReserva", Remote: false, Generated: true}), updateStatusQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateStatusQuarto", Remote: false, Generated: true}), updateUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateUserByEmail", Remote: false, Generated: true}), updateUserPhoneMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateUserPhone", Remote: false, Generated: true})}
 		},
 		ClientStubFn: func(stub codegen.Stub, caller string) any {
-			return component_client_stub{stub: stub, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: true, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: true, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: true, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: true, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: true, Generated: true})}
+			return component_client_stub{stub: stub, allUsersMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "AllUsers", Remote: true, Generated: true}), createHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateHospede", Remote: true, Generated: true}), createQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateQuarto", Remote: true, Generated: true}), createReservaMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateReserva", Remote: true, Generated: true}), createUserMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "CreateUser", Remote: true, Generated: true}), getHospedesMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetHospedes", Remote: true, Generated: true}), getOneHospedeByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneHospedeById", Remote: true, Generated: true}), getOneUserByIdMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetOneUserById", Remote: true, Generated: true}), getQuartosMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetQuartos", Remote: true, Generated: true}), getReservasMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetReservas", Remote: true, Generated: true}), getUserByEmailAndPasswordMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "GetUserByEmailAndPassword", Remote: true, Generated: true}), listUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "ListUserByEmail", Remote: true, Generated: true}), removeHospedeMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "RemoveHospede", Remote: true, Generated: true}), removeReservaMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "RemoveReserva", Remote: true, Generated: true}), updateHospedesInMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateHospedesIn", Remote: true, Generated: true}), updateReservaMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateReserva", Remote: true, Generated: true}), updateStatusQuartoMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateStatusQuarto", Remote: true, Generated: true}), updateUserByEmailMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateUserByEmail", Remote: true, Generated: true}), updateUserPhoneMetrics: codegen.MethodMetricsFor(codegen.MethodLabels{Caller: caller, Component: "projeto-api/internal/app/Component", Method: "UpdateUserPhone", Remote: true, Generated: true})}
 		},
 		ServerStubFn: func(impl any, addLoad func(uint64, float64)) codegen.Server {
 			return component_server_stub{impl: impl.(Component), addLoad: addLoad}
@@ -48,10 +48,24 @@ type component_local_stub struct {
 	impl                             Component
 	tracer                           trace.Tracer
 	allUsersMetrics                  *codegen.MethodMetrics
+	createHospedeMetrics             *codegen.MethodMetrics
+	createQuartoMetrics              *codegen.MethodMetrics
+	createReservaMetrics             *codegen.MethodMetrics
 	createUserMetrics                *codegen.MethodMetrics
+	getHospedesMetrics               *codegen.MethodMetrics
+	getOneHospedeByIdMetrics         *codegen.MethodMetrics
 	getOneUserByIdMetrics            *codegen.MethodMetrics
+	getQuartosMetrics                *codegen.MethodMetrics
+	getReservasMetrics               *codegen.MethodMetrics
 	getUserByEmailAndPasswordMetrics *codegen.MethodMetrics
 	listUserByEmailMetrics           *codegen.MethodMetrics
+	removeHospedeMetrics             *codegen.MethodMetrics
+	removeReservaMetrics             *codegen.MethodMetrics
+	updateHospedesInMetrics          *codegen.MethodMetrics
+	updateReservaMetrics             *codegen.MethodMetrics
+	updateStatusQuartoMetrics        *codegen.MethodMetrics
+	updateUserByEmailMetrics         *codegen.MethodMetrics
+	updateUserPhoneMetrics           *codegen.MethodMetrics
 }
 
 // Check that component_local_stub implements the Component interface.
@@ -77,6 +91,66 @@ func (s component_local_stub) AllUsers(ctx context.Context) (r0 AllUsersOut, err
 	return s.impl.AllUsers(ctx)
 }
 
+func (s component_local_stub) CreateHospede(ctx context.Context, a0 HospedesIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.createHospedeMetrics.Begin()
+	defer func() { s.createHospedeMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.CreateHospede", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.CreateHospede(ctx, a0)
+}
+
+func (s component_local_stub) CreateQuarto(ctx context.Context, a0 QuartosIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.createQuartoMetrics.Begin()
+	defer func() { s.createQuartoMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.CreateQuarto", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.CreateQuarto(ctx, a0)
+}
+
+func (s component_local_stub) CreateReserva(ctx context.Context, a0 ReservasIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.createReservaMetrics.Begin()
+	defer func() { s.createReservaMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.CreateReserva", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.CreateReserva(ctx, a0)
+}
+
 func (s component_local_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bool, err error) {
 	// Update metrics.
 	begin := s.createUserMetrics.Begin()
@@ -97,6 +171,46 @@ func (s component_local_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 boo
 	return s.impl.CreateUser(ctx, a0)
 }
 
+func (s component_local_stub) GetHospedes(ctx context.Context) (r0 AllHospodesOut, err error) {
+	// Update metrics.
+	begin := s.getHospedesMetrics.Begin()
+	defer func() { s.getHospedesMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.GetHospedes", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.GetHospedes(ctx)
+}
+
+func (s component_local_stub) GetOneHospedeById(ctx context.Context, a0 string) (r0 HospedesOut, err error) {
+	// Update metrics.
+	begin := s.getOneHospedeByIdMetrics.Begin()
+	defer func() { s.getOneHospedeByIdMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.GetOneHospedeById", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.GetOneHospedeById(ctx, a0)
+}
+
 func (s component_local_stub) GetOneUserById(ctx context.Context, a0 string) (r0 UsersOut, err error) {
 	// Update metrics.
 	begin := s.getOneUserByIdMetrics.Begin()
@@ -115,6 +229,46 @@ func (s component_local_stub) GetOneUserById(ctx context.Context, a0 string) (r0
 	}
 
 	return s.impl.GetOneUserById(ctx, a0)
+}
+
+func (s component_local_stub) GetQuartos(ctx context.Context) (r0 AllQuartosOut, err error) {
+	// Update metrics.
+	begin := s.getQuartosMetrics.Begin()
+	defer func() { s.getQuartosMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.GetQuartos", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.GetQuartos(ctx)
+}
+
+func (s component_local_stub) GetReservas(ctx context.Context) (r0 AllReservasOut, err error) {
+	// Update metrics.
+	begin := s.getReservasMetrics.Begin()
+	defer func() { s.getReservasMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.GetReservas", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.GetReservas(ctx)
 }
 
 func (s component_local_stub) GetUserByEmailAndPassword(ctx context.Context, a0 string, a1 string) (err error) {
@@ -157,15 +311,169 @@ func (s component_local_stub) ListUserByEmail(ctx context.Context, a0 string) (r
 	return s.impl.ListUserByEmail(ctx, a0)
 }
 
+func (s component_local_stub) RemoveHospede(ctx context.Context, a0 RemoveHospedesIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.removeHospedeMetrics.Begin()
+	defer func() { s.removeHospedeMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.RemoveHospede", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.RemoveHospede(ctx, a0)
+}
+
+func (s component_local_stub) RemoveReserva(ctx context.Context, a0 RemoveReservaIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.removeReservaMetrics.Begin()
+	defer func() { s.removeReservaMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.RemoveReserva", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.RemoveReserva(ctx, a0)
+}
+
+func (s component_local_stub) UpdateHospedesIn(ctx context.Context, a0 UpdateHospedesIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.updateHospedesInMetrics.Begin()
+	defer func() { s.updateHospedesInMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.UpdateHospedesIn", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.UpdateHospedesIn(ctx, a0)
+}
+
+func (s component_local_stub) UpdateReserva(ctx context.Context, a0 UpdateReservaIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.updateReservaMetrics.Begin()
+	defer func() { s.updateReservaMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.UpdateReserva", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.UpdateReserva(ctx, a0)
+}
+
+func (s component_local_stub) UpdateStatusQuarto(ctx context.Context, a0 UpdateQuartosStatusIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.updateStatusQuartoMetrics.Begin()
+	defer func() { s.updateStatusQuartoMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.UpdateStatusQuarto", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.UpdateStatusQuarto(ctx, a0)
+}
+
+func (s component_local_stub) UpdateUserByEmail(ctx context.Context, a0 UpdateUsersEmailIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.updateUserByEmailMetrics.Begin()
+	defer func() { s.updateUserByEmailMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.UpdateUserByEmail", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.UpdateUserByEmail(ctx, a0)
+}
+
+func (s component_local_stub) UpdateUserPhone(ctx context.Context, a0 UpdateUsersPhoneIn) (r0 bool, err error) {
+	// Update metrics.
+	begin := s.updateUserPhoneMetrics.Begin()
+	defer func() { s.updateUserPhoneMetrics.End(begin, err != nil, 0, 0) }()
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.tracer.Start(ctx, "app.Component.UpdateUserPhone", trace.WithSpanKind(trace.SpanKindInternal))
+		defer func() {
+			if err != nil {
+				span.RecordError(err)
+				span.SetStatus(codes.Error, err.Error())
+			}
+			span.End()
+		}()
+	}
+
+	return s.impl.UpdateUserPhone(ctx, a0)
+}
+
 // Client stub implementations.
 
 type component_client_stub struct {
 	stub                             codegen.Stub
 	allUsersMetrics                  *codegen.MethodMetrics
+	createHospedeMetrics             *codegen.MethodMetrics
+	createQuartoMetrics              *codegen.MethodMetrics
+	createReservaMetrics             *codegen.MethodMetrics
 	createUserMetrics                *codegen.MethodMetrics
+	getHospedesMetrics               *codegen.MethodMetrics
+	getOneHospedeByIdMetrics         *codegen.MethodMetrics
 	getOneUserByIdMetrics            *codegen.MethodMetrics
+	getQuartosMetrics                *codegen.MethodMetrics
+	getReservasMetrics               *codegen.MethodMetrics
 	getUserByEmailAndPasswordMetrics *codegen.MethodMetrics
 	listUserByEmailMetrics           *codegen.MethodMetrics
+	removeHospedeMetrics             *codegen.MethodMetrics
+	removeReservaMetrics             *codegen.MethodMetrics
+	updateHospedesInMetrics          *codegen.MethodMetrics
+	updateReservaMetrics             *codegen.MethodMetrics
+	updateStatusQuartoMetrics        *codegen.MethodMetrics
+	updateUserByEmailMetrics         *codegen.MethodMetrics
+	updateUserPhoneMetrics           *codegen.MethodMetrics
 }
 
 // Check that component_client_stub implements the Component interface.
@@ -218,16 +526,16 @@ func (s component_client_stub) AllUsers(ctx context.Context) (r0 AllUsersOut, er
 	return
 }
 
-func (s component_client_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bool, err error) {
+func (s component_client_stub) CreateHospede(ctx context.Context, a0 HospedesIn) (r0 bool, err error) {
 	// Update metrics.
 	var requestBytes, replyBytes int
-	begin := s.createUserMetrics.Begin()
-	defer func() { s.createUserMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+	begin := s.createHospedeMetrics.Begin()
+	defer func() { s.createHospedeMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
 
 	span := trace.SpanFromContext(ctx)
 	if span.SpanContext().IsValid() {
 		// Create a child span for this method.
-		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.CreateUser", trace.WithSpanKind(trace.SpanKindClient))
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.CreateHospede", trace.WithSpanKind(trace.SpanKindClient))
 	}
 
 	defer func() {
@@ -265,6 +573,262 @@ func (s component_client_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bo
 	// Decode the results.
 	dec := codegen.NewDecoder(results)
 	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) CreateQuarto(ctx context.Context, a0 QuartosIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.createQuartoMetrics.Begin()
+	defer func() { s.createQuartoMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.CreateQuarto", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Encode arguments.
+	enc := codegen.NewEncoder()
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 2, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) CreateReserva(ctx context.Context, a0 ReservasIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.createReservaMetrics.Begin()
+	defer func() { s.createReservaMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.CreateReserva", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Encode arguments.
+	enc := codegen.NewEncoder()
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 3, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.createUserMetrics.Begin()
+	defer func() { s.createUserMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.CreateUser", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Encode arguments.
+	enc := codegen.NewEncoder()
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 4, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) GetHospedes(ctx context.Context) (r0 AllHospodesOut, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.getHospedesMetrics.Begin()
+	defer func() { s.getHospedesMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.GetHospedes", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	var shardKey uint64
+
+	// Call the remote method.
+	var results []byte
+	results, err = s.stub.Run(ctx, 5, nil, shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	*(*[]HospedesOut)(&r0) = serviceweaver_dec_slice_HospedesOut_3d55506f(dec)
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) GetOneHospedeById(ctx context.Context, a0 string) (r0 HospedesOut, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.getOneHospedeByIdMetrics.Begin()
+	defer func() { s.getOneHospedeByIdMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.GetOneHospedeById", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Preallocate a buffer of the right size.
+	size := 0
+	size += (4 + len(a0))
+	enc := codegen.NewEncoder()
+	enc.Reset(size)
+
+	// Encode arguments.
+	enc.String(a0)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 6, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	(&r0).WeaverUnmarshal(dec)
 	err = dec.Error()
 	return
 }
@@ -311,7 +875,7 @@ func (s component_client_stub) GetOneUserById(ctx context.Context, a0 string) (r
 	// Call the remote method.
 	requestBytes = len(enc.Data())
 	var results []byte
-	results, err = s.stub.Run(ctx, 2, enc.Data(), shardKey)
+	results, err = s.stub.Run(ctx, 7, enc.Data(), shardKey)
 	replyBytes = len(results)
 	if err != nil {
 		err = errors.Join(weaver.RemoteCallError, err)
@@ -321,6 +885,100 @@ func (s component_client_stub) GetOneUserById(ctx context.Context, a0 string) (r
 	// Decode the results.
 	dec := codegen.NewDecoder(results)
 	(&r0).WeaverUnmarshal(dec)
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) GetQuartos(ctx context.Context) (r0 AllQuartosOut, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.getQuartosMetrics.Begin()
+	defer func() { s.getQuartosMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.GetQuartos", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	var shardKey uint64
+
+	// Call the remote method.
+	var results []byte
+	results, err = s.stub.Run(ctx, 8, nil, shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	*(*[]QuartosOut)(&r0) = serviceweaver_dec_slice_QuartosOut_5b640119(dec)
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) GetReservas(ctx context.Context) (r0 AllReservasOut, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.getReservasMetrics.Begin()
+	defer func() { s.getReservasMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.GetReservas", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	var shardKey uint64
+
+	// Call the remote method.
+	var results []byte
+	results, err = s.stub.Run(ctx, 9, nil, shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	*(*[]ReservasOut)(&r0) = serviceweaver_dec_slice_ReservasOut_54643aae(dec)
 	err = dec.Error()
 	return
 }
@@ -369,7 +1027,7 @@ func (s component_client_stub) GetUserByEmailAndPassword(ctx context.Context, a0
 	// Call the remote method.
 	requestBytes = len(enc.Data())
 	var results []byte
-	results, err = s.stub.Run(ctx, 3, enc.Data(), shardKey)
+	results, err = s.stub.Run(ctx, 10, enc.Data(), shardKey)
 	replyBytes = len(results)
 	if err != nil {
 		err = errors.Join(weaver.RemoteCallError, err)
@@ -424,7 +1082,7 @@ func (s component_client_stub) ListUserByEmail(ctx context.Context, a0 string) (
 	// Call the remote method.
 	requestBytes = len(enc.Data())
 	var results []byte
-	results, err = s.stub.Run(ctx, 4, enc.Data(), shardKey)
+	results, err = s.stub.Run(ctx, 11, enc.Data(), shardKey)
 	replyBytes = len(results)
 	if err != nil {
 		err = errors.Join(weaver.RemoteCallError, err)
@@ -434,6 +1092,383 @@ func (s component_client_stub) ListUserByEmail(ctx context.Context, a0 string) (
 	// Decode the results.
 	dec := codegen.NewDecoder(results)
 	(&r0).WeaverUnmarshal(dec)
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) RemoveHospede(ctx context.Context, a0 RemoveHospedesIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.removeHospedeMetrics.Begin()
+	defer func() { s.removeHospedeMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.RemoveHospede", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Encode arguments.
+	enc := codegen.NewEncoder()
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 12, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) RemoveReserva(ctx context.Context, a0 RemoveReservaIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.removeReservaMetrics.Begin()
+	defer func() { s.removeReservaMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.RemoveReserva", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Encode arguments.
+	enc := codegen.NewEncoder()
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 13, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) UpdateHospedesIn(ctx context.Context, a0 UpdateHospedesIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.updateHospedesInMetrics.Begin()
+	defer func() { s.updateHospedesInMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.UpdateHospedesIn", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Encode arguments.
+	enc := codegen.NewEncoder()
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 14, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) UpdateReserva(ctx context.Context, a0 UpdateReservaIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.updateReservaMetrics.Begin()
+	defer func() { s.updateReservaMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.UpdateReserva", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Preallocate a buffer of the right size.
+	size := 0
+	size += serviceweaver_size_UpdateReservaIn_5a8aeaf2(&a0)
+	enc := codegen.NewEncoder()
+	enc.Reset(size)
+
+	// Encode arguments.
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 15, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) UpdateStatusQuarto(ctx context.Context, a0 UpdateQuartosStatusIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.updateStatusQuartoMetrics.Begin()
+	defer func() { s.updateStatusQuartoMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.UpdateStatusQuarto", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Preallocate a buffer of the right size.
+	size := 0
+	size += serviceweaver_size_UpdateQuartosStatusIn_d798d85e(&a0)
+	enc := codegen.NewEncoder()
+	enc.Reset(size)
+
+	// Encode arguments.
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 16, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) UpdateUserByEmail(ctx context.Context, a0 UpdateUsersEmailIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.updateUserByEmailMetrics.Begin()
+	defer func() { s.updateUserByEmailMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.UpdateUserByEmail", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Preallocate a buffer of the right size.
+	size := 0
+	size += serviceweaver_size_UpdateUsersEmailIn_7ddd1896(&a0)
+	enc := codegen.NewEncoder()
+	enc.Reset(size)
+
+	// Encode arguments.
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 17, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
+	err = dec.Error()
+	return
+}
+
+func (s component_client_stub) UpdateUserPhone(ctx context.Context, a0 UpdateUsersPhoneIn) (r0 bool, err error) {
+	// Update metrics.
+	var requestBytes, replyBytes int
+	begin := s.updateUserPhoneMetrics.Begin()
+	defer func() { s.updateUserPhoneMetrics.End(begin, err != nil, requestBytes, replyBytes) }()
+
+	span := trace.SpanFromContext(ctx)
+	if span.SpanContext().IsValid() {
+		// Create a child span for this method.
+		ctx, span = s.stub.Tracer().Start(ctx, "app.Component.UpdateUserPhone", trace.WithSpanKind(trace.SpanKindClient))
+	}
+
+	defer func() {
+		// Catch and return any panics detected during encoding/decoding/rpc.
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+			if err != nil {
+				err = errors.Join(weaver.RemoteCallError, err)
+			}
+		}
+
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+
+	}()
+
+	// Preallocate a buffer of the right size.
+	size := 0
+	size += serviceweaver_size_UpdateUsersPhoneIn_1d2732f9(&a0)
+	enc := codegen.NewEncoder()
+	enc.Reset(size)
+
+	// Encode arguments.
+	(a0).WeaverMarshal(enc)
+	var shardKey uint64
+
+	// Call the remote method.
+	requestBytes = len(enc.Data())
+	var results []byte
+	results, err = s.stub.Run(ctx, 18, enc.Data(), shardKey)
+	replyBytes = len(results)
+	if err != nil {
+		err = errors.Join(weaver.RemoteCallError, err)
+		return
+	}
+
+	// Decode the results.
+	dec := codegen.NewDecoder(results)
+	r0 = dec.Bool()
 	err = dec.Error()
 	return
 }
@@ -476,14 +1511,42 @@ func (s component_server_stub) GetStubFn(method string) func(ctx context.Context
 	switch method {
 	case "AllUsers":
 		return s.allUsers
+	case "CreateHospede":
+		return s.createHospede
+	case "CreateQuarto":
+		return s.createQuarto
+	case "CreateReserva":
+		return s.createReserva
 	case "CreateUser":
 		return s.createUser
+	case "GetHospedes":
+		return s.getHospedes
+	case "GetOneHospedeById":
+		return s.getOneHospedeById
 	case "GetOneUserById":
 		return s.getOneUserById
+	case "GetQuartos":
+		return s.getQuartos
+	case "GetReservas":
+		return s.getReservas
 	case "GetUserByEmailAndPassword":
 		return s.getUserByEmailAndPassword
 	case "ListUserByEmail":
 		return s.listUserByEmail
+	case "RemoveHospede":
+		return s.removeHospede
+	case "RemoveReserva":
+		return s.removeReserva
+	case "UpdateHospedesIn":
+		return s.updateHospedesIn
+	case "UpdateReserva":
+		return s.updateReserva
+	case "UpdateStatusQuarto":
+		return s.updateStatusQuarto
+	case "UpdateUserByEmail":
+		return s.updateUserByEmail
+	case "UpdateUserPhone":
+		return s.updateUserPhone
 	default:
 		return nil
 	}
@@ -505,6 +1568,81 @@ func (s component_server_stub) allUsers(ctx context.Context, args []byte) (res [
 	// Encode the results.
 	enc := codegen.NewEncoder()
 	serviceweaver_enc_slice_UsersOut_50a126a0(enc, ([]UsersOut)(r0))
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) createHospede(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 HospedesIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.CreateHospede(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) createQuarto(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 QuartosIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.CreateQuarto(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) createReserva(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 ReservasIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.CreateReserva(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
 	enc.Error(appErr)
 	return enc.Data(), nil
 }
@@ -534,6 +1672,51 @@ func (s component_server_stub) createUser(ctx context.Context, args []byte) (res
 	return enc.Data(), nil
 }
 
+func (s component_server_stub) getHospedes(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.GetHospedes(ctx)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	serviceweaver_enc_slice_HospedesOut_3d55506f(enc, ([]HospedesOut)(r0))
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) getOneHospedeById(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 string
+	a0 = dec.String()
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.GetOneHospedeById(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	(r0).WeaverMarshal(enc)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
 func (s component_server_stub) getOneUserById(ctx context.Context, args []byte) (res []byte, err error) {
 	// Catch and return any panics detected during encoding/decoding/rpc.
 	defer func() {
@@ -555,6 +1738,46 @@ func (s component_server_stub) getOneUserById(ctx context.Context, args []byte) 
 	// Encode the results.
 	enc := codegen.NewEncoder()
 	(r0).WeaverMarshal(enc)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) getQuartos(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.GetQuartos(ctx)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	serviceweaver_enc_slice_QuartosOut_5b640119(enc, ([]QuartosOut)(r0))
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) getReservas(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.GetReservas(ctx)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	serviceweaver_enc_slice_ReservasOut_54643aae(enc, ([]ReservasOut)(r0))
 	enc.Error(appErr)
 	return enc.Data(), nil
 }
@@ -610,6 +1833,181 @@ func (s component_server_stub) listUserByEmail(ctx context.Context, args []byte)
 	return enc.Data(), nil
 }
 
+func (s component_server_stub) removeHospede(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 RemoveHospedesIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.RemoveHospede(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) removeReserva(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 RemoveReservaIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.RemoveReserva(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) updateHospedesIn(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 UpdateHospedesIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.UpdateHospedesIn(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) updateReserva(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 UpdateReservaIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.UpdateReserva(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) updateStatusQuarto(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 UpdateQuartosStatusIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.UpdateStatusQuarto(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) updateUserByEmail(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 UpdateUsersEmailIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.UpdateUserByEmail(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
+func (s component_server_stub) updateUserPhone(ctx context.Context, args []byte) (res []byte, err error) {
+	// Catch and return any panics detected during encoding/decoding/rpc.
+	defer func() {
+		if err == nil {
+			err = codegen.CatchPanics(recover())
+		}
+	}()
+
+	// Decode arguments.
+	dec := codegen.NewDecoder(args)
+	var a0 UpdateUsersPhoneIn
+	(&a0).WeaverUnmarshal(dec)
+
+	// TODO(rgrandl): The deferred function above will recover from panics in the
+	// user code: fix this.
+	// Call the local method.
+	r0, appErr := s.impl.UpdateUserPhone(ctx, a0)
+
+	// Encode the results.
+	enc := codegen.NewEncoder()
+	enc.Bool(r0)
+	enc.Error(appErr)
+	return enc.Data(), nil
+}
+
 // Reflect stub implementations.
 
 type component_reflect_stub struct {
@@ -624,13 +2022,48 @@ func (s component_reflect_stub) AllUsers(ctx context.Context) (r0 AllUsersOut, e
 	return
 }
 
+func (s component_reflect_stub) CreateHospede(ctx context.Context, a0 HospedesIn) (r0 bool, err error) {
+	err = s.caller("CreateHospede", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) CreateQuarto(ctx context.Context, a0 QuartosIn) (r0 bool, err error) {
+	err = s.caller("CreateQuarto", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) CreateReserva(ctx context.Context, a0 ReservasIn) (r0 bool, err error) {
+	err = s.caller("CreateReserva", ctx, []any{a0}, []any{&r0})
+	return
+}
+
 func (s component_reflect_stub) CreateUser(ctx context.Context, a0 UserIn) (r0 bool, err error) {
 	err = s.caller("CreateUser", ctx, []any{a0}, []any{&r0})
 	return
 }
 
+func (s component_reflect_stub) GetHospedes(ctx context.Context) (r0 AllHospodesOut, err error) {
+	err = s.caller("GetHospedes", ctx, []any{}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) GetOneHospedeById(ctx context.Context, a0 string) (r0 HospedesOut, err error) {
+	err = s.caller("GetOneHospedeById", ctx, []any{a0}, []any{&r0})
+	return
+}
+
 func (s component_reflect_stub) GetOneUserById(ctx context.Context, a0 string) (r0 UsersOut, err error) {
 	err = s.caller("GetOneUserById", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) GetQuartos(ctx context.Context) (r0 AllQuartosOut, err error) {
+	err = s.caller("GetQuartos", ctx, []any{}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) GetReservas(ctx context.Context) (r0 AllReservasOut, err error) {
+	err = s.caller("GetReservas", ctx, []any{}, []any{&r0})
 	return
 }
 
@@ -644,7 +2077,524 @@ func (s component_reflect_stub) ListUserByEmail(ctx context.Context, a0 string) 
 	return
 }
 
+func (s component_reflect_stub) RemoveHospede(ctx context.Context, a0 RemoveHospedesIn) (r0 bool, err error) {
+	err = s.caller("RemoveHospede", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) RemoveReserva(ctx context.Context, a0 RemoveReservaIn) (r0 bool, err error) {
+	err = s.caller("RemoveReserva", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) UpdateHospedesIn(ctx context.Context, a0 UpdateHospedesIn) (r0 bool, err error) {
+	err = s.caller("UpdateHospedesIn", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) UpdateReserva(ctx context.Context, a0 UpdateReservaIn) (r0 bool, err error) {
+	err = s.caller("UpdateReserva", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) UpdateStatusQuarto(ctx context.Context, a0 UpdateQuartosStatusIn) (r0 bool, err error) {
+	err = s.caller("UpdateStatusQuarto", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) UpdateUserByEmail(ctx context.Context, a0 UpdateUsersEmailIn) (r0 bool, err error) {
+	err = s.caller("UpdateUserByEmail", ctx, []any{a0}, []any{&r0})
+	return
+}
+
+func (s component_reflect_stub) UpdateUserPhone(ctx context.Context, a0 UpdateUsersPhoneIn) (r0 bool, err error) {
+	err = s.caller("UpdateUserPhone", ctx, []any{a0}, []any{&r0})
+	return
+}
+
 // AutoMarshal implementations.
+
+var _ codegen.AutoMarshal = (*HospedesIn)(nil)
+
+type __is_HospedesIn[T ~struct {
+	weaver.AutoMarshal
+	ID             string    "json:\"id\""
+	Nome           string    "json:\"nome\""
+	Email          string    "json:\"email\""
+	Telefone       string    "json:\"telefone,omitempty\""
+	Cpf            string    "json:\"cpf\""
+	DataNascimento string    "json:\"data_nascimento\""
+	Sexo           string    "json:\"sexo\""
+	CreateAt       time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_HospedesIn[HospedesIn]
+
+func (x *HospedesIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("HospedesIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Nome)
+	enc.String(x.Email)
+	enc.String(x.Telefone)
+	enc.String(x.Cpf)
+	enc.String(x.DataNascimento)
+	enc.String(x.Sexo)
+	enc.EncodeBinaryMarshaler(&x.CreateAt)
+}
+
+func (x *HospedesIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("HospedesIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Nome = dec.String()
+	x.Email = dec.String()
+	x.Telefone = dec.String()
+	x.Cpf = dec.String()
+	x.DataNascimento = dec.String()
+	x.Sexo = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.CreateAt)
+}
+
+var _ codegen.AutoMarshal = (*HospedesOut)(nil)
+
+type __is_HospedesOut[T ~struct {
+	weaver.AutoMarshal
+	ID             string    "json:\"id\""
+	Nome           string    "json:\"nome\""
+	Email          string    "json:\"email\""
+	Telefone       string    "json:\"telefone,omitempty\""
+	Cpf            string    "json:\"cpf\""
+	DataNascimento string    "json:\"data_nascimento\""
+	Sexo           string    "json:\"sexo\""
+	CreatedAt      time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_HospedesOut[HospedesOut]
+
+func (x *HospedesOut) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("HospedesOut.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Nome)
+	enc.String(x.Email)
+	enc.String(x.Telefone)
+	enc.String(x.Cpf)
+	enc.String(x.DataNascimento)
+	enc.String(x.Sexo)
+	enc.EncodeBinaryMarshaler(&x.CreatedAt)
+}
+
+func (x *HospedesOut) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("HospedesOut.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Nome = dec.String()
+	x.Email = dec.String()
+	x.Telefone = dec.String()
+	x.Cpf = dec.String()
+	x.DataNascimento = dec.String()
+	x.Sexo = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.CreatedAt)
+}
+
+var _ codegen.AutoMarshal = (*QuartosIn)(nil)
+
+type __is_QuartosIn[T ~struct {
+	weaver.AutoMarshal
+	ID           string    "json:\"id\""
+	Descricao    string    "json:\"descricao,omitempty\""
+	TipoQuarto   string    "json:\"tipo_quarto\""
+	StatusQuarto string    "json:\"status_quarto\""
+	NumeroQuarto int32     "json:\"numero_quarto\""
+	NumeroAndar  int32     "json:\"numero_andar\""
+	CreateAt     time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_QuartosIn[QuartosIn]
+
+func (x *QuartosIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("QuartosIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Descricao)
+	enc.String(x.TipoQuarto)
+	enc.String(x.StatusQuarto)
+	enc.Int32(x.NumeroQuarto)
+	enc.Int32(x.NumeroAndar)
+	enc.EncodeBinaryMarshaler(&x.CreateAt)
+}
+
+func (x *QuartosIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("QuartosIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Descricao = dec.String()
+	x.TipoQuarto = dec.String()
+	x.StatusQuarto = dec.String()
+	x.NumeroQuarto = dec.Int32()
+	x.NumeroAndar = dec.Int32()
+	dec.DecodeBinaryUnmarshaler(&x.CreateAt)
+}
+
+var _ codegen.AutoMarshal = (*QuartosOut)(nil)
+
+type __is_QuartosOut[T ~struct {
+	weaver.AutoMarshal
+	ID           string    "json:\"id\""
+	Descricao    string    "json:\"descricao,omitempty\""
+	TipoQuarto   string    "json:\"tipo_quarto\""
+	StatusQuarto string    "json:\"status_quarto\""
+	NumeroQuarto int32     "json:\"numero_quarto\""
+	NumeroAndar  int32     "json:\"numero_andar\""
+	CreatedAt    time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_QuartosOut[QuartosOut]
+
+func (x *QuartosOut) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("QuartosOut.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Descricao)
+	enc.String(x.TipoQuarto)
+	enc.String(x.StatusQuarto)
+	enc.Int32(x.NumeroQuarto)
+	enc.Int32(x.NumeroAndar)
+	enc.EncodeBinaryMarshaler(&x.CreatedAt)
+}
+
+func (x *QuartosOut) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("QuartosOut.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Descricao = dec.String()
+	x.TipoQuarto = dec.String()
+	x.StatusQuarto = dec.String()
+	x.NumeroQuarto = dec.Int32()
+	x.NumeroAndar = dec.Int32()
+	dec.DecodeBinaryUnmarshaler(&x.CreatedAt)
+}
+
+var _ codegen.AutoMarshal = (*RemoveHospedesIn)(nil)
+
+type __is_RemoveHospedesIn[T ~struct {
+	weaver.AutoMarshal
+	ID        string    "json:\"id\" validate:\"required, uuid\""
+	DeletedAt time.Time "json:\"deleted_at,omitempty\""
+}] struct{}
+
+var _ __is_RemoveHospedesIn[RemoveHospedesIn]
+
+func (x *RemoveHospedesIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("RemoveHospedesIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.EncodeBinaryMarshaler(&x.DeletedAt)
+}
+
+func (x *RemoveHospedesIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("RemoveHospedesIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.DeletedAt)
+}
+
+var _ codegen.AutoMarshal = (*RemoveReservaIn)(nil)
+
+type __is_RemoveReservaIn[T ~struct {
+	weaver.AutoMarshal
+	ID        string    "json:\"id\""
+	DeletedAt time.Time "json:\"deleted_at\""
+}] struct{}
+
+var _ __is_RemoveReservaIn[RemoveReservaIn]
+
+func (x *RemoveReservaIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("RemoveReservaIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.EncodeBinaryMarshaler(&x.DeletedAt)
+}
+
+func (x *RemoveReservaIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("RemoveReservaIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.DeletedAt)
+}
+
+var _ codegen.AutoMarshal = (*ReservasIn)(nil)
+
+type __is_ReservasIn[T ~struct {
+	weaver.AutoMarshal
+	ID            string    "json:\"id\""
+	TipoReserva   string    "json:\"tipo_reserva\""
+	DataReserva   string    "json:\"data_reserva\""
+	DataCheckIn   string    "json:\"data_check_in\""
+	DataCheckOut  string    "json:\"data_check_out\""
+	StatusReserva string    "json:\"status_reserva\""
+	ValorReserva  string    "json:\"valor_reserva\""
+	QuartoId      string    "json:\"quarto_id\""
+	HospedeId     string    "json:\"hospede_id\""
+	CreateAt      time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_ReservasIn[ReservasIn]
+
+func (x *ReservasIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("ReservasIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.TipoReserva)
+	enc.String(x.DataReserva)
+	enc.String(x.DataCheckIn)
+	enc.String(x.DataCheckOut)
+	enc.String(x.StatusReserva)
+	enc.String(x.ValorReserva)
+	enc.String(x.QuartoId)
+	enc.String(x.HospedeId)
+	enc.EncodeBinaryMarshaler(&x.CreateAt)
+}
+
+func (x *ReservasIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("ReservasIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.TipoReserva = dec.String()
+	x.DataReserva = dec.String()
+	x.DataCheckIn = dec.String()
+	x.DataCheckOut = dec.String()
+	x.StatusReserva = dec.String()
+	x.ValorReserva = dec.String()
+	x.QuartoId = dec.String()
+	x.HospedeId = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.CreateAt)
+}
+
+var _ codegen.AutoMarshal = (*ReservasOut)(nil)
+
+type __is_ReservasOut[T ~struct {
+	weaver.AutoMarshal
+	ID            string    "json:\"id\""
+	Nome          string    "json:\"nome\""
+	Cpf           string    "json:\"cpf\""
+	TipoReserva   string    "json:\"tipo_reserva\""
+	DataReserva   string    "json:\"data_reserva\""
+	DataCheckIn   string    "json:\"data_check_in\""
+	DataCheckOut  string    "json:\"data_check_out\""
+	StatusReserva string    "json:\"status_reserva\""
+	ValorReserva  string    "json:\"valor_reserva\""
+	NumeroQuarto  int32     "json:\"numero_quarto\""
+	NumeroAndar   int32     "json:\"numero_andar\""
+	TipoQuarto    string    "json:\"tipo_quarto\""
+	StatusQuarto  string    "json:\"status_quarto\""
+	CreatedAt     time.Time "json:\"created_at,omitempty\""
+}] struct{}
+
+var _ __is_ReservasOut[ReservasOut]
+
+func (x *ReservasOut) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("ReservasOut.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Nome)
+	enc.String(x.Cpf)
+	enc.String(x.TipoReserva)
+	enc.String(x.DataReserva)
+	enc.String(x.DataCheckIn)
+	enc.String(x.DataCheckOut)
+	enc.String(x.StatusReserva)
+	enc.String(x.ValorReserva)
+	enc.Int32(x.NumeroQuarto)
+	enc.Int32(x.NumeroAndar)
+	enc.String(x.TipoQuarto)
+	enc.String(x.StatusQuarto)
+	enc.EncodeBinaryMarshaler(&x.CreatedAt)
+}
+
+func (x *ReservasOut) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("ReservasOut.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Nome = dec.String()
+	x.Cpf = dec.String()
+	x.TipoReserva = dec.String()
+	x.DataReserva = dec.String()
+	x.DataCheckIn = dec.String()
+	x.DataCheckOut = dec.String()
+	x.StatusReserva = dec.String()
+	x.ValorReserva = dec.String()
+	x.NumeroQuarto = dec.Int32()
+	x.NumeroAndar = dec.Int32()
+	x.TipoQuarto = dec.String()
+	x.StatusQuarto = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.CreatedAt)
+}
+
+var _ codegen.AutoMarshal = (*UpdateHospedesIn)(nil)
+
+type __is_UpdateHospedesIn[T ~struct {
+	weaver.AutoMarshal
+	ID             string    "json:\"id\" validate:\"required, uuid\""
+	Nome           string    "json:\"nome,omitempty\""
+	Email          string    "json:\"email,omitempty\""
+	Telefone       string    "json:\"telefone,omitempty\""
+	Cpf            string    "json:\"cpf,omitempty\""
+	DataNascimento string    "json:\"data_nascimento,omitempty\""
+	Sexo           string    "json:\"sexo,omitempty\""
+	UpdateAt       time.Time "json:\"update_at,omitempty\""
+}] struct{}
+
+var _ __is_UpdateHospedesIn[UpdateHospedesIn]
+
+func (x *UpdateHospedesIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateHospedesIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Nome)
+	enc.String(x.Email)
+	enc.String(x.Telefone)
+	enc.String(x.Cpf)
+	enc.String(x.DataNascimento)
+	enc.String(x.Sexo)
+	enc.EncodeBinaryMarshaler(&x.UpdateAt)
+}
+
+func (x *UpdateHospedesIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateHospedesIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Nome = dec.String()
+	x.Email = dec.String()
+	x.Telefone = dec.String()
+	x.Cpf = dec.String()
+	x.DataNascimento = dec.String()
+	x.Sexo = dec.String()
+	dec.DecodeBinaryUnmarshaler(&x.UpdateAt)
+}
+
+var _ codegen.AutoMarshal = (*UpdateQuartosStatusIn)(nil)
+
+type __is_UpdateQuartosStatusIn[T ~struct {
+	weaver.AutoMarshal
+	ID           string "json:\"id\""
+	StatusQuarto string "json:\"status_quarto\""
+}] struct{}
+
+var _ __is_UpdateQuartosStatusIn[UpdateQuartosStatusIn]
+
+func (x *UpdateQuartosStatusIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateQuartosStatusIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.StatusQuarto)
+}
+
+func (x *UpdateQuartosStatusIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateQuartosStatusIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.StatusQuarto = dec.String()
+}
+
+var _ codegen.AutoMarshal = (*UpdateReservaIn)(nil)
+
+type __is_UpdateReservaIn[T ~struct {
+	weaver.AutoMarshal
+	ID            string "json:\"id\""
+	StatusReserva string "json:\"status_reserva\""
+}] struct{}
+
+var _ __is_UpdateReservaIn[UpdateReservaIn]
+
+func (x *UpdateReservaIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateReservaIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.StatusReserva)
+}
+
+func (x *UpdateReservaIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateReservaIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.StatusReserva = dec.String()
+}
+
+var _ codegen.AutoMarshal = (*UpdateUsersEmailIn)(nil)
+
+type __is_UpdateUsersEmailIn[T ~struct {
+	weaver.AutoMarshal
+	ID    string "json:\"id\""
+	Email string "json:\"email\""
+}] struct{}
+
+var _ __is_UpdateUsersEmailIn[UpdateUsersEmailIn]
+
+func (x *UpdateUsersEmailIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateUsersEmailIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Email)
+}
+
+func (x *UpdateUsersEmailIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateUsersEmailIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Email = dec.String()
+}
+
+var _ codegen.AutoMarshal = (*UpdateUsersPhoneIn)(nil)
+
+type __is_UpdateUsersPhoneIn[T ~struct {
+	weaver.AutoMarshal
+	ID    string "json:\"id\""
+	Phone string "json:\"phone\""
+}] struct{}
+
+var _ __is_UpdateUsersPhoneIn[UpdateUsersPhoneIn]
+
+func (x *UpdateUsersPhoneIn) WeaverMarshal(enc *codegen.Encoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateUsersPhoneIn.WeaverMarshal: nil receiver"))
+	}
+	enc.String(x.ID)
+	enc.String(x.Phone)
+}
+
+func (x *UpdateUsersPhoneIn) WeaverUnmarshal(dec *codegen.Decoder) {
+	if x == nil {
+		panic(fmt.Errorf("UpdateUsersPhoneIn.WeaverUnmarshal: nil receiver"))
+	}
+	x.ID = dec.String()
+	x.Phone = dec.String()
+}
 
 var _ codegen.AutoMarshal = (*UserIn)(nil)
 
@@ -689,7 +2639,7 @@ type __is_UsersOut[T ~struct {
 	FullName  string    "json:\"full_name\""
 	Email     string    "json:\"email\""
 	Phone     string    "json:\"phone,omitempty\""
-	IsAdmin   bool      "json:\"is_admin,omitempty\""
+	IsAdmin   bool      "json:\"is_admin\""
 	Birthday  time.Time "json:\"birthday,omitempty\""
 	CreatedAt time.Time "json:\"created_at,omitempty\""
 }] struct{}
@@ -745,4 +2695,115 @@ func serviceweaver_dec_slice_UsersOut_50a126a0(dec *codegen.Decoder) []UsersOut 
 		(&res[i]).WeaverUnmarshal(dec)
 	}
 	return res
+}
+
+func serviceweaver_enc_slice_HospedesOut_3d55506f(enc *codegen.Encoder, arg []HospedesOut) {
+	if arg == nil {
+		enc.Len(-1)
+		return
+	}
+	enc.Len(len(arg))
+	for i := 0; i < len(arg); i++ {
+		(arg[i]).WeaverMarshal(enc)
+	}
+}
+
+func serviceweaver_dec_slice_HospedesOut_3d55506f(dec *codegen.Decoder) []HospedesOut {
+	n := dec.Len()
+	if n == -1 {
+		return nil
+	}
+	res := make([]HospedesOut, n)
+	for i := 0; i < n; i++ {
+		(&res[i]).WeaverUnmarshal(dec)
+	}
+	return res
+}
+
+func serviceweaver_enc_slice_QuartosOut_5b640119(enc *codegen.Encoder, arg []QuartosOut) {
+	if arg == nil {
+		enc.Len(-1)
+		return
+	}
+	enc.Len(len(arg))
+	for i := 0; i < len(arg); i++ {
+		(arg[i]).WeaverMarshal(enc)
+	}
+}
+
+func serviceweaver_dec_slice_QuartosOut_5b640119(dec *codegen.Decoder) []QuartosOut {
+	n := dec.Len()
+	if n == -1 {
+		return nil
+	}
+	res := make([]QuartosOut, n)
+	for i := 0; i < n; i++ {
+		(&res[i]).WeaverUnmarshal(dec)
+	}
+	return res
+}
+
+func serviceweaver_enc_slice_ReservasOut_54643aae(enc *codegen.Encoder, arg []ReservasOut) {
+	if arg == nil {
+		enc.Len(-1)
+		return
+	}
+	enc.Len(len(arg))
+	for i := 0; i < len(arg); i++ {
+		(arg[i]).WeaverMarshal(enc)
+	}
+}
+
+func serviceweaver_dec_slice_ReservasOut_54643aae(dec *codegen.Decoder) []ReservasOut {
+	n := dec.Len()
+	if n == -1 {
+		return nil
+	}
+	res := make([]ReservasOut, n)
+	for i := 0; i < n; i++ {
+		(&res[i]).WeaverUnmarshal(dec)
+	}
+	return res
+}
+
+// Size implementations.
+
+// serviceweaver_size_UpdateQuartosStatusIn_d798d85e returns the size (in bytes) of the serialization
+// of the provided type.
+func serviceweaver_size_UpdateQuartosStatusIn_d798d85e(x *UpdateQuartosStatusIn) int {
+	size := 0
+	size += 0
+	size += (4 + len(x.ID))
+	size += (4 + len(x.StatusQuarto))
+	return size
+}
+
+// serviceweaver_size_UpdateReservaIn_5a8aeaf2 returns the size (in bytes) of the serialization
+// of the provided type.
+func serviceweaver_size_UpdateReservaIn_5a8aeaf2(x *UpdateReservaIn) int {
+	size := 0
+	size += 0
+	size += (4 + len(x.ID))
+	size += (4 + len(x.StatusReserva))
+	return size
+}
+
+// serviceweaver_size_UpdateUsersEmailIn_7ddd1896 returns the size (in bytes) of the serialization
+// of the provided type.
+func serviceweaver_size_UpdateUsersEmailIn_7ddd1896(x *UpdateUsersEmailIn) int {
+	size := 0
+	size += 0
+	size += (4 + len(x.ID))
+	size += (4 + len(x.Email))
+	return size
+}
+
+// serviceweaver_size_UpdateUsersPhoneIn_1d2732f9 returns the size (in bytes) of the serialization
+// of the provided type.
+func serviceweaver_size_UpdateUsersPhoneIn_1d2732f9(x *UpdateUsersPhoneIn) int {
+	size := 0
+	size += 0
+	size += (4 + len(x.ID))
+	size += (4 + len(x.Phone))
+	return size
 }
