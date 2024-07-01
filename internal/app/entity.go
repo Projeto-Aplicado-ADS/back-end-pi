@@ -62,6 +62,17 @@ type (
 		ID string `json:"id" validate:"required, uuid"`
 		DeletedAt time.Time `json:"deleted_at,omitempty"`
 	}
+	UpdateHospedesIn struct {
+		weaver.AutoMarshal
+		ID string `json:"id" validate:"required, uuid"`
+		Nome           string    `json:"nome,omitempty"`
+		Email          string    `json:"email,omitempty"`
+		Telefone       string    `json:"telefone,omitempty"`
+		Cpf            string    `json:"cpf,omitempty"`
+		DataNascimento string    `json:"data_nascimento,omitempty"`
+		Sexo           string    `json:"sexo,omitempty"`
+		UpdateAt       time.Time `json:"update_at,omitempty"`
+	}
 	QuartosOut struct {
 		weaver.AutoMarshal
 		ID           string    `json:"id"`
@@ -228,14 +239,26 @@ func (e HospedesIn) ToStore() (params store.CreateHospedeParams) {
 	return params
 }
 
-
-
 func (e RemoveHospedesIn) ToStore() (out store.RemoverHospedeParams) {
 	time := time.Now()
 	out.ID = e.ID
 	out.DeletedAt = time.UnixMilli()
 	return out
 }
+
+func (e UpdateHospedesIn) ToStore() (params store.AlterarHospedeParams) {
+	time := time.Now()
+	params.ID = e.ID
+	params.Cpf = e.Cpf
+	params.DataNascimento = e.DataNascimento
+	params.Email = e.Email
+	params.Nome = e.Nome
+	params.Sexo = store.HospedesSexo(e.Sexo)
+	params.Telefone = e.Telefone
+	params.UpdateAt = time.UnixMilli()
+	return params
+}
+
 
 func (e QuartosOut) FromStore(in store.Quarto) QuartosOut {
 	e.ID = in.ID

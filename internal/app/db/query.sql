@@ -71,11 +71,11 @@ SELECT * FROM hospedes where deleted_at = 0;
 
 -- name: ListHospedeById :one
 SELECT * FROM hospedes
-WHERE id = ?;
+WHERE id = ? and deleted_at = 0;
 
 -- name: AlterarHospede :execresult
 UPDATE hospedes
-SET nome = ?, email = ?, telefone = ?, cpf = ?, data_nascimento = ?, sexo = ?
+SET nome = ?, email = ?, telefone = ?, cpf = ?, data_nascimento = ?, sexo = ?, update_at = ?
 WHERE id = ?;
 
 -- name: RemoverHospede :exec

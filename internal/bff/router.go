@@ -1,6 +1,7 @@
 package bff
 
 import (
+	"fmt"
 	"time"
 
 	"projeto-api/internal/app"
@@ -135,6 +136,14 @@ func (e implBFF) GetHospedes(c *fiber.Ctx) (err error) {
 	return c.Status(fiber.StatusOK).JSON(out)
 }
 
+func (e implBFF) GetHospedeById (c *fiber.Ctx) (err error) {
+	out, err := e.user.Get().GetOneHospedeById(c.Context(), c.Params("id"))
+	if err != nil {
+		return err
+	}
+	return c.Status(fiber.StatusOK).JSON(out)
+}
+
 func (e implBFF) CreateHospede (c *fiber.Ctx) (err error) {
 	var body app.HospedesIn
 
@@ -168,6 +177,26 @@ func (e implBFF) DeleteHospede(c *fiber.Ctx) (err error) {
 	return c.SendStatus(fiber.StatusNoContent)
 }
 
+func (e implBFF) UpdateHospede(c *fiber.Ctx) (err error) {
+	var body app.UpdateHospedesIn
+	if err = c.BodyParser(&body); err != nil {
+		return fiber.ErrBadRequest
+	}
+	_, err = e.user.Get().UpdateHospedesIn(c.Context(), app.UpdateHospedesIn{
+		ID: c.Params("id"),
+		Nome: body.Nome,
+		Email: body.Email,
+		Telefone: body.Telefone,
+		Cpf: body.Cpf,
+		DataNascimento: body.DataNascimento,
+		Sexo: body.Sexo,
+	})
+	if err != nil {
+		fmt.Println(err)
+		return fiber.ErrInternalServerError
+	}
+	return c.SendStatus(fiber.StatusNoContent)
+}
 
 
 func (e implBFF) CreateQuarto(c *fiber.Ctx) (err error) {

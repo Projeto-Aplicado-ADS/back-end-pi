@@ -27,6 +27,8 @@ type Component interface {
 	GetHospedes(ctx context.Context) (out AllHospodesOut, err error)
 	CreateHospede(ctx context.Context, in HospedesIn) (ok bool, err error)
 	RemoveHospede(ctx context.Context, out RemoveHospedesIn) (ok bool, err error)
+	UpdateHospedesIn(ctx context.Context, in UpdateHospedesIn) (ok bool, err error)
+	GetOneHospedeById(ctx context.Context, id string) (out HospedesOut, err error)
 
 	/* Quartos */
 	GetQuartos(ctx context.Context) (out AllQuartosOut, err error)
@@ -138,6 +140,15 @@ func (e implapp) GetHospedes(ctx context.Context) (out AllHospodesOut, err error
 	return out.FromStore(hospedes), nil
 }
 
+
+func (e implapp) GetOneHospedeById(ctx context.Context, id string) (out HospedesOut, err error) {	
+	hospede, err := e.db.ListHospedeById(ctx, id)
+	if err != nil {
+		return out, err
+	}
+	return out.FromStore(hospede), nil
+}
+
 func (e implapp) CreateHospede(ctx context.Context, in HospedesIn) (ok bool, err error) {
 	_, err = e.db.CreateHospede(ctx, in.ToStore())
 	if err != nil {
@@ -150,6 +161,14 @@ func (e implapp) RemoveHospede(ctx context.Context, out RemoveHospedesIn) (ok bo
 	err = e.db.RemoverHospede(ctx, out.ToStore())
 	if err != nil {
 		return false, errors.New("Erro ao remover hospede")
+	}
+	return true, nil
+}
+
+func (e implapp) UpdateHospedesIn(ctx context.Context, in UpdateHospedesIn) (ok bool, err error) {
+	_, err = e.db.AlterarHospede(ctx, in.ToStore())
+	if err != nil {
+		return false, err
 	}
 	return true, nil
 }

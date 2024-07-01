@@ -27,7 +27,7 @@ func (q *Queries) AlterarEmailUser(ctx context.Context, arg AlterarEmailUserPara
 
 const alterarHospede = `-- name: AlterarHospede :execresult
 UPDATE hospedes
-SET nome = ?, email = ?, telefone = ?, cpf = ?, data_nascimento = ?, sexo = ?
+SET nome = ?, email = ?, telefone = ?, cpf = ?, data_nascimento = ?, sexo = ?, update_at = ?
 WHERE id = ?
 `
 
@@ -38,6 +38,7 @@ type AlterarHospedeParams struct {
 	Cpf            string
 	DataNascimento string
 	Sexo           HospedesSexo
+	UpdateAt       int64
 	ID             string
 }
 
@@ -49,6 +50,7 @@ func (q *Queries) AlterarHospede(ctx context.Context, arg AlterarHospedeParams) 
 		arg.Cpf,
 		arg.DataNascimento,
 		arg.Sexo,
+		arg.UpdateAt,
 		arg.ID,
 	)
 }
@@ -332,7 +334,7 @@ func (q *Queries) ListAdmins(ctx context.Context) ([]User, error) {
 
 const listHospedeById = `-- name: ListHospedeById :one
 SELECT id, nome, email, telefone, cpf, data_nascimento, sexo, created_at, update_at, deleted_at FROM hospedes
-WHERE id = ?
+WHERE id = ? and deleted_at = 0
 `
 
 func (q *Queries) ListHospedeById(ctx context.Context, id string) (Hospede, error) {
